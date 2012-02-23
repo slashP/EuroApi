@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using EuroApi.Models;
 
@@ -13,17 +10,11 @@ namespace EuroApi.Controllers
     {
         private EuroApiContext db = new EuroApiContext();
 
-        //
-        // GET: /Match/
-
         public ActionResult Index()
         {
             var matches = db.Matches.Include(m => m.HomeTeam).Include(m => m.GuestTeam);
             return View(matches.ToList());
         }
-
-        //
-        // GET: /Match/Details/5
 
         public ActionResult Details(int id = 0)
         {
@@ -35,18 +26,12 @@ namespace EuroApi.Controllers
             return View(match);
         }
 
-        //
-        // GET: /Match/Create
-
         public ActionResult Create()
         {
             ViewBag.HomeTeamId = new SelectList(db.Teams, "Id", "Name");
             ViewBag.GuestTeamId = new SelectList(db.Teams, "Id", "Name");
             return View();
         }
-
-        //
-        // POST: /Match/Create
 
         [HttpPost]
         public ActionResult Create(Match match)
@@ -63,9 +48,6 @@ namespace EuroApi.Controllers
             return View(match);
         }
 
-        //
-        // GET: /Match/Edit/5
-
         public ActionResult Edit(int id = 0)
         {
             Match match = db.Matches.Find(id);
@@ -77,9 +59,6 @@ namespace EuroApi.Controllers
             ViewBag.GuestTeamId = new SelectList(db.Teams, "Id", "Name", match.GuestTeamId);
             return View(match);
         }
-
-        //
-        // POST: /Match/Edit/5
 
         [HttpPost]
         public ActionResult Edit(Match match)
@@ -95,9 +74,6 @@ namespace EuroApi.Controllers
             return View(match);
         }
 
-        //
-        // GET: /Match/Delete/5
-
         public ActionResult Delete(int id = 0)
         {
             Match match = db.Matches.Find(id);
@@ -107,9 +83,6 @@ namespace EuroApi.Controllers
             }
             return View(match);
         }
-
-        //
-        // POST: /Match/Delete/5
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)

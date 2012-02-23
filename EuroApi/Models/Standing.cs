@@ -1,9 +1,6 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using EuroApi.Models;
 
-namespace EuroApi.Controllers
+namespace EuroApi.Models
 {
     public class Standing
     {

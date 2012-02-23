@@ -13,17 +13,11 @@ namespace EuroApi.Controllers
     {
         private EuroApiContext db = new EuroApiContext();
 
-        //
-        // GET: /Team/
-
         public ActionResult Index()
         {
             var teams = db.Teams.Include(t => t.Group);
             return View(teams.ToList());
         }
-
-        //
-        // GET: /Team/Details/5
 
         public ActionResult Details(int id = 0)
         {
@@ -35,17 +29,11 @@ namespace EuroApi.Controllers
             return View(team);
         }
 
-        //
-        // GET: /Team/Create
-
         public ActionResult Create()
         {
             ViewBag.GroupId = new SelectList(db.Groups, "Id", "Name");
             return View();
         }
-
-        //
-        // POST: /Team/Create
 
         [HttpPost]
         public ActionResult Create(Team team)
@@ -61,9 +49,6 @@ namespace EuroApi.Controllers
             return View(team);
         }
 
-        //
-        // GET: /Team/Edit/5
-
         public ActionResult Edit(int id = 0)
         {
             Team team = db.Teams.Find(id);
@@ -74,9 +59,6 @@ namespace EuroApi.Controllers
             ViewBag.GroupId = new SelectList(db.Groups, "Id", "Name", team.GroupId);
             return View(team);
         }
-
-        //
-        // POST: /Team/Edit/5
 
         [HttpPost]
         public ActionResult Edit(Team team)
@@ -91,9 +73,6 @@ namespace EuroApi.Controllers
             return View(team);
         }
 
-        //
-        // GET: /Team/Delete/5
-
         public ActionResult Delete(int id = 0)
         {
             Team team = db.Teams.Find(id);
@@ -103,9 +82,6 @@ namespace EuroApi.Controllers
             }
             return View(team);
         }
-
-        //
-        // POST: /Team/Delete/5
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using EuroApi.Models;
 
@@ -13,16 +9,10 @@ namespace EuroApi.Controllers
     {
         private EuroApiContext db = new EuroApiContext();
 
-        //
-        // GET: /Group/
-
         public ActionResult Index()
         {
             return View(db.Groups.ToList());
         }
-
-        //
-        // GET: /Group/Details/5
 
         public ActionResult Details(int id = 0)
         {
@@ -34,16 +24,10 @@ namespace EuroApi.Controllers
             return View(group);
         }
 
-        //
-        // GET: /Group/Create
-
         public ActionResult Create()
         {
             return View();
         }
-
-        //
-        // POST: /Group/Create
 
         [HttpPost]
         public ActionResult Create(Group group)
@@ -58,9 +42,6 @@ namespace EuroApi.Controllers
             return View(group);
         }
 
-        //
-        // GET: /Group/Edit/5
-
         public ActionResult Edit(int id = 0)
         {
             Group group = db.Groups.Find(id);
@@ -70,9 +51,6 @@ namespace EuroApi.Controllers
             }
             return View(group);
         }
-
-        //
-        // POST: /Group/Edit/5
 
         [HttpPost]
         public ActionResult Edit(Group group)
@@ -86,9 +64,6 @@ namespace EuroApi.Controllers
             return View(group);
         }
 
-        //
-        // GET: /Group/Delete/5
-
         public ActionResult Delete(int id = 0)
         {
             Group group = db.Groups.Find(id);
@@ -98,9 +73,6 @@ namespace EuroApi.Controllers
             }
             return View(group);
         }
-
-        //
-        // POST: /Group/Delete/5
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)

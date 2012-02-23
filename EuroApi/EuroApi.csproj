@@ -127,7 +127,6 @@
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MatchController.cs" />
-    <Compile Include="Controllers\Standing.cs" />
     <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -141,10 +140,9 @@
     <Compile Include="Models\Championship.cs" />
     <Compile Include="Models\EuroApiContext.cs" />
     <Compile Include="Models\Group.cs" />
-    <Compile Include="Models\GroupViewModel.cs" />
     <Compile Include="Models\Match.cs" />
+    <Compile Include="Models\Standing.cs" />
     <Compile Include="Models\Team.cs" />
-    <Compile Include="Models\TeamViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -158,8 +156,6 @@
     <Content Include="Content\flags\greece-flag.gif" />
     <Content Include="Content\flags\ireland-flag.gif" />
     <Content Include="Content\flags\italy-flag.gif" />
-    <Content Include="Content\flags\montenegro-flag.gif" />
-    <Content Include="Content\flags\montenegro-flag.jpg" />
     <Content Include="Content\flags\netherlands-flag.gif" />
     <Content Include="Content\flags\poland-flag.gif" />
     <Content Include="Content\flags\portugal-flag.gif" />
