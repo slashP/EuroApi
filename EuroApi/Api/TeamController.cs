@@ -1,24 +1,35 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Web.Http;
+using EuroApi.DTO;
 using EuroApi.Models;
+using System.Data.Entity;
 
 namespace EuroApi.Api.Controllers
 {
-    public class EuroApiController : ApiController
+    public class TeamController : ApiController
     {
-        private readonly EuroApiContext _db = new EuroApiContext();
+        private EuroApiContext _db = new EuroApiContext();
 
         // GET /api/EuroApi
-        public IQueryable<Team> Get()
+        public ICollection<DtoTeam> Get()
         {
-            return _db.Teams;
+            var teams = _db.Teams;
+            return DtoTeam.TeamsToDto(teams.ToList());
         }
 
         // GET /api/EuroApi/5
-        public Team Get(int id)
+        public DtoTeam Get(int id)
         {
-            return _db.Teams.Find(id);
+            return DtoTeam.TeamToDto(_db.Teams.Find(id));
+        }
+
+        // GET /api/EuroApi/Germany
+        public DtoTeam Get(string name)
+        {
+            var team = _db.Teams.FirstOrDefault(t => t.Name == name);
+            return DtoTeam.TeamToDto(team);
         }
 
         // POST /api/EuroApi

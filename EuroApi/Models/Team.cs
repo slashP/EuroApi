@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Linq;
 
 namespace EuroApi.Models
@@ -18,15 +19,17 @@ namespace EuroApi.Models
         public virtual ICollection<Match> AwayMatches { get; set; }
 
         [NotMapped]
-        public Collection<Match> Matches 
+        public Collection<Match> Matches
         {
             get
             {
                 if (HomeMatches == null || AwayMatches == null)
                     return null;
-                return new Collection<Match>(HomeMatches.Concat(AwayMatches).ToList());
+                return new Collection<Match>(HomeMatches.Concat(AwayMatches).OrderBy(m => m.Date).ToList());
             }
+            set { Debug.WriteLine("setter called  " + value); }
         }
+
         [NotMapped]
         public Collection<Match> PlayedMatches
         {
@@ -34,16 +37,28 @@ namespace EuroApi.Models
             {
                 if (HomeMatches == null || AwayMatches == null)
                     return null;
-                return new Collection<Match>(HomeMatches.Concat(AwayMatches).Where(m => m.Date.CompareTo(DateTime.Now) > 0).ToList());
+                return new Collection<Match>(HomeMatches.Concat(AwayMatches).Where(m => m.AwayTeamGoals != null && m.HomeTeamGoals != null).ToList());
             }
+            set { Debug.WriteLine("setter called  " + value); }
         }
+
         [NotMapped]
         public int GoalsScored
         {
             get
             {
-                return HomeMatches.Sum(homeMatch => homeMatch.HomeTeamGoals ?? 0) + AwayMatches.Sum(awayMatch => awayMatch.AwayTeamGoals ?? 0);
+                var sum = 0;
+                if (HomeMatches != null)
+                {
+                    sum += HomeMatches.Sum(homeMatch => homeMatch.HomeTeamGoals ?? 0);
+                }
+                if (AwayMatches != null)
+                {
+                    sum += AwayMatches.Sum(awayMatch => awayMatch.AwayTeamGoals ?? 0);
+                }
+                return sum;
             }
+            set { Debug.WriteLine("setter called  " + value); }
         }
 
         [NotMapped]
@@ -51,8 +66,18 @@ namespace EuroApi.Models
         {
             get
             {
-                return HomeMatches.Sum(homeMatch => homeMatch.AwayTeamGoals ?? 0) + AwayMatches.Sum(awayMatch => awayMatch.HomeTeamGoals ?? 0);
+                var sum = 0;
+                if(HomeMatches != null)
+                {
+                    sum += HomeMatches.Sum(homeMatch => homeMatch.AwayTeamGoals ?? 0);
+                }
+                if(AwayMatches != null)
+                {
+                    sum += AwayMatches.Sum(awayMatch => awayMatch.HomeTeamGoals ?? 0);
+                }
+                return sum;
             }
+            set { Debug.WriteLine("setter called  " + value); }
         }
 
         [NotMapped]
@@ -64,22 +89,29 @@ namespace EuroApi.Models
             get
             {
                 var sum = 0;
-                foreach (var homeMatch in HomeMatches)
+                if (HomeMatches != null)
                 {
-                    if (homeMatch.HomeTeamGoals == homeMatch.AwayTeamGoals)
-                        sum += 1;
-                    else if (homeMatch.HomeTeamGoals > homeMatch.AwayTeamGoals)
-                        sum += 3;
+                    foreach (var homeMatch in HomeMatches.Where(homeMatch => homeMatch.HomeTeamGoals != null))
+                    {
+                        if (homeMatch.HomeTeamGoals == homeMatch.AwayTeamGoals)
+                            sum += 1;
+                        else if (homeMatch.HomeTeamGoals > homeMatch.AwayTeamGoals)
+                            sum += 3;
+                    }
                 }
-                foreach (var awayMatch in AwayMatches)
+                if (AwayMatches != null)
                 {
-                    if (awayMatch.HomeTeamGoals == awayMatch.AwayTeamGoals)
-                        sum += 1;
-                    else if (awayMatch.AwayTeamGoals > awayMatch.HomeTeamGoals)
-                        sum += 3;
+                    foreach (var awayMatch in AwayMatches.Where(awayMatch => awayMatch.HomeTeamGoals != null))
+                    {
+                        if (awayMatch.HomeTeamGoals == awayMatch.AwayTeamGoals)
+                            sum += 1;
+                        else if (awayMatch.AwayTeamGoals > awayMatch.HomeTeamGoals)
+                            sum += 3;
+                    }
                 }
                 return sum;
             }
+            set { Debug.WriteLine("setter called  " + value); }
         }
 
 

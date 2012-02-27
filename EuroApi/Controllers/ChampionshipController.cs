@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using EuroApi.Models;
@@ -11,18 +12,18 @@ namespace EuroApi.Controllers
 
         public ActionResult Index()
         {
-            var firstOrDefault = _db.Teams.FirstOrDefault();
+            var firstOrDefault = _db.Teams.Include(t => t.Group).FirstOrDefault();
             var group = "A";
-            if (firstOrDefault != null)
-            {
-                group = firstOrDefault.Group.Name;
-            }
-            var matches = _db.Matches.Where(m => m.HomeTeam.Group.Name == group && m.Date.CompareTo(DateTime.Now) > 0).ToList();
+            var matches = _db.Matches.Where(m => m.HomeTeam.Group.Name == group && m.HomeTeamGoals != null).ToList();
             ViewBag.Matches = matches;
-            var teams = _db.Teams.ToList();
+            var teams = _db.Teams.Where(t => t.Group.Name == group).ToList();
             Standing.SortTeams(ref teams);
             return View(teams);
         }
 
+        public ActionResult TeamView()
+        {
+            return View();
+        }
     }
 }
