@@ -157,21 +157,22 @@
     <Compile Include="Api\TeamController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ChampionshipController.cs" />
+    <Compile Include="Controllers\GroupBetController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MatchController.cs" />
+    <Compile Include="Controllers\MatchResultBetController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
+    <Compile Include="DAL\IRepository.cs" />
+    <Compile Include="DAL\TeamRepository.cs" />
     <Compile Include="DTO\DtoMatch.cs" />
     <Compile Include="DTO\DtoTeam.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201202231713279_InitialCreate.cs" />
-    <Compile Include="Migrations\201202231713279_InitialCreate.Designer.cs">
-      <DependentUpon>201202231713279_InitialCreate.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\MatchResultBet.cs" />
     <Compile Include="Models\Championship.cs" />
     <Compile Include="Models\EuroApiContext.cs" />
     <Compile Include="Models\Group.cs" />
@@ -331,6 +332,27 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Championship\TeamView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Championship\Groups.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\GroupBet\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\MatchResultBet\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\MatchResultBet\Details.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\MatchResultBet\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\MatchResultBet\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\MatchResultBet\Delete.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

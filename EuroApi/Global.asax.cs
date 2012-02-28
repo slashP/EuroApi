@@ -15,6 +15,7 @@ namespace EuroApi
 
         public static void RegisterRoutes(RouteCollection routes)
         {
+            //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<EuroApiContext>());
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.MapHttpRoute("DefaultApi", "api/{controller}/{id}", new { id = RouteParameter.Optional });
 

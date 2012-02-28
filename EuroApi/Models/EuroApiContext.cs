@@ -24,5 +24,7 @@ namespace EuroApi.Models
         }
 
         public DbSet<Group> Groups { get; set; }
+
+        public DbSet<MatchResultBet> MatchResultBets { get; set; }
     }
 }

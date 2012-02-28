@@ -2,33 +2,33 @@
 using System.Linq;
 using System.Net.Http;
 using System.Web.Http;
+using EuroApi.DAL;
 using EuroApi.DTO;
 using EuroApi.Models;
-using System.Data.Entity;
 
-namespace EuroApi.Api.Controllers
+namespace EuroApi.Api
 {
     public class TeamController : ApiController
     {
-        private EuroApiContext _db = new EuroApiContext();
+        private readonly IRepository<Team> _repository = new TeamRepository();
 
         // GET /api/EuroApi
         public ICollection<DtoTeam> Get()
         {
-            var teams = _db.Teams;
+            var teams = _repository.GetAll();
             return DtoTeam.TeamsToDto(teams.ToList());
         }
 
         // GET /api/EuroApi/5
         public DtoTeam Get(int id)
         {
-            return DtoTeam.TeamToDto(_db.Teams.Find(id));
+            return DtoTeam.TeamToDto(_repository.Find(id));
         }
 
         // GET /api/EuroApi/Germany
         public DtoTeam Get(string name)
         {
-            var team = _db.Teams.FirstOrDefault(t => t.Name == name);
+            var team = _repository.GetAll().FirstOrDefault(t => t.Name == name);
             return DtoTeam.TeamToDto(team);
         }
 
@@ -36,24 +36,24 @@ namespace EuroApi.Api.Controllers
 
         public HttpResponseMessage<Team> Post(Team team)
         {
-            var added = _db.Teams.Add(team);
-            _db.SaveChanges();
+            var added = _repository.Add(team);
+            _repository.Save();
             return new HttpResponseMessage<Team>(added);
         }
 
         // PUT /api/EuroApi/5
         public void Put(int id, Team team)
         {
-            var oldTeam = _db.Teams.Find(id);
+            var oldTeam = _repository.Find(id);
             oldTeam.Name = team.Name;
-            _db.SaveChanges();
+            _repository.Save();
         }
 
         // DELETE /api/EuroApi/5
         public void Delete(Team team)
         {
-            _db.Teams.Remove(team);
-            _db.SaveChanges();
+            _repository.Remove(team);
+            _repository.Save();
         }
     }
 }
