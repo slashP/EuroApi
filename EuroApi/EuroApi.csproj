@@ -159,7 +159,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BogusController.cs" />
     <Compile Include="Controllers\ChampionshipController.cs" />
-    <Compile Include="Controllers\GroupBetController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MatchController.cs" />
