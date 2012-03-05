@@ -5,121 +5,72 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using EuroApi.DAL;
+using EuroApi.DTO;
 using EuroApi.Models;
 
 namespace EuroApi.Controllers
 {
+    [Authorize]
     public class MatchResultBetController : Controller
     {
-        private readonly EuroApiContext _db = new EuroApiContext();
-
+        private readonly IRepository<MatchResultBet> _repository = new MatchResultBetRepository();
+        private readonly IRepository<Match> _matchRepository = new MatchRepository();
+        private readonly IRepository<Team> _teamRepository = new TeamRepository(); 
         //
         // GET: /MatchResultBet/
 
-        public ActionResult Index()
+        public ActionResult Index(string group = "A")
         {
-            var matchresultbets = _db.MatchResultBets.Include(m => m.Match);
-            return View(matchresultbets.ToList());
+            var matches = _matchRepository.Query(x => x.HomeTeam.Group.Name == group);
+            ViewBag.UsersResultBets = _repository.Query(x => x.User == User.Identity.Name).ToList();
+            return View(matches.ToList());
         }
 
-        //
-        // GET: /MatchResultBet/Details/5
-
-        public ActionResult Details(int id = 0)
+        public JsonResult GetTeamsInGroup(string group = "A")
         {
-            MatchResultBet matchresultbet = _db.MatchResultBets.Find(id);
-            if (matchresultbet == null)
+            var teams = _teamRepository.Query(t => t.Group.Name == group).ToList();
+            var userBets = _repository.Query(x => x.User == User.Identity.Name).ToList();
+            var sortedGroupTeams = UserBetStanding.SortTeams(teams, userBets);
+            var teamsDto = DtoTeam.TeamsToDto(sortedGroupTeams);
+            return Json(teamsDto);
+        }
+
+        public JsonResult SetBet(int? matchId, int? homeGoals, int? awayGoals, string group)
+        {
+            if (matchId == null || homeGoals == null || awayGoals == null)
+                return null;
+            var userBet = _repository.Query(x => x.User == User.Identity.Name && x.MatchId == matchId).FirstOrDefault();
+            if(userBet == null)
             {
-                return HttpNotFound();
+                var userB = new MatchResultBet
+                                {
+                                    User = User.Identity.Name,
+                                    MatchId = (int)matchId,
+                                    HomeTeamGoals = (int)homeGoals,
+                                    AwayTeamGoals = (int)awayGoals
+                                };
+                _repository.Add(userB);
+                _repository.Save();
             }
-            return View(matchresultbet);
-        }
-
-        //
-        // GET: /MatchResultBet/Create
-
-        public ActionResult Create()
-        {
-            ViewBag.MatchId = new SelectList(_db.Matches, "Id", "Id");
-            return View();
-        }
-
-        //
-        // POST: /MatchResultBet/Create
-
-        [HttpPost]
-        public ActionResult Create(MatchResultBet matchresultbet)
-        {
-            if (ModelState.IsValid)
+            else
             {
-                _db.MatchResultBets.Add(matchresultbet);
-                _db.SaveChanges();
-                return RedirectToAction("Index");
+                userBet.HomeTeamGoals = (int)homeGoals;
+                userBet.AwayTeamGoals = (int)awayGoals;
+                _repository.Save();
             }
-
-            ViewBag.MatchId = new SelectList(_db.Matches, "Id", "Id", matchresultbet.MatchId);
-            return View(matchresultbet);
+            return GetTeamsInGroup(group);
         }
 
-        //
-        // GET: /MatchResultBet/Edit/5
-
-        public ActionResult Edit(int id = 0)
+        public JsonResult RemoveAllBets(string group)
         {
-            MatchResultBet matchresultbet = _db.MatchResultBets.Find(id);
-            if (matchresultbet == null)
+            var matchIds = _matchRepository.Query(x => x.HomeTeam.Group.Name == group).Select(x => new {x.Id});
+            foreach (var userBet in matchIds.Select(matchId => _repository.Query(x => x.User == User.Identity.Name && x.MatchId == matchId.Id).FirstOrDefault()).Where(userBet => userBet != null))
             {
-                return HttpNotFound();
+                _repository.Remove(userBet);
             }
-            ViewBag.MatchId = new SelectList(_db.Matches, "Id", "Id", matchresultbet.MatchId);
-            return View(matchresultbet);
-        }
-
-        //
-        // POST: /MatchResultBet/Edit/5
-
-        [HttpPost]
-        public ActionResult Edit(MatchResultBet matchresultbet)
-        {
-            if (ModelState.IsValid)
-            {
-                _db.Entry(matchresultbet).State = EntityState.Modified;
-                _db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.MatchId = new SelectList(_db.Matches, "Id", "Id", matchresultbet.MatchId);
-            return View(matchresultbet);
-        }
-
-        //
-        // GET: /MatchResultBet/Delete/5
-
-        public ActionResult Delete(int id = 0)
-        {
-            MatchResultBet matchresultbet = _db.MatchResultBets.Find(id);
-            if (matchresultbet == null)
-            {
-                return HttpNotFound();
-            }
-            return View(matchresultbet);
-        }
-
-        //
-        // POST: /MatchResultBet/Delete/5
-
-        [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            MatchResultBet matchresultbet = _db.MatchResultBets.Find(id);
-            _db.MatchResultBets.Remove(matchresultbet);
-            _db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            _db.Dispose();
-            base.Dispose(disposing);
+            _repository.Save();
+            return GetTeamsInGroup(group);
         }
     }
 }

@@ -18,8 +18,8 @@ namespace EuroApi.Controllers
             ViewBag.Matches = matches;
             
             var teams = _db.Teams.Where(t => t.Group.Name == group).ToList();
-            Standing.SortTeams(ref teams);
-            return View(teams);
+            var sortedTeams = Standing.SortTeams(teams);
+            return View(sortedTeams);
         }
 
         public ActionResult Groups()
@@ -28,8 +28,8 @@ namespace EuroApi.Controllers
             foreach (var team in _db.Groups.Select(a => a.Name))
             {
                 var teamsInGroup = _db.Teams.Where(t => t.Group.Name == team).ToList();
-                Standing.SortTeams(ref teamsInGroup);
-                groups.Add(teamsInGroup);
+                var sortedTeamsInGroup = Standing.SortTeams(teamsInGroup);
+                groups.Add(sortedTeamsInGroup);
             }
             return View(groups);
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using EuroApi.Models;
 
 namespace EuroApi.DTO
@@ -11,16 +12,27 @@ namespace EuroApi.DTO
 
         public string Name { get; set; }
         public string GroupName { get; set; }
+        public int GoalsScored { get; set; }
+        public int Points { get; set; }
+        public int GoalsConceded { get; set; }
+        public int GoalDifference { get; set; }
+        public int MatchCount { get; set; }
 
         public static DtoTeam TeamToDto(Team team)
         {
-            return new DtoTeam
+            var dto = new DtoTeam
                        {
                            Name = team.Name,
                            GroupName = team.Group.Name,
                            Matches = DtoMatch.MatchesToDto(team.Matches),
-                           PlayedMatches = DtoMatch.MatchesToDto(team.PlayedMatches)
+                           PlayedMatches = DtoMatch.MatchesToDto(team.PlayedMatches),
+                           Points = team.Points,
+                           GoalsConceded = team.GoalsConceded,
+                           GoalsScored = team.GoalsScored,
+                           GoalDifference = team.GoalDifference
                        };
+            dto.MatchCount = team.Matches.Count(x => x.HomeTeamGoals != null);
+            return dto;
         }
 
         public static ICollection<DtoTeam> TeamsToDto(ICollection<Team> teams)

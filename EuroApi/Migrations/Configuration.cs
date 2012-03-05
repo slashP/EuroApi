@@ -65,7 +65,6 @@ context.Matches.Add(new Match{Id = 21, Date = DateTime.Parse("June 18,2012 20:45
 context.Matches.Add(new Match{Id = 22, Date = DateTime.Parse("June 18,2012 20:45"), HomeTeamId = 10, GuestTeamId = 11, Place = "Poznan"});
 context.Matches.Add(new Match{Id = 23, Date = DateTime.Parse("June 19,2012 20:45"), HomeTeamId = 14, GuestTeamId = 15, Place = "Donetsk"});
 context.Matches.Add(new Match{Id = 24, Date = DateTime.Parse("June 19,2012 20:45"), HomeTeamId = 16, GuestTeamId = 13, Place = "Kiev"});
-            //
         }
     }
 }

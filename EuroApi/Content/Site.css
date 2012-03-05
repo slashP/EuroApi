@@ -678,3 +678,21 @@ table th {
  
     border-bottom: solid 1px #e8eef4;
 }   
+
+.resultBet {
+    width: 20px;
+    margin-right: 80px;
+}
+
+.teamsInMatch div {
+    width: 110px;
+    display: inline-block;
+}
+
+.userBetMatch {
+    margin-bottom: 5px;
+}
+
+.untouched {
+    border: 1px solid lightcoral;
+}
