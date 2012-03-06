@@ -1,66 +1,66 @@
 ﻿<RecentFiles>
   <RecentFiles>
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:Championship/f:TeamView.cshtml" caret="0" fromTop="0" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:MatchResultBet/f:Edit.cshtml" caret="0" fromTop="0" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Migrations/f:Configuration.cs" caret="0" fromTop="0" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Models/f:EuroApiContext.cs" caret="929" fromTop="24" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Scripts/f:jquery-ui-1.8.17.min.js" caret="0" fromTop="0" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Controllers/f:BogusController.cs" caret="0" fromTop="0" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:Bogus/f:Index.cshtml" caret="0" fromTop="0" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:Bogus/f:Details.cshtml" caret="0" fromTop="0" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:Bogus/f:Create.cshtml" caret="0" fromTop="0" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:Bogus/f:Edit.cshtml" caret="0" fromTop="0" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:Bogus/f:Delete.cshtml" caret="0" fromTop="0" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Controllers/f:MatchResultBetController.cs" caret="2590" fromTop="14" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Content/f:Site.css" caret="12865" fromTop="28" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:DTO/f:DtoTeam.cs" caret="1360" fromTop="21" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Models/f:MatchResultBet.cs" caret="389" fromTop="13" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:MatchResultBet/f:Index.cshtml" caret="993" fromTop="20" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:DAL/f:MatchRepository.cs" caret="653" fromTop="15" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Models/f:UserBetStanding.cs" caret="840" fromTop="25" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:DAL/f:MatchResultBetRepository.cs" caret="699" fromTop="15" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:DAL/f:IRepository.cs" caret="145" fromTop="6" />
     <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Models/f:Team.cs" caret="230" fromTop="9" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Models/f:Standing.cs" caret="111" fromTop="5" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Controllers/f:ChampionshipController.cs" caret="1141" fromTop="14" />
     <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:Championship/f:Index.cshtml" caret="1260" fromTop="20" />
     <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Models/f:Match.cs" caret="63" fromTop="4" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:Shared/f:_Layout.cshtml" caret="395" fromTop="8" />
     <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:DTO/f:DtoMatchResultBet.cs" caret="69" fromTop="4" />
     <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:DAL/f:TeamRepository.cs" caret="628" fromTop="15" />
     <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Api/f:MatchBetController.cs" caret="424" fromTop="16" />
     <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Api/f:TeamController.cs" caret="527" fromTop="16" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Controllers/f:AccountController.cs" caret="0" fromTop="0" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Controllers/f:ChampionshipController.cs" caret="0" fromTop="0" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Controllers/f:GroupController.cs" caret="0" fromTop="0" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Controllers/f:HomeController.cs" caret="0" fromTop="0" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Controllers/f:MatchController.cs" caret="0" fromTop="0" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Models/f:Standing.cs" caret="153" fromTop="7" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Models/f:UserBetStanding.cs" caret="308" fromTop="4" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:Player/f:Index.cshtml" caret="0" fromTop="0" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:Player/f:Details.cshtml" caret="0" fromTop="0" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:Player/f:Create.cshtml" caret="0" fromTop="0" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:Player/f:Edit.cshtml" caret="0" fromTop="0" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:Player/f:Delete.cshtml" caret="0" fromTop="0" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Migrations/f:Configuration.cs" caret="7151" fromTop="18" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/f:Global.asax.cs" caret="541" fromTop="17" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:Team/f:Index.cshtml" caret="822" fromTop="6" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:Team/f:Players.cshtml" caret="463" fromTop="16" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Controllers/f:TeamController.cs" caret="714" fromTop="19" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Controllers/f:PlayerController.cs" caret="434" fromTop="13" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Models/f:Player.cs" caret="1232" fromTop="24" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Models/f:EuroApiContext.cs" caret="1007" fromTop="20" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:Shared/f:_Layout.cshtml" caret="1694" fromTop="13" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Controllers/f:MatchResultBetController.cs" caret="819" fromTop="12" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:MatchResultBet/f:Index.cshtml" caret="3754" fromTop="19" />
   </RecentFiles>
   <RecentEdits>
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:MatchResultBet/f:Index.cshtml" caret="2798" fromTop="21" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:MatchResultBet/f:Index.cshtml" caret="2289" fromTop="16" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:DAL/f:MatchResultBetRepository.cs" caret="699" fromTop="15" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:MatchResultBet/f:Index.cshtml" caret="1853" fromTop="14" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Controllers/f:MatchResultBetController.cs" caret="809" fromTop="15" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:DAL/f:MatchRepository.cs" caret="652" fromTop="15" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:MatchResultBet/f:Index.cshtml" caret="2573" fromTop="26" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:MatchResultBet/f:Index.cshtml" caret="1387" fromTop="8" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:MatchResultBet/f:Index.cshtml" caret="3696" fromTop="20" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:MatchResultBet/f:Index.cshtml" caret="3696" fromTop="20" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Controllers/f:MatchResultBetController.cs" caret="3054" fromTop="24" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Controllers/f:MatchResultBetController.cs" caret="2962" fromTop="19" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:DTO/f:DtoTeam.cs" caret="584" fromTop="5" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:DTO/f:DtoTeam.cs" caret="685" fromTop="9" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:DTO/f:DtoTeam.cs" caret="1360" fromTop="21" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:MatchResultBet/f:Index.cshtml" caret="3080" fromTop="14" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Controllers/f:MatchResultBetController.cs" caret="1625" fromTop="17" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Controllers/f:MatchResultBetController.cs" caret="2131" fromTop="17" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Controllers/f:MatchResultBetController.cs" caret="2406" fromTop="22" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:MatchResultBet/f:Index.cshtml" caret="1608" fromTop="11" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:MatchResultBet/f:Index.cshtml" caret="2140" fromTop="14" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:MatchResultBet/f:Index.cshtml" caret="2412" fromTop="15" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:MatchResultBet/f:Index.cshtml" caret="2646" fromTop="23" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:MatchResultBet/f:Index.cshtml" caret="3844" fromTop="15" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Content/f:Site.css" caret="12687" fromTop="16" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:MatchResultBet/f:Index.cshtml" caret="608" fromTop="12" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Content/f:Site.css" caret="12865" fromTop="28" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Controllers/f:MatchResultBetController.cs" caret="1208" fromTop="16" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:MatchResultBet/f:Index.cshtml" caret="576" fromTop="14" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:MatchResultBet/f:Index.cshtml" caret="993" fromTop="20" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:Team/f:Players.cshtml" caret="463" fromTop="16" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Migrations/f:Configuration.cs" caret="65234" fromTop="26" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Migrations/f:Configuration.cs" caret="65234" fromTop="21" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Migrations/f:Configuration.cs" caret="7244" fromTop="12" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Migrations/f:Configuration.cs" caret="7244" fromTop="13" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Migrations/f:Configuration.cs" caret="7244" fromTop="13" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Migrations/f:Configuration.cs" caret="7244" fromTop="13" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Migrations/f:Configuration.cs" caret="7227" fromTop="13" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Migrations/f:Configuration.cs" caret="7244" fromTop="0" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Migrations/f:Configuration.cs" caret="65232" fromTop="26" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Models/f:Player.cs" caret="164" fromTop="7" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Models/f:Player.cs" caret="1071" fromTop="20" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Models/f:Player.cs" caret="1232" fromTop="24" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Controllers/f:TeamController.cs" caret="714" fromTop="19" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Migrations/f:Configuration.cs" caret="730" fromTop="5" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Migrations/f:Configuration.cs" caret="817" fromTop="3" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Migrations/f:Configuration.cs" caret="730" fromTop="8" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Migrations/f:Configuration.cs" caret="781" fromTop="9" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Migrations/f:Configuration.cs" caret="1042" fromTop="10" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Migrations/f:Configuration.cs" caret="3201" fromTop="21" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/f:Global.asax.cs" caret="541" fromTop="17" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Migrations/f:Configuration.cs" caret="1532" fromTop="14" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Migrations/f:Configuration.cs" caret="2952" fromTop="18" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Migrations/f:Configuration.cs" caret="1304" fromTop="11" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Migrations/f:Configuration.cs" caret="6950" fromTop="14" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:Shared/f:_Layout.cshtml" caret="1102" fromTop="20" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:Shared/f:_Layout.cshtml" caret="1694" fromTop="13" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:MatchResultBet/f:Index.cshtml" caret="1995" fromTop="18" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:MatchResultBet/f:Index.cshtml" caret="2351" fromTop="20" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:MatchResultBet/f:Index.cshtml" caret="3754" fromTop="19" />
   </RecentEdits>
 </RecentFiles>

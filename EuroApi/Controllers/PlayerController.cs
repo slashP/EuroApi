@@ -9,93 +9,104 @@ using EuroApi.Models;
 
 namespace EuroApi.Controllers
 {
-    public class TeamController : Controller
+    public class PlayerController : Controller
     {
         private EuroApiContext db = new EuroApiContext();
 
+        //
+        // GET: /Player/
+
         public ActionResult Index()
         {
-            var teams = db.Teams.Include(t => t.Group);
-            return View(teams.ToList());
+            return View(db.Players.ToList());
         }
 
-        public ActionResult Players(int id)
-        {
-            var teamName = db.Teams.Find(id).Name;
-            var players = db.Players.Where(x => x.NationalTeam == teamName).ToList();
-            players.Sort();
-            return View(players);
-        }
+        //
+        // GET: /Player/Details/5
 
         public ActionResult Details(int id = 0)
         {
-            Team team = db.Teams.Find(id);
-            if (team == null)
+            Player player = db.Players.Find(id);
+            if (player == null)
             {
                 return HttpNotFound();
             }
-            return View(team);
+            return View(player);
         }
+
+        //
+        // GET: /Player/Create
 
         public ActionResult Create()
         {
-            ViewBag.GroupId = new SelectList(db.Groups, "Id", "Name");
             return View();
         }
 
+        //
+        // POST: /Player/Create
+
         [HttpPost]
-        public ActionResult Create(Team team)
+        public ActionResult Create(Player player)
         {
             if (ModelState.IsValid)
             {
-                db.Teams.Add(team);
+                db.Players.Add(player);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.GroupId = new SelectList(db.Groups, "Id", "Name", team.GroupId);
-            return View(team);
+            return View(player);
         }
+
+        //
+        // GET: /Player/Edit/5
 
         public ActionResult Edit(int id = 0)
         {
-            Team team = db.Teams.Find(id);
-            if (team == null)
+            Player player = db.Players.Find(id);
+            if (player == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.GroupId = new SelectList(db.Groups, "Id", "Name", team.GroupId);
-            return View(team);
+            return View(player);
         }
 
+        //
+        // POST: /Player/Edit/5
+
         [HttpPost]
-        public ActionResult Edit(Team team)
+        public ActionResult Edit(Player player)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(team).State = EntityState.Modified;
+                db.Entry(player).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.GroupId = new SelectList(db.Groups, "Id", "Name", team.GroupId);
-            return View(team);
+            return View(player);
         }
+
+        //
+        // GET: /Player/Delete/5
 
         public ActionResult Delete(int id = 0)
         {
-            Team team = db.Teams.Find(id);
-            if (team == null)
+            Player player = db.Players.Find(id);
+            if (player == null)
             {
                 return HttpNotFound();
             }
-            return View(team);
+            return View(player);
         }
+
+        //
+        // POST: /Player/Delete/5
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Team team = db.Teams.Find(id);
-            db.Teams.Remove(team);
+            Player player = db.Players.Find(id);
+            db.Players.Remove(player);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
