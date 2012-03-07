@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using EuroApi.DAL;
 using EuroApi.DTO;
@@ -20,6 +21,35 @@ namespace EuroApi.Controllers
             var matches = _matchRepository.Query(x => x.HomeTeam.Group.Name == group);
             ViewBag.UsersResultBets = _repository.Query(x => x.User == User.Identity.Name).ToList();
             return View(matches.ToList());
+        }
+
+        public ActionResult Overview()
+        {
+            var groups = new List<List<Team>>();
+            var userBets = _repository.Query(x => x.User == User.Identity.Name).ToList();
+            foreach (var groupName in new []{"A", "B", "C", "D"})
+            {
+                var teamsInGroup = _teamRepository.Query(t => t.Group.Name == groupName).ToList();
+                var sortedGroupTeams = UserBetStanding.SortTeams(teamsInGroup, userBets);
+                groups.Add(sortedGroupTeams);
+            }
+            var knockout = new KnockoutPhase();
+            var teams = _teamRepository.GetAll().ToList();
+            var sortedGroupTeams2 = UserBetStanding.SortTeams(teams, userBets);
+            var matches = knockout.GetQuarterFinals(sortedGroupTeams2);
+            ViewBag.QuarterFinals = matches;
+            return View(groups);
+            
+        }
+
+        public ActionResult QuarterFinals()
+        {
+            var knockout = new KnockoutPhase();
+            var teams = _teamRepository.GetAll().ToList();
+            var userBets = _repository.Query(x => x.User == User.Identity.Name).ToList();
+            var sortedGroupTeams = UserBetStanding.SortTeams(teams, userBets);
+            var matches = knockout.GetQuarterFinals(sortedGroupTeams);
+            return View(matches);
         }
 
         public JsonResult GetTeamsInGroup(string group = "A")

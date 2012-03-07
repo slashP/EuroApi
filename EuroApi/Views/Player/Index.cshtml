@@ -4,7 +4,17 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+
+<div class="demo">
+
+    <div class="ui-widget">
+        <label for="tags">Name of player: </label>
+        <input id="tags">
+    </div>
+</div>
+
+<div id="searchDescription"></div>
+
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -73,3 +83,31 @@
 }
 
 </table>
+
+
+<script>
+    $(function () {
+        var availableTags = [];
+        $.ajax({
+            url: "/Player/GetPlayerList",
+            type: "POST",
+            async: false,
+            success: function (results) {
+                console.log(results);
+                availableTags = results;
+            }
+        });
+
+        $("#tags").autocomplete({
+            source: availableTags,
+            select: function (value, data) {
+                if (typeof data == "undefined") {
+                    $("#searchDescription").html('You selected: ' + value + "<br/>");
+                } else {
+                    $("#searchDescription").html('You selected: ' + data.item.value + "<br/>");
+                    window.location = "/Player/Show/?name=" + data.item.value;
+                }
+            }
+        });
+    });
+	</script>

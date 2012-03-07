@@ -22,7 +22,7 @@ namespace EuroApi.Controllers
         public ActionResult Players(int id)
         {
             var teamName = db.Teams.Find(id).Name;
-            var players = db.Players.Where(x => x.NationalTeam == teamName).ToList();
+            var players = db.Players.Where(x => x.NationalTeam == teamName).OrderBy(t => t.Number).ToList();
             players.Sort();
             return View(players);
         }

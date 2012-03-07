@@ -21,6 +21,20 @@ namespace EuroApi.Controllers
             return View(db.Players.ToList());
         }
 
+        public JsonResult GetPlayerList()
+        {
+            var playerNames = db.Players.Select(x => x.Name).ToList();
+            return Json(playerNames);
+        }
+
+        public ActionResult Show(string name)
+        {
+            var player = db.Players.FirstOrDefault(t => t.Name == name);
+            if (player == null)
+                return RedirectToAction("Index");
+            return RedirectToAction("Details", new {id = player.Id});
+        }
+
         //
         // GET: /Player/Details/5
 

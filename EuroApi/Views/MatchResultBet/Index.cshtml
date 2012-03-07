@@ -6,7 +6,16 @@
     ViewBag.Title = "Index";
     var userBets = (List<MatchResultBet>) ViewBag.UsersResultBets;
 }
+<div class="normalWrapper">
+<div style="margin-bottom: 30px;">Choose group:<br />
+    @Html.ActionLink("Overview", "Overview", "MatchResultBet")
+    <a href="/MatchResultBet/Index?group=a">Group A</a>
+    <a href="/MatchResultBet/Index?group=b">Group B</a>
+    <a href="/MatchResultBet/Index?group=c">Group C</a>
+    <a href="/MatchResultBet/Index?group=d">Group D</a>
+</div>
 <div class="userBetMatches">
+    <div style="font-weight: bold; font-size: 1.5em; margin-bottom: 10px;">Group @Model.FirstOrDefault().HomeTeam.Group.Name</div>
     @foreach(var match in Model)
     {
         
@@ -16,9 +25,9 @@
         <div class="userBetMatch">
             <div class="teamsInMatch">
                 <div><img src="/Content/flags/@(match.HomeTeam.Name)-flag.gif" style='height: 14px;' alt='flag' />
-                @match.HomeTeam.Name</div>
+                    @match.HomeTeam.Name</div>
                 <div><img src="/Content/flags/@(match.GuestTeam.Name)-flag.gif" style='height: 14px;' alt='flag' />                 
-                @match.GuestTeam.Name</div>
+                    @match.GuestTeam.Name</div>
             </div>
             <input class="resultBet homeTeam @untouched" type="tel" matchId="@match.Id" value="@userBetHome"/>
             <input class="resultBet awayTeam @untouched" type="tel" matchId="@match.Id" value="@userBetAway" />
@@ -27,9 +36,9 @@
 </div>
 <div class="groupTable">
     
-</div>
+</div><br />
 <input type="button" onclick="removeAllUserBets();" value="Remove all bets" />
-
+</div>
 <script>
     $(document).ready(function () {
         $(".resultBet").on("change", function (event) {

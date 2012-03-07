@@ -648,8 +648,9 @@ ul#social li {
 
 .groupTable {
     display: inline-block;
-    margin: 20px;
+    margin: 35px 40px 0px 0px;
     width: 330px;
+    
 }
 
 .groupTables {
@@ -695,4 +696,20 @@ table th {
 
 .untouched {
     border: 1px solid lightcoral;
+}
+
+.display-label {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+.display-field {
+    margin-bottom: 10px;
+}
+.userBetMatches {
+    float: left;
+}
+
+.normalWrapper{
+    margin: 0px auto 0px auto;
+    width: 600px;
 }
