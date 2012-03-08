@@ -12,6 +12,12 @@ namespace EuroApi.Models
 
         }
 
+        public static List<Team> SortTeamsByGroup(List<Team> teams, List<MatchResultBet> userBets)
+        {
+            SetupBets(ref teams, userBets);
+            return Standing.SortTeamsByGroup(teams);
+        } 
+
         private static void SetupBets(ref List<Team> teams, List<MatchResultBet> userBets)
         {
             foreach (var match in teams.SelectMany(x => x.Matches).Distinct())

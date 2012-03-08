@@ -17,7 +17,7 @@ namespace EuroApi.Models
                         .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Match>()
-                        .HasRequired(m => m.GuestTeam)
+                        .HasRequired(m => m.AwayTeam)
                         .WithMany(t => t.AwayMatches)
                         .HasForeignKey(m => m.GuestTeamId)
                         .WillCascadeOnDelete(false);

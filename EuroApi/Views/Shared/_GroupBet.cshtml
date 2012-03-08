@@ -1,0 +1,16 @@
+﻿@model List<EuroApi.Models.Match>
+@{
+    var group = @Model.FirstOrDefault().HomeTeam.Group.Name;
+}
+<div class="normalWrapper">
+<div class="userBetMatches">
+    <div style="font-weight: bold; font-size: 1.5em; margin-bottom: 10px;">Group @group</div>
+    @foreach(var match in Model)
+    {
+        @Html.Partial("_UserBetMatch", match)
+    }
+</div>
+<div class="groupTable group@(group)" group="@group">
+    
+</div><br />
+</div>

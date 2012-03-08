@@ -650,7 +650,7 @@ ul#social li {
     display: inline-block;
     margin: 35px 40px 0px 0px;
     width: 330px;
-    
+    height: 200px;
 }
 
 .groupTables {
@@ -682,7 +682,12 @@ table th {
 
 .resultBet {
     width: 20px;
-    margin-right: 80px;
+    height: 18px;
+    margin-right: 87px;
+    text-align: center;
+    border: none;
+    background: #FFF;
+    margin-bottom: 4px;
 }
 
 .teamsInMatch div {
@@ -712,4 +717,18 @@ table th {
 .normalWrapper{
     margin: 0px auto 0px auto;
     width: 600px;
+}
+
+.player {
+    
+}
+
+.championshipWrapper {
+    display: inline-block;
+    width: 900px;
+}
+
+.groupBet {
+    width: 400px;
+    float: left;
 }

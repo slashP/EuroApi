@@ -17,12 +17,12 @@ namespace EuroApi.DAL
 
         public IEnumerable<Team> GetAll()
         {
-            return _db.Teams;
+            return _db.Teams.OrderBy(x => x.Id).Take(16);
         }
 
         public IEnumerable<Team> Query(Expression<Func<Team, bool>> filter)
         {
-            return _db.Teams.Where(filter);
+            return _db.Teams.OrderBy(x => x.Id).Take(16).Where(filter);
         }
 
         public Team Add(Team entity)

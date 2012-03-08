@@ -1,3 +1,5 @@
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 using EuroApi.Models;
 
 namespace EuroApi.Migrations
@@ -7,7 +9,7 @@ namespace EuroApi.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<EuroApi.Models.EuroApiContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<EuroApiContext>
     {
         public Configuration()
         {
@@ -21,20 +23,36 @@ namespace EuroApi.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.
             //
-            //AddGroups(context);
-            //AddTeams(context);
-            //AddMatches(context);
-            AddPlayers(context);
+            try
+            {
+
+
+                AddGroups(context);
+                AddTeams(context);
+                AddMatches(context);
+                AddPlayers(context);
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        Debug.WriteLine("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
+                    }
+                }
+            }
         }
 
         private void AddGroups(EuroApiContext context)
         {
-            context.Groups.ToList().ForEach(g => context.Groups.Remove(g));
-            context.SaveChanges();
-            context.Groups.AddOrUpdate(new Group {Id = 1, Name = "A" });
-            context.Groups.AddOrUpdate(new Group {Id = 2, Name = "B" });
-            context.Groups.AddOrUpdate(new Group {Id = 3, Name = "C" });
-            context.Groups.AddOrUpdate(new Group {Id = 4, Name = "D" });
+            //context.Groups.ToList().ForEach(g => context.Groups.Remove(g));
+            //context.SaveChanges();
+            context.Groups.AddOrUpdate(new Group { Id = 1, Name = "A" });
+            context.Groups.AddOrUpdate(new Group { Id = 2, Name = "B" });
+            context.Groups.AddOrUpdate(new Group { Id = 3, Name = "C" });
+            context.Groups.AddOrUpdate(new Group { Id = 4, Name = "D" });
+            context.Groups.AddOrUpdate(new Group { Id = 5, Name = "Esdf" });
         }
 
         private void AddTeams(EuroApiContext context)
@@ -57,36 +75,45 @@ namespace EuroApi.Migrations
             context.Teams.AddOrUpdate(new Team { Id = 14, GroupId = 4, Name = "England" });
             context.Teams.AddOrUpdate(new Team { Id = 15, GroupId = 4, Name = "Ukraine" });
             context.Teams.AddOrUpdate(new Team { Id = 16, GroupId = 4, Name = "Sweden" });
+            context.Teams.AddOrUpdate(new Team { Id = 17, GroupId = 5, Name = "asdf" });
+            context.Teams.AddOrUpdate(new Team { Id = 18, GroupId = 5, Name = "asdf" });
         }
 
         private void AddMatches(EuroApiContext context)
         {
             //context.Matches.ToList().ForEach(m => context.Matches.Remove(m));
             //context.SaveChanges();
-            context.Matches.AddOrUpdate(new Match { Id = 1, Date = DateTime.Parse("June 8,2012 18:00"), HomeTeamId = 1, GuestTeamId = 2, Place = "Warsaw" });
-            context.Matches.AddOrUpdate(new Match { Id = 2, Date = DateTime.Parse("June 8,2012 20:45"), HomeTeamId = 3, GuestTeamId = 4, Place = "Wroclaw" });
-            context.Matches.AddOrUpdate(new Match { Id = 3, Date = DateTime.Parse("June 9,2012 18:00"), HomeTeamId = 5, GuestTeamId = 6, Place = "Kharkov" });
-            context.Matches.AddOrUpdate(new Match { Id = 4, Date = DateTime.Parse("June 9,2012 20:45"), HomeTeamId = 7, GuestTeamId = 8, Place = "Lvov" });
-            context.Matches.AddOrUpdate(new Match { Id = 5, Date = DateTime.Parse("June 10,2012 18:00"), HomeTeamId = 9, GuestTeamId = 10, Place = "Gdansk" });
-            context.Matches.AddOrUpdate(new Match { Id = 6, Date = DateTime.Parse("June 10,2012 20:45"), HomeTeamId = 11, GuestTeamId = 12, Place = "Poznan" });
-            context.Matches.AddOrUpdate(new Match { Id = 7, Date = DateTime.Parse("June 11,2012 18:00"), HomeTeamId = 13, GuestTeamId = 14, Place = "Donetsk" });
-            context.Matches.AddOrUpdate(new Match { Id = 8, Date = DateTime.Parse("June 11,2012 20:45"), HomeTeamId = 15, GuestTeamId = 16, Place = "Kiev" });
-            context.Matches.AddOrUpdate(new Match { Id = 9, Date = DateTime.Parse("June 12,2012 18:00"), HomeTeamId = 2, GuestTeamId = 4, Place = "Wroclaw" });
-            context.Matches.AddOrUpdate(new Match { Id = 10, Date = DateTime.Parse("June 12,2012 20:45"), HomeTeamId = 1, GuestTeamId = 3, Place = "Warsaw" });
-            context.Matches.AddOrUpdate(new Match { Id = 11, Date = DateTime.Parse("June 13,2012 18:00"), HomeTeamId = 6, GuestTeamId = 8, Place = "Lvov" });
-            context.Matches.AddOrUpdate(new Match { Id = 12, Date = DateTime.Parse("June 13,2012 20:45"), HomeTeamId = 5, GuestTeamId = 7, Place = "Kharkov" });
-            context.Matches.AddOrUpdate(new Match { Id = 13, Date = DateTime.Parse("June 14,2012 18:00"), HomeTeamId = 10, GuestTeamId = 12, Place = "Poznan" });
-            context.Matches.AddOrUpdate(new Match { Id = 14, Date = DateTime.Parse("June 14,2012 20:45"), HomeTeamId = 9, GuestTeamId = 11, Place = "Gdansk" });
-            context.Matches.AddOrUpdate(new Match { Id = 15, Date = DateTime.Parse("June 15,2012 18:00"), HomeTeamId = 16, GuestTeamId = 14, Place = "Kiev" });
-            context.Matches.AddOrUpdate(new Match { Id = 16, Date = DateTime.Parse("June 15,2012 20:45"), HomeTeamId = 15, GuestTeamId = 13, Place = "Donetsk" });
-            context.Matches.AddOrUpdate(new Match { Id = 17, Date = DateTime.Parse("June 16,2012 20:45"), HomeTeamId = 4, GuestTeamId = 1, Place = "Wroclaw" });
-            context.Matches.AddOrUpdate(new Match { Id = 18, Date = DateTime.Parse("June 16,2012 20:45"), HomeTeamId = 2, GuestTeamId = 3, Place = "Warsaw" });
-            context.Matches.AddOrUpdate(new Match { Id = 19, Date = DateTime.Parse("June 17,2012 20:45"), HomeTeamId = 8, GuestTeamId = 5, Place = "Kharkov" });
-            context.Matches.AddOrUpdate(new Match { Id = 20, Date = DateTime.Parse("June 17,2012 20:45"), HomeTeamId = 6, GuestTeamId = 7, Place = "Lvov" });
-            context.Matches.AddOrUpdate(new Match { Id = 21, Date = DateTime.Parse("June 18,2012 20:45"), HomeTeamId = 12, GuestTeamId = 9, Place = "Gdansk" });
-            context.Matches.AddOrUpdate(new Match { Id = 22, Date = DateTime.Parse("June 18,2012 20:45"), HomeTeamId = 10, GuestTeamId = 11, Place = "Poznan" });
-            context.Matches.AddOrUpdate(new Match { Id = 23, Date = DateTime.Parse("June 19,2012 20:45"), HomeTeamId = 14, GuestTeamId = 15, Place = "Donetsk" });
-            context.Matches.AddOrUpdate(new Match { Id = 24, Date = DateTime.Parse("June 19,2012 20:45"), HomeTeamId = 16, GuestTeamId = 13, Place = "Kiev" });
+            context.Matches.AddOrUpdate(new Match { Type = 0, Id = 1, Date = DateTime.Parse("June 8,2012 18:00"), HomeTeamId = 1, GuestTeamId = 2, Place = "Warsaw" });
+            context.Matches.AddOrUpdate(new Match { Type = 0, Id = 2, Date = DateTime.Parse("June 8,2012 20:45"), HomeTeamId = 3, GuestTeamId = 4, Place = "Wroclaw" });
+            context.Matches.AddOrUpdate(new Match { Type = 0, Id = 3, Date = DateTime.Parse("June 9,2012 18:00"), HomeTeamId = 5, GuestTeamId = 6, Place = "Kharkov" });
+            context.Matches.AddOrUpdate(new Match { Type = 0, Id = 4, Date = DateTime.Parse("June 9,2012 20:45"), HomeTeamId = 7, GuestTeamId = 8, Place = "Lvov" });
+            context.Matches.AddOrUpdate(new Match { Type = 0, Id = 5, Date = DateTime.Parse("June 10,2012 18:00"), HomeTeamId = 9, GuestTeamId = 10, Place = "Gdansk" });
+            context.Matches.AddOrUpdate(new Match { Type = 0, Id = 6, Date = DateTime.Parse("June 10,2012 20:45"), HomeTeamId = 11, GuestTeamId = 12, Place = "Poznan" });
+            context.Matches.AddOrUpdate(new Match { Type = 0, Id = 7, Date = DateTime.Parse("June 11,2012 18:00"), HomeTeamId = 13, GuestTeamId = 14, Place = "Donetsk" });
+            context.Matches.AddOrUpdate(new Match { Type = 0, Id = 8, Date = DateTime.Parse("June 11,2012 20:45"), HomeTeamId = 15, GuestTeamId = 16, Place = "Kiev" });
+            context.Matches.AddOrUpdate(new Match { Type = 0, Id = 9, Date = DateTime.Parse("June 12,2012 18:00"), HomeTeamId = 2, GuestTeamId = 4, Place = "Wroclaw" });
+            context.Matches.AddOrUpdate(new Match { Type = 0, Id = 10, Date = DateTime.Parse("June 12,2012 20:45"), HomeTeamId = 1, GuestTeamId = 3, Place = "Warsaw" });
+            context.Matches.AddOrUpdate(new Match { Type = 0, Id = 11, Date = DateTime.Parse("June 13,2012 18:00"), HomeTeamId = 6, GuestTeamId = 8, Place = "Lvov" });
+            context.Matches.AddOrUpdate(new Match { Type = 0, Id = 12, Date = DateTime.Parse("June 13,2012 20:45"), HomeTeamId = 5, GuestTeamId = 7, Place = "Kharkov" });
+            context.Matches.AddOrUpdate(new Match { Type = 0, Id = 13, Date = DateTime.Parse("June 14,2012 18:00"), HomeTeamId = 10, GuestTeamId = 12, Place = "Poznan" });
+            context.Matches.AddOrUpdate(new Match { Type = 0, Id = 14, Date = DateTime.Parse("June 14,2012 20:45"), HomeTeamId = 9, GuestTeamId = 11, Place = "Gdansk" });
+            context.Matches.AddOrUpdate(new Match { Type = 0, Id = 15, Date = DateTime.Parse("June 15,2012 18:00"), HomeTeamId = 16, GuestTeamId = 14, Place = "Kiev" });
+            context.Matches.AddOrUpdate(new Match { Type = 0, Id = 16, Date = DateTime.Parse("June 15,2012 20:45"), HomeTeamId = 15, GuestTeamId = 13, Place = "Donetsk" });
+            context.Matches.AddOrUpdate(new Match { Type = 0, Id = 17, Date = DateTime.Parse("June 16,2012 20:45"), HomeTeamId = 4, GuestTeamId = 1, Place = "Wroclaw" });
+            context.Matches.AddOrUpdate(new Match { Type = 0, Id = 18, Date = DateTime.Parse("June 16,2012 20:45"), HomeTeamId = 2, GuestTeamId = 3, Place = "Warsaw" });
+            context.Matches.AddOrUpdate(new Match { Type = 0, Id = 19, Date = DateTime.Parse("June 17,2012 20:45"), HomeTeamId = 8, GuestTeamId = 5, Place = "Kharkov" });
+            context.Matches.AddOrUpdate(new Match { Type = 0, Id = 20, Date = DateTime.Parse("June 17,2012 20:45"), HomeTeamId = 6, GuestTeamId = 7, Place = "Lvov" });
+            context.Matches.AddOrUpdate(new Match { Type = 0, Id = 21, Date = DateTime.Parse("June 18,2012 20:45"), HomeTeamId = 12, GuestTeamId = 9, Place = "Gdansk" });
+            context.Matches.AddOrUpdate(new Match { Type = 0, Id = 22, Date = DateTime.Parse("June 18,2012 20:45"), HomeTeamId = 10, GuestTeamId = 11, Place = "Poznan" });
+            context.Matches.AddOrUpdate(new Match { Type = 0, Id = 23, Date = DateTime.Parse("June 19,2012 20:45"), HomeTeamId = 14, GuestTeamId = 15, Place = "Donetsk" });
+            context.Matches.AddOrUpdate(new Match { Type = 0, Id = 24, Date = DateTime.Parse("June 19,2012 20:45"), HomeTeamId = 16, GuestTeamId = 13, Place = "Kiev" });
+            context.Matches.AddOrUpdate(new Match { Type = 1, Id = 25, Date = DateTime.Parse("June 21, 2012 20:45"), HomeTeamId = 17, GuestTeamId = 18, Place = "Warzaw" });
+            context.Matches.AddOrUpdate(new Match { Type = 1, Id = 26, Date = DateTime.Parse("June 22, 2012 20:45"), HomeTeamId = 17, GuestTeamId = 18, Place = "Gdansk" });
+            context.Matches.AddOrUpdate(new Match { Type = 1, Id = 27, Date = DateTime.Parse("June 23, 2012 20:45"), HomeTeamId = 17, GuestTeamId = 18, Place = "Donetsk" });
+            context.Matches.AddOrUpdate(new Match { Type = 1, Id = 28, Date = DateTime.Parse("June 24, 2012 20:45"), HomeTeamId = 17, GuestTeamId = 18, Place = "Kiev" });
+            context.Matches.AddOrUpdate(new Match { Type = 2, Id = 29, Date = DateTime.Parse("June 27, 2012 20:45"), HomeTeamId = 17, GuestTeamId = 18, Place = "Donetsk" });
+            context.Matches.AddOrUpdate(new Match { Type = 2, Id = 30, Date = DateTime.Parse("June 28, 2012 20:45"), HomeTeamId = 17, GuestTeamId = 18, Place = "Warzaw" });
+            context.Matches.AddOrUpdate(new Match { Type = 3, Id = 31, Date = DateTime.Parse("July 1, 2012 20:45"), HomeTeamId = 17, GuestTeamId = 18, Place = "Kiev" });
         }
 
         private void AddPlayers(EuroApiContext context)

@@ -12,7 +12,7 @@ namespace EuroApi.Controllers
 
         public ActionResult Index()
         {
-            var matches = db.Matches.Include(m => m.HomeTeam).Include(m => m.GuestTeam);
+            var matches = db.Matches.Include(m => m.HomeTeam).Include(m => m.AwayTeam);
             return View(matches.ToList());
         }
 

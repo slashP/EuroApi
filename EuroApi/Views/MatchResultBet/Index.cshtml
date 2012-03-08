@@ -1,10 +1,7 @@
-﻿@using System.Globalization
-@using EuroApi.Models
+﻿@using EuroApi.Models
 @model List<Match>
-
 @{
     ViewBag.Title = "Index";
-    var userBets = (List<MatchResultBet>) ViewBag.UsersResultBets;
 }
 <div class="normalWrapper">
 <div style="margin-bottom: 30px;">Choose group:<br />
@@ -18,20 +15,7 @@
     <div style="font-weight: bold; font-size: 1.5em; margin-bottom: 10px;">Group @Model.FirstOrDefault().HomeTeam.Group.Name</div>
     @foreach(var match in Model)
     {
-        
-        var userBetHome = userBets.Where(x => x.MatchId == match.Id).Select(x => x.HomeTeamGoals).FirstOrDefault();
-        var userBetAway = userBets.Where(x => x.MatchId == match.Id).Select(x => x.AwayTeamGoals).FirstOrDefault();
-        var untouched = userBets.Any(x => x.MatchId == match.Id) ? "" : "untouched";
-        <div class="userBetMatch">
-            <div class="teamsInMatch">
-                <div><img src="/Content/flags/@(match.HomeTeam.Name)-flag.gif" style='height: 14px;' alt='flag' />
-                    @match.HomeTeam.Name</div>
-                <div><img src="/Content/flags/@(match.GuestTeam.Name)-flag.gif" style='height: 14px;' alt='flag' />                 
-                    @match.GuestTeam.Name</div>
-            </div>
-            <input class="resultBet homeTeam @untouched" type="tel" matchId="@match.Id" value="@userBetHome"/>
-            <input class="resultBet awayTeam @untouched" type="tel" matchId="@match.Id" value="@userBetAway" />
-        </div>
+        @Html.Partial("_UserBetMatch", match)
     }
 </div>
 <div class="groupTable">
@@ -102,6 +86,5 @@
                 $(".resultBet").val("0");
             }
         });
-    }
-    
+    }	    
 </script>

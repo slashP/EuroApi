@@ -17,6 +17,7 @@ namespace EuroApi.DTO
         public int GoalsConceded { get; set; }
         public int GoalDifference { get; set; }
         public int MatchCount { get; set; }
+        public string Group { get; set; }
 
         public static DtoTeam TeamToDto(Team team)
         {
@@ -29,7 +30,8 @@ namespace EuroApi.DTO
                            Points = team.Points,
                            GoalsConceded = team.GoalsConceded,
                            GoalsScored = team.GoalsScored,
-                           GoalDifference = team.GoalDifference
+                           GoalDifference = team.GoalDifference,
+                           Group = team.Group.Name
                        };
             dto.MatchCount = team.Matches.Count(x => x.HomeTeamGoals != null);
             return dto;
@@ -37,12 +39,7 @@ namespace EuroApi.DTO
 
         public static ICollection<DtoTeam> TeamsToDto(ICollection<Team> teams)
         {
-            var dtoTeams = new List<DtoTeam>();
-            foreach (var team in teams)
-            {
-                dtoTeams.Add(DtoTeam.TeamToDto(team));
-            }
-            return dtoTeams;
+            return teams.Select(TeamToDto).ToList();
         }
     }
 }

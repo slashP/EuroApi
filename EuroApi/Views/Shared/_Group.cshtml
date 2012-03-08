@@ -1,34 +1,22 @@
 ﻿@using EuroApi.Models
 @model List<Team>
-<style>
-th {
-   width: 25px; 
+@{
+    var firstTeam = Model.FirstOrDefault() ?? new Team{Group = new Group{Name = ""}};
+    var groupName = firstTeam.Group.Name;
 }
-</style>
-
-<h3 style="text-align: center;">The groups</h3>
-<div class="matches">
-    @foreach(var match in (List<Match>)ViewBag.Matches)
-    {
-        <div class="match">
-            @match.HomeTeam.Name - @match.AwayTeam.Name | @match.HomeTeamGoals : @match.AwayTeamGoals
-        </div>
-    }
-</div>
-<div class="groupTables">
-
-    <div class="groupTable">
+<div class="groupTable">
+<div style="margin-left: -40px; margin-bottom: 15px;font-weight: bold; font-size: 1.2em;">Group @groupName</div>       
     <table>
         <tr>
-        <th style="width: 30px;"></th>
-        <th style="width: 70px;">Team</th>
-        <th>#</th>
-        <th>+</th>
-        <th>-</th>
-        <th>+/-</th>
-        <th>P</th>
-
+            <th style="width: 30px;"></th>
+            <th style="width: 70px;">Team</th>
+            <th>#</th>
+            <th>+</th>
+            <th>-</th>
+            <th>+/-</th>
+            <th>P</th>
         </tr>
+        
         @foreach (var team in Model)
         {
             string teamName = team.Name.ToLower().Replace(" ", "");
@@ -44,5 +32,4 @@ th {
             </tr>
         }
     </table>
-    </div>
 </div>

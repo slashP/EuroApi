@@ -27,28 +27,63 @@ namespace EuroApi.Controllers
         {
             var groups = new List<List<Team>>();
             var userBets = _repository.Query(x => x.User == User.Identity.Name).ToList();
+            var betTeams = new List<Team>();
             foreach (var groupName in new []{"A", "B", "C", "D"})
             {
                 var teamsInGroup = _teamRepository.Query(t => t.Group.Name == groupName).ToList();
                 var sortedGroupTeams = UserBetStanding.SortTeams(teamsInGroup, userBets);
                 groups.Add(sortedGroupTeams);
+                sortedGroupTeams.ForEach(betTeams.Add);
             }
             var knockout = new KnockoutPhase();
-            var teams = _teamRepository.GetAll().ToList();
-            var sortedGroupTeams2 = UserBetStanding.SortTeams(teams, userBets);
-            var matches = knockout.GetQuarterFinals(sortedGroupTeams2);
+            var matches = knockout.GetQuarterFinals(betTeams);
             ViewBag.QuarterFinals = matches;
             return View(groups);
             
         }
 
-        public ActionResult QuarterFinals()
+        private List<Team> SortedTeamsAfterGroupPlay()
         {
-            var knockout = new KnockoutPhase();
             var teams = _teamRepository.GetAll().ToList();
             var userBets = _repository.Query(x => x.User == User.Identity.Name).ToList();
-            var sortedGroupTeams = UserBetStanding.SortTeams(teams, userBets);
-            var matches = knockout.GetQuarterFinals(sortedGroupTeams);
+            var sortedGroupTeams = UserBetStanding.SortTeamsByGroup(teams, userBets);
+            return sortedGroupTeams;
+        }
+
+        private List<Match> QuarterFinalsFromBets()
+        {
+            var knockout = new KnockoutPhase();
+            var quarterFinals = knockout.GetQuarterFinals(SortedTeamsAfterGroupPlay());
+            return quarterFinals;
+        } 
+
+        public JsonResult QuarterFinals()
+        {
+            if (_repository.GetAll().Count() < 16)
+            {
+                return Json("Not enough bets");
+            }
+            var quarterFinals = QuarterFinalsFromBets();
+            return Json(DtoMatch.MatchesToDto(quarterFinals));
+        }
+
+        public JsonResult SemiFinals()
+        {
+            var semiFinals = new KnockoutPhase().SemiFinals(QuarterFinalsFromBets());
+            return Json(DtoMatch.MatchesToDto(semiFinals));
+        }
+
+        public JsonResult Final()
+        {
+            var knockoutPhase = new KnockoutPhase();
+            var final = knockoutPhase.Final(knockoutPhase.SemiFinals(QuarterFinalsFromBets()));
+            return Json(DtoMatch.MatchToDto(final));
+        }
+
+        public ActionResult ChampionshipBet()
+        {
+            var matches = _matchRepository.Query(x => x.Type == Match.GROUP_MATCH).OrderBy(x => x.Id).ToList();
+            ViewBag.UsersResultBets = _repository.Query(x => x.User == User.Identity.Name).ToList();
             return View(matches);
         }
 

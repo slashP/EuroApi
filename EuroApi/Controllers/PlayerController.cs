@@ -18,7 +18,7 @@ namespace EuroApi.Controllers
 
         public ActionResult Index()
         {
-            return View(db.Players.ToList());
+            return View(db.Players.ToList().Take(10));
         }
 
         public JsonResult GetPlayerList()

@@ -22,7 +22,7 @@ namespace EuroApi.DTO
                        {
                            Date = match.Date.ToString(new CultureInfo("nb-NO")),
                            HomeTeam = match.HomeTeam.Name,
-                           GuestTeam = match.GuestTeam.Name,
+                           GuestTeam = match.AwayTeam.Name,
                            HomeTeamGoals = match.HomeTeamGoals,
                            AwayTeamGoals = match.AwayTeamGoals
                        };
@@ -37,7 +37,7 @@ namespace EuroApi.DTO
                                    {
                                        Date = match.Date.ToString(new CultureInfo("nb-NO")),
                                        HomeTeam = match.HomeTeam.Name,
-                                       GuestTeam = match.GuestTeam.Name,
+                                       GuestTeam = match.AwayTeam.Name,
                                        HomeTeamGoals = match.HomeTeamGoals,
                                        AwayTeamGoals = match.AwayTeamGoals
                                    });

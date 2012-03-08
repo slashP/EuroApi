@@ -207,6 +207,7 @@
     <Content Include="Content\flags\spain-flag.gif" />
     <Content Include="Content\flags\sweden-flag.gif" />
     <Content Include="Content\flags\ukraine-flag.gif" />
+    <Content Include="Content\themes\base\images\rounded.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -415,6 +416,21 @@
   <ItemGroup>
     <Content Include="Views\MatchResultBet\QuarterFinals.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_UserBetMatch.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Group.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Player.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\MatchResultBet\ChampionshipBet.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_GroupBet.cshtml" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -432,7 +448,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>17527</DevelopmentServerPort>
+          <DevelopmentServerPort>60188</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

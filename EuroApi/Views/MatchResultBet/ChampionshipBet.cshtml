@@ -1,0 +1,108 @@
+﻿@model List<EuroApi.Models.Match>
+
+@{
+    ViewBag.Title = "Championship";
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+<div class="championshipWrapper">
+    
+    @for(var i = 0; i<4; i++)
+    {
+        
+        var matchesInGroup = Model.Skip(i * 6).Take(6).ToList();
+        var group = matchesInGroup.FirstOrDefault().HomeTeam.Group.Name;
+        var leftRight = i%2 == 0 ? "left" : "right";
+        <div class="groupBet" style="float: @leftRight;">
+            @Html.Partial("_GroupBet", matchesInGroup)
+            <br />
+            <input type="button" onclick="removeAllUserBets('@(group)');" value="Remove all bets group @group" />
+        </div>
+    }
+    
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        $(".resultBet").on("change", function (event) {
+            if (isNaN($(this).val()) || $(this).val() > 20) {
+                $(this).val("0");
+            }
+            var parentDiv = $(this).parent();
+            var homeGoals = parentDiv.find(".homeTeam").val();
+            var awayGoals = parentDiv.find(".awayTeam").val();
+            var group = $(this).attr("group");
+            setBet($(this).attr("matchId"), homeGoals, awayGoals, group);
+            getQuarterFinals();
+        });
+        getInitialGroupsAtStartup();
+    });
+
+    function getInitialGroupsAtStartup() {
+        var groups = ["A", "B", "C", "D"];
+        for (var i = 0; i < groups.length; i++ ) {
+            $.ajax({
+                type: 'POST',
+                url: "/MatchResultBet/GetTeamsInGroup",
+                data: { group: groups[i] },
+                success: function (results) {
+                    outputGroup(results, results[0].Group);
+                }
+            });
+        }
+    }
+
+    function setBet(matchId, homeGoals, awayGoals, group) {
+        $.ajax({
+            type: 'POST',
+            url: "/MatchResultBet/SetBet",
+            data: { matchId: matchId, homeGoals: homeGoals, awayGoals: awayGoals, group: group },
+            success: function (results) {
+                outputGroup(results, group);
+            }
+        });
+    }
+    
+    function getURLParameter(name) {
+        return decodeURI(
+            (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1]
+        );
+    }
+
+    function outputGroup(results, group) {
+        var html = "<table><tr><th style='width: 30px;'></th><th style='width: 70px;'>Team</th><th>#</th><th>+</th><th>-</th><th>+/-</th><th>P</th></tr>";
+        for (var i = 0; i < results.length; i++) {
+            var team = results[i];
+            html += getTeamRow(team.Name, team.MatchCount, team.GoalsScored, team.GoalsConceded, team.GoalDifference, team.Points);
+        }
+        html += "</table>";
+        $(".group" + group + "").html(html);
+
+        function getTeamRow(teamName, matchCount, goalsScored, goalsConceded, goalDifference, points) {
+            return "<tr><td><img src=/Content/flags/" + teamName + "-flag.gif style='height: 14px;' alt='flag' /></td><td>" + teamName + "</td><td>" + matchCount + "</td><td>" + goalsScored + "</td><td>" + goalsConceded + "</td><td>" + goalDifference + "</td><td>" + points + "</td></tr>";
+        }
+    }
+
+    function removeAllUserBets(group) {
+        $.ajax({
+            type: 'POST',
+            url: "/MatchResultBet/RemoveAllBets",
+            data: { group: group },
+            success: function (results) {
+                outputGroup(results, group);
+                $(".resultBet").val("0");
+            }
+        });
+    }
+
+    function getQuarterFinals() {
+        $.ajax({
+            type: 'POST',
+            url: "/MatchResultBet/QuarterFinals",
+            success: function (results) {
+                console.log(results);
+            }
+        });
+    }
+</script>

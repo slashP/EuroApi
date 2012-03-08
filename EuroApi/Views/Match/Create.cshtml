@@ -24,10 +24,10 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.GuestTeamId, "GuestTeam")
+            @Html.LabelFor(model => model.GuestTeamId, "AwayTeam")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("GuestTeamId", String.Empty)
+            @Html.DropDownList("AwayTeamId", String.Empty)
             @Html.ValidationMessageFor(model => model.GuestTeamId)
         </div>
 

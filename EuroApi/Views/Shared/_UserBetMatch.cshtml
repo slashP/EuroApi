@@ -1,0 +1,21 @@
+﻿@using EuroApi.Models
+@model Match
+@{
+    var userBets = (List<MatchResultBet>)ViewBag.UsersResultBets;
+    var userBetHome = userBets.Where(x => x.MatchId == Model.Id).Select(x => x.HomeTeamGoals).FirstOrDefault();
+    var userBetAway = userBets.Where(x => x.MatchId == Model.Id).Select(x => x.AwayTeamGoals).FirstOrDefault();
+    var untouched = userBets.Any(x => x.MatchId == Model.Id) ? "" : "untouched";
+    var group = Model.HomeTeam.Group.Name;
+}
+<div class="userBetMatch">
+    <div class="teamsInMatch">
+        <div><img src="/Content/flags/@(Model.HomeTeam.Name)-flag.gif" style='height: 14px;' alt='flag' />
+            @Model.HomeTeam.Name
+        </div>
+        <div><img src="/Content/flags/@(Model.AwayTeam.Name)-flag.gif" style='height: 14px;' alt='flag' />                 
+            @Model.AwayTeam.Name
+        </div>
+    </div>
+    <input class="resultBet homeTeam @untouched" type="tel" group="@group" matchId="@Model.Id" value="@userBetHome"/>
+    <input class="resultBet awayTeam @untouched" type="tel" group="@group" matchId="@Model.Id" value="@userBetAway" />
+</div>
