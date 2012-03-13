@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using EuroApi.DAL;
 
 namespace EuroApi.Models
@@ -10,17 +8,6 @@ namespace EuroApi.Models
     {
         public List<KnockoutMatch> KnockoutMatches { get; set; }
 
-        private readonly List<DateTime> _matchTimes = new List<DateTime>
-                                                {
-                                                    DateTime.Parse("21 June 2012 20:45"),
-                                                    DateTime.Parse("22 June 2012 20:45"),
-                                                    DateTime.Parse("23 June 2012 20:45"),
-                                                    DateTime.Parse("24 June 2012 20:45"),
-                                                    DateTime.Parse("27 June 2012 20:45"),
-                                                    DateTime.Parse("28 June 2012 20:45"),
-                                                    DateTime.Parse("1 July 2012 20:45")
-                                                };
-        private readonly List<string> _places = new List<string>{"Warzaw", "Donetsk", "Gdansk", "Kiev"}; 
         private readonly IRepository<Match> _matchRepsoitory = new MatchRepository(); 
         public List<Match> GetQuarterFinals(List<Team> teams)
         {

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
@@ -23,8 +22,14 @@ namespace EuroApi.Models
         {
             get
             {
-                if (HomeMatches == null || AwayMatches == null)
-                    return null;
+                if (HomeMatches == null)
+                {
+                    HomeMatches = new Collection<Match>();
+                }
+                if(AwayMatches == null)
+                {
+                    AwayMatches = new Collection<Match>();
+                }
                 return new Collection<Match>(HomeMatches.Concat(AwayMatches).OrderBy(m => m.Date).ToList());
             }
             set { Debug.WriteLine("setter called  " + value); }
@@ -35,8 +40,14 @@ namespace EuroApi.Models
         {
             get
             {
-                if (HomeMatches == null || AwayMatches == null)
-                    return null;
+                if (HomeMatches == null)
+                {
+                    HomeMatches = new Collection<Match>();
+                }
+                if (AwayMatches == null)
+                {
+                    AwayMatches = new Collection<Match>();
+                }
                 return new Collection<Match>(HomeMatches.Concat(AwayMatches).Where(m => m.AwayTeamGoals != null && m.HomeTeamGoals != null).ToList());
             }
             set { Debug.WriteLine("setter called  " + value); }
