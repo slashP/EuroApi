@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
@@ -16,6 +17,9 @@ namespace EuroApi.Models
         public virtual Group Group { get; set; }
         public virtual ICollection<Match> HomeMatches { get; set; }
         public virtual ICollection<Match> AwayMatches { get; set; }
+
+        public virtual ICollection<KnockoutMatch> KnockoutHomeMatches { get; set; }
+        public virtual ICollection<KnockoutMatch> KnockoutAwayMatches { get; set; }
 
         [NotMapped]
         public Collection<Match> Matches

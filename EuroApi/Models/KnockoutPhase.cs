@@ -8,10 +8,10 @@ namespace EuroApi.Models
     {
         public List<KnockoutMatch> KnockoutMatches { get; set; }
 
-        private readonly IRepository<Match> _matchRepsoitory = new MatchRepository(); 
-        public List<Match> GetQuarterFinals(List<Team> teams)
+        private readonly IRepository<KnockoutMatch> _knockoutMatchRepsoitory = new KnockoutMatchRepository(); 
+        public List<KnockoutMatch> GetQuarterFinals(List<Team> teams)
         {
-            var quarterFinals = _matchRepsoitory.Query(x => x.Type == Match.QUARTERFINAL).ToList();
+            var quarterFinals = _knockoutMatchRepsoitory.Query(x => x.Type == KnockoutMatch.QUARTERFINAL).ToList();
             quarterFinals[0].HomeTeam = teams[0];
             quarterFinals[0].AwayTeam = teams[5];
             quarterFinals[1].HomeTeam = teams[8];
@@ -23,9 +23,9 @@ namespace EuroApi.Models
             return quarterFinals;
         }
 
-        public List<Match> SemiFinals(List<Match> quarterFinals)
+        public List<KnockoutMatch> SemiFinals(List<KnockoutMatch> quarterFinals)
         {
-            var semiFinals = _matchRepsoitory.Query(x => x.Type == Match.SEMIFINAL).ToList();
+            var semiFinals = _knockoutMatchRepsoitory.Query(x => x.Type == KnockoutMatch.SEMIFINAL).ToList();
             semiFinals[0].HomeTeam = quarterFinals[0].Winner();
             semiFinals[0].AwayTeam = quarterFinals[2].Winner();
             semiFinals[1].HomeTeam = quarterFinals[1].Winner();
@@ -33,9 +33,9 @@ namespace EuroApi.Models
             return semiFinals;
         }
 
-        public Match Final(List<Match> semiFinals)
+        public KnockoutMatch Final(List<KnockoutMatch> semiFinals)
         {
-            var final = _matchRepsoitory.Query(x => x.Type == Match.FINAL).FirstOrDefault();
+            var final = _knockoutMatchRepsoitory.Query(x => x.Type == KnockoutMatch.FINAL).FirstOrDefault();
             if (final == null)
             {
                 return null;

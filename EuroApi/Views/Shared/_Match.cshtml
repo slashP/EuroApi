@@ -1,0 +1,11 @@
+﻿@model EuroApi.Models.KnockoutMatch
+<div class="userBetMatch">
+    <div class="teamsInMatch">
+        <div><img src="/Content/flags/@(Model.HomeTeam.Name)-flag.gif" style='height: 14px;' alt='flag' />
+            @Model.HomeTeam.Name
+        </div>
+        <div><img src="/Content/flags/@(Model.AwayTeam.Name)-flag.gif" style='height: 14px;' alt='flag' />                 
+            @Model.AwayTeam.Name
+        </div>
+    </div>
+</div>

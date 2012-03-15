@@ -44,7 +44,7 @@ namespace EuroApi.Controllers
             }
 
             ViewBag.HomeTeamId = new SelectList(db.Teams, "Id", "Name", match.HomeTeamId);
-            ViewBag.GuestTeamId = new SelectList(db.Teams, "Id", "Name", match.GuestTeamId);
+            ViewBag.GuestTeamId = new SelectList(db.Teams, "Id", "Name", match.AwayTeamId);
             return View(match);
         }
 
@@ -56,7 +56,7 @@ namespace EuroApi.Controllers
                 return HttpNotFound();
             }
             ViewBag.HomeTeamId = new SelectList(db.Teams, "Id", "Name", match.HomeTeamId);
-            ViewBag.GuestTeamId = new SelectList(db.Teams, "Id", "Name", match.GuestTeamId);
+            ViewBag.GuestTeamId = new SelectList(db.Teams, "Id", "Name", match.AwayTeamId);
             return View(match);
         }
 
@@ -70,7 +70,7 @@ namespace EuroApi.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.HomeTeamId = new SelectList(db.Teams, "Id", "Name", match.HomeTeamId);
-            ViewBag.GuestTeamId = new SelectList(db.Teams, "Id", "Name", match.GuestTeamId);
+            ViewBag.GuestTeamId = new SelectList(db.Teams, "Id", "Name", match.AwayTeamId);
             return View(match);
         }
 

@@ -7,18 +7,17 @@ namespace EuroApi.Models
     {
         public static List<Team> SortTeams(List<Team> teams, List<MatchResultBet> userBets)
         {
-            SetupBets(ref teams, userBets);
-            return Standing.SortTeams(teams);
-
+            var teamsWithBets = SetupBets(teams, userBets);
+            return Standing.SortTeams(teamsWithBets);
         }
 
         public static List<Team> SortTeamsByGroup(List<Team> teams, List<MatchResultBet> userBets)
         {
-            SetupBets(ref teams, userBets);
-            return Standing.SortTeamsByGroup(teams);
+            var teamsWithBets = SetupBets(teams, userBets);
+            return Standing.SortTeamsByGroup(teamsWithBets);
         } 
 
-        private static void SetupBets(ref List<Team> teams, List<MatchResultBet> userBets)
+        private static List<Team> SetupBets(List<Team> teams, List<MatchResultBet> userBets)
         {
             foreach (var match in teams.SelectMany(x => x.Matches).Distinct())
             {
@@ -32,6 +31,7 @@ namespace EuroApi.Models
                 match.HomeTeamGoals = userBet.HomeTeamGoals;
                 match.AwayTeamGoals = userBet.AwayTeamGoals;
             }
+            return teams != null ? teams.ToList() : null;
         }
     }
 }

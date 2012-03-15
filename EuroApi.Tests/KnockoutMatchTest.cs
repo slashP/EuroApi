@@ -7,12 +7,12 @@ using Xunit;
 
 namespace EuroApi.Tests
 {
-    public class MatchTest
+    public class KnockoutMatchTest
     {
         [Fact]
         public void GivenTheResultIsOneOneThenNoOneIsTheWinner()
         {
-            var match = new Match
+            var match = new KnockoutMatch
             {
                 HomeTeam = new Team { Name = "Holland" },
                 AwayTeam = new Team { Name = "Germany" },
@@ -25,7 +25,7 @@ namespace EuroApi.Tests
         [Fact]
         public void GivenTheResultIsOneZeroThenTheHomeTeamIsTheWinner()
         {
-            var match = new Match
+            var match = new KnockoutMatch()
             {
                 HomeTeam = new Team { Name = "Holland" },
                 AwayTeam = new Team { Name = "Germany" },
@@ -38,7 +38,7 @@ namespace EuroApi.Tests
         [Fact]
         public void GivenTheResultIsZeroOneThenTheAwayTeamIsTheWinner()
         {
-            var match = new Match
+            var match = new KnockoutMatch
             {
                 HomeTeam = new Team { Name = "Holland" },
                 AwayTeam = new Team { Name = "Germany" },

@@ -19,9 +19,10 @@
             <input type="button" onclick="removeAllUserBets('@(group)');" value="Remove all bets group @group" />
         </div>
     }
-    
-
 </div>
+<div class="quarterFinals"><h3>Quarter finals</h3></div>
+<div class="semiFinals"></div>
+<div class="final"></div>
 
 <script>
     $(document).ready(function () {
@@ -102,6 +103,9 @@
             url: "/MatchResultBet/QuarterFinals",
             success: function (results) {
                 console.log(results);
+                for (var i = 0; i < results.length; i++ ) {
+                    $(".quarterFinals").append(results[i]);
+                }
             }
         });
     }

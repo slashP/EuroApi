@@ -7,6 +7,7 @@ namespace EuroApi.Models
         public DbSet<Team> Teams { get; set; }
 
         public DbSet<Match> Matches { get; set; }
+        public DbSet<KnockoutMatch> KnockoutMatches { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -19,7 +20,19 @@ namespace EuroApi.Models
             modelBuilder.Entity<Match>()
                         .HasRequired(m => m.AwayTeam)
                         .WithMany(t => t.AwayMatches)
-                        .HasForeignKey(m => m.GuestTeamId)
+                        .HasForeignKey(m => m.AwayTeamId)
+                        .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<KnockoutMatch>()
+                        .HasRequired(m => m.HomeTeam)
+                        .WithMany(t => t.KnockoutHomeMatches)
+                        .HasForeignKey(m => m.HomeTeamId)
+                        .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<KnockoutMatch>()
+                        .HasRequired(m => m.AwayTeam)
+                        .WithMany(t => t.KnockoutAwayMatches)
+                        .HasForeignKey(m => m.AwayTeamId)
                         .WillCascadeOnDelete(false);
         }
 

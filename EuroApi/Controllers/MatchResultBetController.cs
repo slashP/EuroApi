@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web.Mvc;
 using EuroApi.DAL;
@@ -50,7 +51,7 @@ namespace EuroApi.Controllers
             return sortedGroupTeams;
         }
 
-        private List<Match> QuarterFinalsFromBets()
+        private List<KnockoutMatch> QuarterFinalsFromBets()
         {
             var knockout = new KnockoutPhase();
             var quarterFinals = knockout.GetQuarterFinals(SortedTeamsAfterGroupPlay());
@@ -59,30 +60,32 @@ namespace EuroApi.Controllers
 
         public JsonResult QuarterFinals()
         {
-            if (_repository.GetAll().Count() < 16)
+            var count = _repository.GetAll().Count();
+            if (count < 24)
             {
                 return Json("Not enough bets");
             }
             var quarterFinals = QuarterFinalsFromBets();
-            return Json(DtoMatch.MatchesToDto(quarterFinals));
+            var html = quarterFinals.Select(x => RenderPartialViewToString("_Match", x));
+            return Json(html);
         }
 
         public JsonResult SemiFinals()
         {
             var semiFinals = new KnockoutPhase().SemiFinals(QuarterFinalsFromBets());
-            return Json(DtoMatch.MatchesToDto(semiFinals));
+            return Json("TODO");
         }
 
         public JsonResult Final()
         {
             var knockoutPhase = new KnockoutPhase();
             var final = knockoutPhase.Final(knockoutPhase.SemiFinals(QuarterFinalsFromBets()));
-            return Json(DtoMatch.MatchToDto(final));
+            return Json("TODO");
         }
 
         public ActionResult ChampionshipBet()
         {
-            var matches = _matchRepository.Query(x => x.Type == Match.GROUP_MATCH).OrderBy(x => x.Id).ToList();
+            var matches = _matchRepository.GetAll().OrderBy(x => x.Id).ToList();
             ViewBag.UsersResultBets = _repository.Query(x => x.User == User.Identity.Name).ToList();
             return View(matches);
         }
@@ -131,6 +134,22 @@ namespace EuroApi.Controllers
             }
             _repository.Save();
             return GetTeamsInGroup(group);
+        }
+
+        protected string RenderPartialViewToString(string viewName, object model)
+        {
+            if (string.IsNullOrEmpty(viewName))
+                viewName = ControllerContext.RouteData.GetRequiredString("action");
+
+            ViewData.Model = model;
+
+            using (var sw = new StringWriter())
+            {
+                var viewResult = ViewEngines.Engines.FindPartialView(ControllerContext, viewName);
+                var viewContext = new ViewContext(ControllerContext, viewResult.View, ViewData, TempData, sw);
+                viewResult.View.Render(viewContext, sw);
+                return sw.GetStringBuilder().ToString();
+            }
         }
     }
 }
