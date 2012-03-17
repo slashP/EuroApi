@@ -66,7 +66,7 @@ namespace EuroApi.Controllers
                 return Json("Not enough bets");
             }
             var quarterFinals = QuarterFinalsFromBets();
-            var html = quarterFinals.Select(x => RenderPartialViewToString("_Match", x));
+            var html = quarterFinals.Select(x => RenderPartialViewToString("_UserBetKnockoutMatch", x));
             return Json(html);
         }
 
@@ -85,7 +85,7 @@ namespace EuroApi.Controllers
 
         public ActionResult ChampionshipBet()
         {
-            var matches = _matchRepository.GetAll().OrderBy(x => x.Id).ToList();
+            var matches = _matchRepository.GetAll().OrderBy(x => x.HomeTeam.Group.Name).ThenBy(x => x.Date).ToList();
             ViewBag.UsersResultBets = _repository.Query(x => x.User == User.Identity.Name).ToList();
             return View(matches);
         }

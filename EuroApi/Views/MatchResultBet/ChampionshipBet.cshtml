@@ -38,7 +38,35 @@
             getQuarterFinals();
         });
         getInitialGroupsAtStartup();
+        setupKnockoutChangeEvents();
     });
+
+    function setupKnockoutChangeEvents() {
+        $(".resultBetKnockout").on("change", function (event) {
+            if (isNaN($(this).val()) || $(this).val() > 20) {
+                $(this).val("0");
+            }
+            var parentDiv = $(this).parent();
+            var homeGoals = parentDiv.find(".homeTeam").val();
+            var awayGoals = parentDiv.find(".awayTeam").val();
+            console.log("hallllaaaa" + $(this).attr("matchId") + " " + homeGoals + " " + awayGoals);
+            setKnockoutBet($(this).attr("matchId"), homeGoals, awayGoals);
+        });
+    }
+    var setKnockoutBet = function (matchId, homeGoals, awayGoals) {
+        $.ajax({
+            type: 'POST',
+            url: "/KnockoutMatchResultBet/SetBet",
+            data: { matchId: matchId, homeGoals: homeGoals, awayGoals: awayGoals},
+            success: function (results) {
+                getSemiFinals();
+            }
+        });
+    };
+
+    function getSemiFinals() {
+        
+    }
 
     function getInitialGroupsAtStartup() {
         var groups = ["A", "B", "C", "D"];
@@ -102,10 +130,11 @@
             type: 'POST',
             url: "/MatchResultBet/QuarterFinals",
             success: function (results) {
-                console.log(results);
-                for (var i = 0; i < results.length; i++ ) {
+                $(".quarterFinals").html('');
+                for (var i = 0; i < results.length; i++) {
                     $(".quarterFinals").append(results[i]);
                 }
+                setupKnockoutChangeEvents();                
             }
         });
     }

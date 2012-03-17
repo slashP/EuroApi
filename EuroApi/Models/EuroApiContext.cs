@@ -7,6 +7,7 @@ namespace EuroApi.Models
         public DbSet<Team> Teams { get; set; }
 
         public DbSet<Match> Matches { get; set; }
+
         public DbSet<KnockoutMatch> KnockoutMatches { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -40,6 +41,14 @@ namespace EuroApi.Models
 
         public DbSet<MatchResultBet> MatchResultBets { get; set; }
 
+        public DbSet<KnockoutMatchResultBet> KnockoutMatchResultBets { get; set; }
+
         public DbSet<Player> Players { get; set; }
+
+        public DbSet<User> Users { get; set; }
+
+        public DbSet<UserInLeague> UserInLeagues { get; set; }
+
+        public DbSet<UserLeague> UserLeagues { get; set; }
     }
 }

@@ -1,7 +1,8 @@
 ﻿@using EuroApi.Models
-@model Match
+@model KnockoutMatch
+
 @{
-    var userBets = (List<MatchResultBet>)ViewBag.UsersResultBets;
+    var userBets = (List<KnockoutMatchResultBet>)ViewBag.UsersResultBetsKnockout;
     var userBetHomeResult = 0;
     var userBetAwayResult = 0;
     var untouched = "untoched";
@@ -15,8 +16,8 @@
         }
         untouched = "";
     }
-    var group = Model.HomeTeam.Group.Name;
 }
+
 <div class="userBetMatch">
     <div class="teamsInMatch">
         <div><img src="/Content/flags/@(Model.HomeTeam.Name)-flag.gif" style='height: 14px;' alt='flag' />
@@ -26,6 +27,6 @@
             @Model.AwayTeam.Name
         </div>
     </div>
-    <input class="resultBet homeTeam @untouched" type="tel" group="@group" matchId="@Model.Id" value="@userBetHomeResult"/>
-    <input class="resultBet awayTeam @untouched" type="tel" group="@group" matchId="@Model.Id" value="@userBetAwayResult" />
+    <input class="resultBetKnockout homeTeam @untouched" type="tel" matchId="@Model.Id" value="@userBetHomeResult"/>
+    <input class="resultBetKnockout awayTeam @untouched" type="tel" matchId="@Model.Id" value="@userBetAwayResult" />
 </div>
