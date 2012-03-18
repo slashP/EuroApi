@@ -8,20 +8,8 @@ namespace EuroApi.Models
     {
         public List<KnockoutMatch> KnockoutMatches { get; set; }
 
-        private readonly IRepository<KnockoutMatch> _knockoutMatchRepsoitory = new KnockoutMatchRepository(); 
-        public List<KnockoutMatch> GetQuarterFinals(List<Team> teams)
-        {
-            var quarterFinals = _knockoutMatchRepsoitory.Query(x => x.Type == KnockoutMatch.QUARTERFINAL).ToList();
-            quarterFinals[0].HomeTeam = teams[0];
-            quarterFinals[0].AwayTeam = teams[5];
-            quarterFinals[1].HomeTeam = teams[8];
-            quarterFinals[1].AwayTeam = teams[13];
-            quarterFinals[2].HomeTeam = teams[4];
-            quarterFinals[2].AwayTeam = teams[1];
-            quarterFinals[3].HomeTeam = teams[12];
-            quarterFinals[3].AwayTeam = teams[9];
-            return quarterFinals;
-        }
+        private readonly IRepository<KnockoutMatch> _knockoutMatchRepsoitory = new KnockoutMatchRepository();
+        private readonly IRepository<KnockoutMatchResultBet> _knockoutBetRepository = new KnockoutMatchResultBetRepository();
 
         public List<KnockoutMatch> SemiFinals(List<KnockoutMatch> quarterFinals)
         {

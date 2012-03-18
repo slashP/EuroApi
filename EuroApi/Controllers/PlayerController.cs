@@ -21,6 +21,26 @@ namespace EuroApi.Controllers
             return View(db.Players.ToList().Take(10));
         }
 
+        public ActionResult TopList()
+        {
+            var players = db.Players.OrderByDescending(x => x.Goals).ToList();
+            return View(players);
+        }
+
+        public ActionResult TopTeams()
+        {
+            var sums = db.Players.GroupBy(x => x.NationalTeam).Select(x => 
+                new { 
+                    Goals = x.Sum(y => y.Goals),
+                    Name = x.FirstOrDefault().NationalTeam,
+                    Caps = x.Sum(y => y.Caps),
+                    DateOfBirthAverage = x.Average(y => y.DateOfBirth.Year),
+                    DateOfBirth = DateTime.MinValue
+                }).OrderByDescending(d => d.Goals).ToList();
+            var dates = new List<DateTime>(sums.Select(sum => new DateTime((long)sum.DateOfBirthAverage)));
+            return null;
+        }
+
         public JsonResult GetPlayerList()
         {
             var playerNames = db.Players.Select(x => x.Name).ToList();

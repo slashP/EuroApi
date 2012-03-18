@@ -13,7 +13,11 @@ namespace EuroApi.Controllers
     {
         private readonly IRepository<MatchResultBet> _repository = new MatchResultBetRepository();
         private readonly IRepository<Match> _matchRepository = new MatchRepository();
-        private readonly IRepository<Team> _teamRepository = new TeamRepository(); 
+        private readonly IRepository<Team> _teamRepository = new TeamRepository();
+        private readonly IRepository<KnockoutMatchResultBet> _knockoutBetRepository = new KnockoutMatchResultBetRepository();
+        private readonly IRepository<KnockoutMatch> _knockoutMatchRepository = new KnockoutMatchRepository();
+
+
         //
         // GET: /MatchResultBet/
 
@@ -24,24 +28,24 @@ namespace EuroApi.Controllers
             return View(matches.ToList());
         }
 
-        public ActionResult Overview()
-        {
-            var groups = new List<List<Team>>();
-            var userBets = _repository.Query(x => x.User == User.Identity.Name).ToList();
-            var betTeams = new List<Team>();
-            foreach (var groupName in new []{"A", "B", "C", "D"})
-            {
-                var teamsInGroup = _teamRepository.Query(t => t.Group.Name == groupName).ToList();
-                var sortedGroupTeams = UserBetStanding.SortTeams(teamsInGroup, userBets);
-                groups.Add(sortedGroupTeams);
-                sortedGroupTeams.ForEach(betTeams.Add);
-            }
-            var knockout = new KnockoutPhase();
-            var matches = knockout.GetQuarterFinals(betTeams);
-            ViewBag.QuarterFinals = matches;
-            return View(groups);
+        //public ActionResult Overview()
+        //{
+        //    var groups = new List<List<Team>>();
+        //    var userBets = _repository.Query(x => x.User == User.Identity.Name).ToList();
+        //    var betTeams = new List<Team>();
+        //    foreach (var groupName in new []{"A", "B", "C", "D"})
+        //    {
+        //        var teamsInGroup = _teamRepository.Query(t => t.Group.Name == groupName).ToList();
+        //        var sortedGroupTeams = UserBetStanding.SortTeams(teamsInGroup, userBets);
+        //        groups.Add(sortedGroupTeams);
+        //        sortedGroupTeams.ForEach(betTeams.Add);
+        //    }
+        //    var knockout = new KnockoutPhase();
+        //    var matches = knockout.GetQuarterFinals(betTeams, TODO);
+        //    ViewBag.QuarterFinals = matches;
+        //    return View(groups);
             
-        }
+        //}
 
         private List<Team> SortedTeamsAfterGroupPlay()
         {
@@ -53,8 +57,11 @@ namespace EuroApi.Controllers
 
         private List<KnockoutMatch> QuarterFinalsFromBets()
         {
-            var knockout = new KnockoutPhase();
-            var quarterFinals = knockout.GetQuarterFinals(SortedTeamsAfterGroupPlay());
+            var userBets =
+                _knockoutBetRepository.Query(
+                    x => x.User == User.Identity.Name && x.KnockoutMatch.Type == KnockoutMatch.QUARTERFINAL).ToList();
+            var origQuarterFinals = _knockoutMatchRepository.Query(x => x.Type == KnockoutMatch.QUARTERFINAL).OrderBy(x => x.Date).ToList();
+            var quarterFinals = UserBetStanding.GetQuarterFinals(SortedTeamsAfterGroupPlay(), origQuarterFinals , userBets);
             return quarterFinals;
         } 
 
@@ -95,8 +102,7 @@ namespace EuroApi.Controllers
             var teams = _teamRepository.Query(t => t.Group.Name == group).ToList();
             var userBets = _repository.Query(x => x.User == User.Identity.Name).ToList();
             var sortedGroupTeams = UserBetStanding.SortTeams(teams, userBets);
-            var teamsDto = DtoTeam.TeamsToDto(sortedGroupTeams);
-            return Json(teamsDto);
+            return Json(new { html = RenderPartialViewToString("_Group", sortedGroupTeams), group = group });            
         }
 
         public JsonResult SetBet(int? matchId, int? homeGoals, int? awayGoals, string group)
@@ -147,6 +153,7 @@ namespace EuroApi.Controllers
             {
                 var viewResult = ViewEngines.Engines.FindPartialView(ControllerContext, viewName);
                 var viewContext = new ViewContext(ControllerContext, viewResult.View, ViewData, TempData, sw);
+                viewContext.ViewBag.UsersResultBetsKnockout = _knockoutBetRepository.Query(x => x.User == User.Identity.Name).ToList();
                 viewResult.View.Render(viewContext, sw);
                 return sw.GetStringBuilder().ToString();
             }

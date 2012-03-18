@@ -16,6 +16,8 @@ namespace EuroApi
         public static void RegisterRoutes(RouteCollection routes)
         {
             //Database.SetInitializer(new DropCreateDatabaseAlways<EuroApiContext>());
+            //var db = new EuroApiContext();
+            //db.Database.ExecuteSqlCommand("DELETE FROM dbo.KnockoutMatchResultBets where id >= {0}", 0);
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.MapHttpRoute("DefaultApi", "api/{controller}/{id}", new { id = RouteParameter.Optional });
 

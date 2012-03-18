@@ -60,6 +60,9 @@ nav, section {
     height: 0;
     visibility: hidden;
 }
+.clear {
+    clear: both;
+}
 
 h1, h2, h3, 
 h4, h5, h6 {

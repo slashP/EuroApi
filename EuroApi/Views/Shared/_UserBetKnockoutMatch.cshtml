@@ -6,9 +6,22 @@
     var userBetHomeResult = 0;
     var userBetAwayResult = 0;
     var untouched = "untoched";
+    var type = "";
+    if (Model.Type == KnockoutMatch.QUARTERFINAL)
+    {
+        type = "quarter";
+    } 
+    else if(Model.Type == KnockoutMatch.SEMIFINAL)
+    {
+        type = "semi";
+    }
+    else if (Model.Type == KnockoutMatch.FINAL)
+    {
+        type = "final";
+    }
     if (userBets != null)
     {
-        var userBet = userBets.Where(x => x.MatchId == Model.Id).ToList();
+        var userBet = userBets.Where(x => x.HomeTeamId == Model.HomeTeamId && x.AwayTeamId == Model.AwayTeamId).ToList();
         if (userBet.Any())
         {
             userBetHomeResult = userBet.Select(x => x.HomeTeamGoals).FirstOrDefault();
@@ -27,6 +40,6 @@
             @Model.AwayTeam.Name
         </div>
     </div>
-    <input class="resultBetKnockout homeTeam @untouched" type="tel" matchId="@Model.Id" value="@userBetHomeResult"/>
-    <input class="resultBetKnockout awayTeam @untouched" type="tel" matchId="@Model.Id" value="@userBetAwayResult" />
+    <input class="resultBetKnockout @type homeTeam @untouched" type="tel" homeTeamId="@Model.HomeTeam.Id" awayTeamId="@Model.AwayTeam.Id" matchId="@Model.Id" value="@userBetHomeResult"/>
+    <input class="resultBetKnockout @type awayTeam @untouched" type="tel" homeTeamId="@Model.HomeTeam.Id" awayTeamId="@Model.AwayTeam.Id" matchId="@Model.Id" value="@userBetAwayResult" />
 </div>
