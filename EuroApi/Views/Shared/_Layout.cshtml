@@ -1,39 +1,35 @@
-﻿@using System.Security.Policy
+﻿@using Microsoft.Web.Optimization
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
         <title>@ViewBag.Title - My ASP.NET MVC Application</title>
-        <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
-        <link href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" rel="stylesheet" type="text/css" />
+        <link href="@BundleTable.Bundles.ResolveBundleUrl("~/Content/css")" rel="stylesheet" type="text/css" />
+        <link href="@BundleTable.Bundles.ResolveBundleUrl("~/Content/themes/base/css")" rel="stylesheet" type="text/css" />
+        <script src="@BundleTable.Bundles.ResolveBundleUrl("~/Scripts/js")"></script>
         
-
-        <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
-        <script src="@Url.Content("~/Scripts/jquery-ui-1.8.17.min.js")" type="text/javascript"></script>
-        <script src="@Url.Content("~/Scripts/modernizr-2.0.6-development-only.js")" type="text/javascript"></script>
-        <script src="@Url.Content("~/Scripts/AjaxLogin.js")" type="text/javascript"></script>
-    </head>
+   </head>
     <body>
         <header>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("your logo here.", "Index", "Home")</p>
-                </div>
-                <div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LogOnPartial")
-                    </section>
-                    <nav>
-                        <ul id="menu">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                            <li><a href="/MatchResultBet/Index?group=a">Bet</a></li>
-                            <li>@Html.ActionLink("Players", "Index", "Player")</li>
-                        </ul>
-                    </nav>
-                </div>
+            
+            <div class="navbar navbar-fixed-top">  
+                <div class="navbar-inner">  
+                    <div class="container">
+                        <a class="brand" href="/">
+                            <img src="/Content/flags/spain-flag.gif" height="30" width="30" alt="w3resource logo" />
+                        </a>  
+                        <div class="nav-collapse">
+                            <ul class="nav">
+                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                                <li>@Html.ActionLink("Bet", "Index", "MatchResultBet")</li>
+                                <li>@Html.ActionLink("Players", "Index", "Player")</li>
+                                <li>@Html.ActionLink("Stats", "TopTeams", "Player")</li>
+                            </ul>
+                        </div><!--/.nav-collapse -->  
+                    </div>  
+                </div>  
             </div>
+            <div class="clear"></div>
         </header>
         <div id="body">
             @RenderSection("featured", false)

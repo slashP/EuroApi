@@ -4,26 +4,24 @@
     ViewBag.Title = "Championship";
     Layout = "../Shared/_Layout.cshtml";
 }
-
-<div class="championshipWrapper">
-    
-    @for(var i = 0; i<4; i++)
-    {
-        
-        var matchesInGroup = Model.Skip(i * 6).Take(6).ToList();
-        var group = matchesInGroup.FirstOrDefault().HomeTeam.Group.Name;
-        var leftRight = i%2 == 0 ? "left" : "right";
-        <div class="groupBet" style="float: @leftRight;">
-            @Html.Partial("_GroupBet", matchesInGroup)
-            <div style="clear: left;"></div>
-            <input type="button" onclick="removeAllUserBets('@(group)');" value="Remove all bets group @group" />
-        </div>
-    }
+<div class="row">
+    <div class="span3">&nbsp;</div>
+    <div class="span6" style="text-align: center;">
+        <ul class="nav nav-pills">
+            <li class="active liGroups">
+                <a href="#" onclick="getGroups();">Groups</a>
+            </li>
+            <li class="liQuarter"><a href="#" onclick="getQuarterFinals();">Quarter finals</a></li>
+            <li class="liSemi"><a href="#" onclick="getSemiFinals();">Semi finals</a></li>
+            <li class="liFinal"><a href="#" onclick="getFinal();">Final</a></li>
+        </ul>
+    </div>
+    <div class="span3">&nbsp;</div>
 </div>
-<div class="quarterFinals"><h3>Quarter finals</h3></div>
-<div class="semiFinals"></div>
-<div class="final"></div>
 
+<div class="row">
+    <div class="bettingArea"></div>
+</div>
 <script>
     $(document).ready(function () {
         $(".resultBet").on("change", function (event) {
@@ -35,17 +33,13 @@
             var awayGoals = parentDiv.find(".awayTeam").val();
             var group = $(this).attr("group");
             setBet($(this).attr("matchId"), homeGoals, awayGoals, group);
-            setTimeout("getQuarterFinals()", 100);
-            setTimeout("getQuarterFinals()", 100);
-            setTimeout("getQuarterFinals()", 100);
         });
-        getInitialGroupsAtStartup();
+        getGroups();
         setupKnockoutChangeEvents();
-        setTimeout("getQuarterFinals()", 500);        
     });
 
     function setupKnockoutChangeEvents() {
-        $(".resultBetKnockout").live("change", function (event) {
+        $(".resultBetKnockout").live("change", function () {
             if (isNaN($(this).val()) || $(this).val() > 20) {
                 $(this).val("0");
             }
@@ -70,7 +64,6 @@
             url: "/KnockoutMatchResultBet/SetBet",
             data: { matchId: matchId, homeGoals: homeGoals, awayGoals: awayGoals, homeTeamId: homeTeamId, awayTeamId: awayTeamId },
             success: function (results) {
-                console.log(type);
                 $("." + type).empty();
                 $("." + type).html("<h2>" + capitaliseFirstLetter(type) + "</h2>");
                 for (var i = 0; i < results.length; i++) {
@@ -80,18 +73,17 @@
         });
     };
 
-    function getInitialGroupsAtStartup() {
-        var groups = ["A", "B", "C", "D"];
-        for (var i = 0; i < groups.length; i++ ) {
-            $.ajax({
-                type: 'POST',
-                url: "/MatchResultBet/GetTeamsInGroup",
-                data: { group: groups[i] },
-                success: function (results) {
-                    outputGroup(results, results.group);
-                }
-            });
-        }
+    function getGroups() {
+        setActive('liGroups');
+        $.ajax({
+            type: 'POST',
+            url: "/MatchResultBet/GetGroups",
+            success: function(results) {
+                $(".bettingArea").html('');
+                $(".bettingArea").html('<h2>Groups</h2>');
+                $(".bettingArea").append(results);
+            }
+        });
     }
 
     function setBet(matchId, homeGoals, awayGoals, group) {
@@ -128,18 +120,60 @@
     }
 
     function getQuarterFinals() {
+        setActive('liQuarter');
         $.ajax({
             type: 'POST',
             url: "/MatchResultBet/QuarterFinals",
             success: function (results) {
-                $(".quarterFinals").html('');
-                $(".quarterFinals").html('<h2>Quarter finals</h2>');
+                $(".bettingArea").html('');
+                $(".bettingArea").html('<h2>Quarter finals</h2>');
                 for (var i = 0; i < results.length; i++) {
-                    $(".quarterFinals").append(results[i]);
+                    $(".bettingArea").append(results[i]);
                 }
             }
         });
     }
+
+    function getSemiFinals() {
+        setActive('liSemi');
+        $.ajax({
+            type: 'POST',
+            url: "/KnockoutMatchResultBet/SemiFinals",
+            success: function (results) {
+                $(".bettingArea").html('');
+                $(".bettingArea").html('<h2>Semifinals</h2>');
+                for (var i = 0; i < results.length; i++) {
+                    $(".bettingArea").append(results[i]);
+                }
+            }
+        });
+    }
+
+    function getFinal() {
+        setActive('liFinal');
+        $.ajax({
+            type: 'POST',
+            url: "/KnockoutMatchResultBet/Final",
+            success: function (results) {
+                $(".bettingArea").html('');
+                $(".bettingArea").html('<h2>Final</h2>');
+                for (var i = 0; i < results.length; i++) {
+                    $(".bettingArea").append(results[i]);
+                }
+            }
+        });
+    }
+
+    function setActive(classToSet) {
+        resetActive();
+        $("." + classToSet).addClass('active');
+        function resetActive() {
+            $(".nav-pills li").each(function () {
+                $(this).removeClass('active');
+            });
+        }
+    }
+    
     function capitaliseFirstLetter(string)
     {
         return string.charAt(0).toUpperCase() + string.slice(1);

@@ -1,0 +1,101 @@
+﻿@using EuroApi.Models
+@model List<Player>
+
+@{
+    var previosPlayer = new Player { NationalTeam = "asdf" };
+    var types = (List<PlayerBetType>) ViewBag.Types;
+    var bets = (List<PlayerBet>) ViewBag.Bets;
+}
+<script src="/Scripts/sortable/jquery-ui-1.8.17.min.js"></script>
+@foreach (var type in types)
+{
+    var bet = bets.FirstOrDefault(x => x.PlayerBetTypeId == type.Id);
+    <div class="page-header">
+        <h2>@type.LongDescription</h2>
+    </div>
+    <div class="row">
+        <div class="span3">
+            <span>Select</span>
+            <select class="playerSelect playerSelect@(type.Id)" typeId="@type.Id">
+                @foreach (var player in Model)
+                {
+                    if (previosPlayer.NationalTeam != player.NationalTeam)
+                    {
+                        <option disabled="disabled" style="font-weight: bold; font-size: 1.5em; border-bottom: 1px solid black;">@player.NationalTeam</option>
+                    }
+                    else if(bet != null && bet.PlayerId == player.Id)
+                    {
+                        <option value="@player.Id" selected="selected">@player.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@player.Id">@player.Name</option>
+                    }
+                    previosPlayer = player;
+                }
+            </select>
+        </div>
+        <div class="span3">
+            <span>Search </span>            
+            <div class="demo">
+                <div class="ui-widget">
+                    @if(bet != null)
+                    {
+                        <input class="playerSearch playerSearch@(type.Id)" typeId="@type.Id" value="@bet.Player.Name" />
+                    }
+                    else
+                    {
+                        <input class="playerSearch playerSearch@(type.Id)" typeId="@type.Id" />
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="selectedBetPlayer@(type.Id)"></div>
+    </div>
+}
+
+<script>
+
+    $(function () {
+        var availableTags = [];
+        $.ajax({
+            url: "/Player/GetPlayerListWithLabels",
+            async: false,
+            type: "POST",
+            success: function (results) {
+                availableTags = results;
+            }
+        });
+
+        $(".playerSearch").autocomplete({
+            source: availableTags,
+            select: function (value, data) {
+                console.log(data.item.id);
+                if (typeof data == "undefined") {
+                    $("#selectedBetPlayer").html('You selected: ' + value + "<br/>");
+                } else {
+                    var type = $(this).attr("typeId");
+                    console.log(type);
+                    setPlayerBet(data.item.id, type);
+                }
+            }
+        });
+        $(".playerSelect").live("change", function () {
+            var type = $(this).attr("typeId");
+            var playerId = $(this).val();
+            $(".playerSearch" + type).val($(this).find("option:selected").text());
+            setPlayerBet(playerId, type);
+        });
+    });
+
+    function setPlayerBet(id, type) {
+        $.ajax({
+            url: "/PlayerBet/SetBet",
+            data: { playerId: id, type: type },
+            type: "POST",
+            success: function (results) {
+                $(".playerSelect" + type).val(id);
+            }
+        });
+    }
+</script>

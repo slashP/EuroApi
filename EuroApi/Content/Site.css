@@ -1,23 +1,20 @@
 ﻿html {
-    background-color: #eee;
     margin: 0;
     padding: 0;
 }
 
 body {
-    background-color: #eee;
     border-top: solid 10px #000;
-    color: #fff;
+    
     font-size: .85em;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     margin: 0;
     padding: 0;
-    box-shadow: 10px 10px 5px #888;
 }
 
 a:link, a:visited, 
 a:active, a:hover {
-    color: #fff;
+    
     outline: none;
     padding-left: 3px;
     padding-right: 3px;
@@ -66,7 +63,7 @@ nav, section {
 
 h1, h2, h3, 
 h4, h5, h6 {
-    color: #fff;
+    
     margin-bottom: 0;
     padding-bottom: 0;
 }
@@ -100,10 +97,10 @@ h5, h6 {
 }
 
 #body {
-    background-color: #55aa44;
+    
     clear: both;
     padding-bottom: 35px;
-    
+    margin-top: 50px;
 }
 
     .main-content {
@@ -117,7 +114,6 @@ h5, h6 {
 
 footer {
     clear: both;
-    background-color: #488c3f;
     font-size: .8em;
     height: 100px;
 }
@@ -650,10 +646,7 @@ ul#social li {
 }
 
 .groupTable {
-    display: inline-block;
-    margin: 35px 40px 0px 0px;
-    width: 330px;
-    height: 200px;
+    padding: 3px;
 }
 
 .groupTables {
@@ -686,18 +679,46 @@ table th {
 .resultBet {
     width: 20px;
     height: 18px;
-    margin-right: 87px;
     text-align: center;
     border: none;
     background: #FFF;
+    margin-top: 7px;
     margin-bottom: 4px;
+    box-shadow: 1px 0px 1px 1px #888;    
+    
+}
+.homeTeam {
+    margin-right: 80px;    
+}
+.teamInMatch {
+    width: 105px;
 }
 
+.groupBet {
+    margin-left: 20px;
+}
+
+.resultSaved {
+    width: 15px;
+}
+
+.resultBetKnockout {
+    width: 20px;
+    height: 18px;
+    text-align: center;
+    border: none;
+    background: #FFF;
+    margin-top: 7px;
+    margin-bottom: 4px;
+    box-shadow: 1px 0px 1px 1px #888;    
+}
+.resultSaved {
+    margin-left: 4px;
+}
 .teamsInMatch div {
-    width: 110px;
+    
     display: inline-block;
 }
-
 .userBetMatch {
     margin-bottom: 5px;
 }
@@ -717,10 +738,6 @@ table th {
     float: left;
 }
 
-.normalWrapper{
-    margin: 0px auto 0px auto;
-    width: 600px;
-}
 
 .player {
     
@@ -731,7 +748,17 @@ table th {
     width: 900px;
 }
 
-.groupBet {
-    width: 400px;
-    float: left;
+.quarterFinalsRow {
+    background-color: #eee;
+    padding-bottom: 10px;    
+}
+
+.semiFinalsRow {
+    background-color: #ddd;
+    padding-bottom: 10px;    
+}
+
+.finalRow {
+    background-color: #ccc;
+    padding-bottom: 10px;
 }

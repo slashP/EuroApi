@@ -5,7 +5,6 @@ using EuroApi.Models;
 namespace EuroApi.Migrations
 {
     using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
@@ -16,7 +15,7 @@ namespace EuroApi.Migrations
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(EuroApi.Models.EuroApiContext context)
+        protected override void Seed(EuroApiContext context)
         {
             //  This method will be called after migrating to the latest version.
 
@@ -25,12 +24,11 @@ namespace EuroApi.Migrations
             //
             try
             {
-
-
                 AddGroups(context);
                 AddTeams(context);
                 AddMatches(context);
                 AddPlayers(context);
+                AddPlayerBetTypes(context);
             }
             catch (DbEntityValidationException dbEx)
             {
@@ -42,6 +40,12 @@ namespace EuroApi.Migrations
                     }
                 }
             }
+        }
+
+        private void AddPlayerBetTypes(EuroApiContext context)
+        {
+            context.PlayerBetTypes.AddOrUpdate(new PlayerBetType { Id = 1, ShortDescription = "Top scorer", LongDescription = "Select top scorer in tournament" });
+            context.PlayerBetTypes.AddOrUpdate(new PlayerBetType { Id = 2, ShortDescription = "Most assists", LongDescription = "Select player with the most assists" });
         }
 
         private void AddGroups(EuroApiContext context)

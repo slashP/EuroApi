@@ -31,15 +31,16 @@
     }
 }
 
-<div class="userBetMatch">
-    <div class="teamsInMatch">
-        <div><img src="/Content/flags/@(Model.HomeTeam.Name)-flag.gif" style='height: 14px;' alt='flag' />
-            @Model.HomeTeam.Name
-        </div>
-        <div><img src="/Content/flags/@(Model.AwayTeam.Name)-flag.gif" style='height: 14px;' alt='flag' />                 
-            @Model.AwayTeam.Name
-        </div>
+<div class="teamsInMatch">
+    <div class="teamInMatch"><img src="/Content/flags/@(Model.HomeTeam.Name)-flag.gif" style='height: 14px;' alt='flag' />
+        @Model.HomeTeam.Name
     </div>
+    <div class="teamInMatch"><img src="/Content/flags/@(Model.AwayTeam.Name)-flag.gif" style='height: 14px;' alt='flag' />                 
+        @Model.AwayTeam.Name
+    </div>
+</div>
+<div class="teamsInMatch">
     <input class="resultBetKnockout @type homeTeam @untouched" type="tel" homeTeamId="@Model.HomeTeam.Id" awayTeamId="@Model.AwayTeam.Id" matchId="@Model.Id" value="@userBetHomeResult"/>
     <input class="resultBetKnockout @type awayTeam @untouched" type="tel" homeTeamId="@Model.HomeTeam.Id" awayTeamId="@Model.AwayTeam.Id" matchId="@Model.Id" value="@userBetAwayResult" />
+     <div class="resultSaved"><img class="resultSavedImage" alt=""/></div>
 </div>

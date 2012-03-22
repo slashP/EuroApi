@@ -3,6 +3,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
 using EuroApi.Models;
+using Microsoft.Web.Optimization;
 
 namespace EuroApi
 {
@@ -20,6 +21,7 @@ namespace EuroApi
             //db.Database.ExecuteSqlCommand("DELETE FROM dbo.KnockoutMatchResultBets where id >= {0}", 0);
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.MapHttpRoute("DefaultApi", "api/{controller}/{id}", new { id = RouteParameter.Optional });
+            BundleTable.Bundles.EnableDefaultBundles();
 
             routes.MapRoute(
                 "Default", // Route name

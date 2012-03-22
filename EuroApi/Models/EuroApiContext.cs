@@ -50,5 +50,9 @@ namespace EuroApi.Models
         public DbSet<UserInLeague> UserInLeagues { get; set; }
 
         public DbSet<UserLeague> UserLeagues { get; set; }
+
+        public DbSet<PlayerBet> PlayerBets { get; set; }
+
+        public DbSet<PlayerBetType> PlayerBetTypes { get; set; }
     }
 }

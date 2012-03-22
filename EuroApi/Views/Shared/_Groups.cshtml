@@ -1,0 +1,19 @@
+﻿@using EuroApi.Models
+@model List<List<EuroApi.Models.Team>>
+
+@foreach (var group in Model)
+{
+    var matchList = new List<Match>();
+    foreach (var team in group)
+    {
+        matchList.AddRange(team.Matches);
+    }
+    matchList = matchList.Distinct().OrderBy(x => x.Date).ToList();
+    <div class="groupTable span3 group@(group)" group="@group">
+        @Html.Partial("_Group", group)
+    </div>
+    <div class="span3 groupBet">
+        @Html.Partial("_GroupBet", matchList)
+        <input type="button" onclick="removeAllUserBets('@(@group.FirstOrDefault().Group.Name)');" value="Remove all bets group @(@group.FirstOrDefault().Group.Name)" style="margin-top: 7px;" />
+    </div>
+}

@@ -4,8 +4,7 @@
     var firstTeam = Model.FirstOrDefault() ?? new Team{Group = new Group{Name = ""}};
     var groupName = firstTeam.Group.Name;
 }
-<div class="groupTable">
-<div style="margin-left: 0px; margin-bottom: 15px;font-weight: bold; font-size: 1.2em;">Group @groupName</div>       
+<div class="groupTable groupTable@(groupName)">
     <table>
         <tr>
             <th style="width: 30px;"></th>

@@ -3664,7 +3664,7 @@ jQuery.prototype.children = function( until, selector ) {
 		ret = this.length > 1 && !guaranteedUnique[ name ] ? jQuery.unique( ret ) : ret;
 
 		if ( (this.length > 1 || rmultiselector.test( selector )) && rparentsprev.test( name ) ) {
-			ret = ret.reverse();
+			ret = ret.reverse23();
 		}
 
 		return this.pushStack( ret, name, slice.call( arguments ).join(",") );
@@ -3814,7 +3814,7 @@ jQuery.prototype.contents = function( until, selector ) {
 		ret = this.length > 1 && !guaranteedUnique[ name ] ? jQuery.unique( ret ) : ret;
 
 		if ( (this.length > 1 || rmultiselector.test( selector )) && rparentsprev.test( name ) ) {
-			ret = ret.reverse();
+			ret = ret.reverse23();
 		}
 
 		return this.pushStack( ret, name, slice.call( arguments ).join(",") );
@@ -5340,7 +5340,7 @@ jQuery.prototype.next = function( until, selector ) {
 		ret = this.length > 1 && !guaranteedUnique[ name ] ? jQuery.unique( ret ) : ret;
 
 		if ( (this.length > 1 || rmultiselector.test( selector )) && rparentsprev.test( name ) ) {
-			ret = ret.reverse();
+			ret = ret.reverse23();
 		}
 
 		return this.pushStack( ret, name, slice.call( arguments ).join(",") );
@@ -5367,7 +5367,7 @@ jQuery.prototype.nextAll = function( until, selector ) {
 		ret = this.length > 1 && !guaranteedUnique[ name ] ? jQuery.unique( ret ) : ret;
 
 		if ( (this.length > 1 || rmultiselector.test( selector )) && rparentsprev.test( name ) ) {
-			ret = ret.reverse();
+			ret = ret.reverse23();
 		}
 
 		return this.pushStack( ret, name, slice.call( arguments ).join(",") );
@@ -5399,7 +5399,7 @@ jQuery.prototype.nextUntil = function( until, selector ) {
 		ret = this.length > 1 && !guaranteedUnique[ name ] ? jQuery.unique( ret ) : ret;
 
 		if ( (this.length > 1 || rmultiselector.test( selector )) && rparentsprev.test( name ) ) {
-			ret = ret.reverse();
+			ret = ret.reverse23();
 		}
 
 		return this.pushStack( ret, name, slice.call( arguments ).join(",") );
@@ -5679,7 +5679,7 @@ jQuery.prototype.parent = function( until, selector ) {
 		ret = this.length > 1 && !guaranteedUnique[ name ] ? jQuery.unique( ret ) : ret;
 
 		if ( (this.length > 1 || rmultiselector.test( selector )) && rparentsprev.test( name ) ) {
-			ret = ret.reverse();
+			ret = ret.reverse23();
 		}
 
 		return this.pushStack( ret, name, slice.call( arguments ).join(",") );
@@ -5706,7 +5706,7 @@ jQuery.prototype.parents = function( until, selector ) {
 		ret = this.length > 1 && !guaranteedUnique[ name ] ? jQuery.unique( ret ) : ret;
 
 		if ( (this.length > 1 || rmultiselector.test( selector )) && rparentsprev.test( name ) ) {
-			ret = ret.reverse();
+			ret = ret.reverse23();
 		}
 
 		return this.pushStack( ret, name, slice.call( arguments ).join(",") );
@@ -5738,7 +5738,7 @@ jQuery.prototype.parentsUntil = function( until, selector ) {
 		ret = this.length > 1 && !guaranteedUnique[ name ] ? jQuery.unique( ret ) : ret;
 
 		if ( (this.length > 1 || rmultiselector.test( selector )) && rparentsprev.test( name ) ) {
-			ret = ret.reverse();
+			ret = ret.reverse23();
 		}
 
 		return this.pushStack( ret, name, slice.call( arguments ).join(",") );
@@ -5847,7 +5847,7 @@ jQuery.prototype.prev = function( until, selector ) {
 		ret = this.length > 1 && !guaranteedUnique[ name ] ? jQuery.unique( ret ) : ret;
 
 		if ( (this.length > 1 || rmultiselector.test( selector )) && rparentsprev.test( name ) ) {
-			ret = ret.reverse();
+			ret = ret.reverse23();
 		}
 
 		return this.pushStack( ret, name, slice.call( arguments ).join(",") );
@@ -5874,7 +5874,7 @@ jQuery.prototype.prevAll = function( until, selector ) {
 		ret = this.length > 1 && !guaranteedUnique[ name ] ? jQuery.unique( ret ) : ret;
 
 		if ( (this.length > 1 || rmultiselector.test( selector )) && rparentsprev.test( name ) ) {
-			ret = ret.reverse();
+			ret = ret.reverse23();
 		}
 
 		return this.pushStack( ret, name, slice.call( arguments ).join(",") );
@@ -5906,7 +5906,7 @@ jQuery.prototype.prevUntil = function( until, selector ) {
 		ret = this.length > 1 && !guaranteedUnique[ name ] ? jQuery.unique( ret ) : ret;
 
 		if ( (this.length > 1 || rmultiselector.test( selector )) && rparentsprev.test( name ) ) {
-			ret = ret.reverse();
+			ret = ret.reverse23();
 		}
 
 		return this.pushStack( ret, name, slice.call( arguments ).join(",") );
@@ -6524,7 +6524,7 @@ jQuery.prototype.siblings = function( until, selector ) {
 		ret = this.length > 1 && !guaranteedUnique[ name ] ? jQuery.unique( ret ) : ret;
 
 		if ( (this.length > 1 || rmultiselector.test( selector )) && rparentsprev.test( name ) ) {
-			ret = ret.reverse();
+			ret = ret.reverse23();
 		}
 
 		return this.pushStack( ret, name, slice.call( arguments ).join(",") );

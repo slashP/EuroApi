@@ -50,7 +50,7 @@ namespace EuroApi.Controllers
                     ToList();
                 if (userBets.Count >= 4)
                 {
-                    var semiFinals = SemiFinalsFromBets().ToList();
+                    var semiFinals = GetSemiFinalsFromBets().ToList();
                     if (userBets.Any(x => x.KnockoutMatch.Winner() == null))
                         return Json("");
                     var html = semiFinals.Select(x => RenderPartialViewToString("_UserBetKnockoutMatch", x));
@@ -79,12 +79,6 @@ namespace EuroApi.Controllers
             }
             
             return Json("");
-        }
-
-        private IEnumerable<KnockoutMatch> SemiFinalsFromBets()
-        {
-            var semiFinals = GetSemiFinalsFromBets();
-            return semiFinals;
         }
 
         private IEnumerable<KnockoutMatch> GetSemiFinalsFromBets()
@@ -118,5 +112,39 @@ namespace EuroApi.Controllers
                 return sw.GetStringBuilder().ToString();
             }
         }
+
+        public JsonResult SemiFinals()
+        {
+            var userBets =
+                _repository.Query(x => x.KnockoutMatch.Type == KnockoutMatch.QUARTERFINAL && x.User == User.Identity.Name).
+                    ToList();
+            if (userBets.Count >= 4)
+            {
+                var semiFinals = GetSemiFinalsFromBets().ToList();
+                if (userBets.Any(x => x.KnockoutMatch.Winner() == null))
+                    return Json("");
+                var html = semiFinals.Select(x => RenderPartialViewToString("_UserBetKnockoutMatch", x));
+                return Json(html);
+            }
+            return Json("");
+        }
+
+        public JsonResult Final()
+        {
+            var userBets =
+                _repository.Query(x => x.KnockoutMatch.Type == KnockoutMatch.SEMIFINAL && x.User == User.Identity.Name).
+                    ToList();
+            var final = GetFinalFromBets();
+            if (userBets.Count >= 2)
+            {
+                if (userBets.Any(x => x.KnockoutMatch.Winner() == null))
+                    return Json("");
+                var html = new List<string> { RenderPartialViewToString("_UserBetKnockoutMatch", final) };
+                return Json(html);
+            }
+            return Json("");
+        }
+
+
     }
 }

@@ -1,0 +1,39 @@
+﻿@model List<EuroApi.Models.Player>
+
+@{
+    var teamName = Model.FirstOrDefault() == null ? "" : Model.FirstOrDefault().NationalTeam;
+    ViewBag.Title = "Players " + teamName;
+}
+<div class="page-header">
+    <div class="span3">
+        <img src="/Content/flags/@(teamName.ToLower())-flag.gif" width="50px;" alt="flag" />
+    </div>
+    <h2>@teamName</h2>
+</div>
+<div style="margin-top: 30px;" class="row">
+    <div class="span1" style="font-weight: bold;">
+        Position    
+    </div>
+    <div class="span3" style="font-weight: bold;">
+        Name
+    </div>
+    <div class="span3" style="font-weight: bold;">
+        Club
+    </div>
+    <div class="span2" style="font-weight: bold;">
+        Caps
+    </div>
+    <div class="span2" style="font-weight: bold;">
+        Goals
+    </div>
+
+</div>
+<div class="">
+    @foreach(var player in Model)
+    {
+        <div class="row" style="margin-bottom: 4px;">
+            @Html.Partial("_Player", player)
+        </div>
+    }
+</div>
+

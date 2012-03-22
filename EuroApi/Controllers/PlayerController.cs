@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using EuroApi.DAL;
 using EuroApi.Models;
+using EuroApi.Util;
 
 namespace EuroApi.Controllers
 {
     public class PlayerController : Controller
     {
+        IRepository<Team> _teamRepository = new TeamRepository();
         private EuroApiContext db = new EuroApiContext();
 
         //
@@ -18,6 +22,8 @@ namespace EuroApi.Controllers
 
         public ActionResult Index()
         {
+            var teams = _teamRepository.GetAll().OrderBy(x => x.GroupId).ToList();
+            ViewBag.Teams = teams;
             return View(db.Players.ToList().Take(10));
         }
 
@@ -27,6 +33,7 @@ namespace EuroApi.Controllers
             return View(players);
         }
 
+        [OutputCache(Duration = 3600)]
         public ActionResult TopTeams()
         {
             var sums = db.Players.GroupBy(x => x.NationalTeam).Select(x => 
@@ -34,17 +41,34 @@ namespace EuroApi.Controllers
                     Goals = x.Sum(y => y.Goals),
                     Name = x.FirstOrDefault().NationalTeam,
                     Caps = x.Sum(y => y.Caps),
-                    DateOfBirthAverage = x.Average(y => y.DateOfBirth.Year),
-                    DateOfBirth = DateTime.MinValue
-                }).OrderByDescending(d => d.Goals).ToList();
-            var dates = new List<DateTime>(sums.Select(sum => new DateTime((long)sum.DateOfBirthAverage)));
-            return null;
+                    DateOfBirthAverage = x.Average(y => (y.DateOfBirth.Year * 365 + y.DateOfBirth.Month * 30 + y.DateOfBirth.Day)/365),
+                    DateOfBirth = DateTime.MinValue,
+                }).OrderByDescending(d => d.Goals);
+            var datoer = new List<string>();
+            foreach (var dato in sums.Select(x => x.DateOfBirthAverage))
+            {
+                if(Math.Abs(Math.Round(dato, 2) - Math.Round(dato, 0)) < 0.05)
+                    datoer.Add(Math.Round(dato,0) + ".0");
+                else
+                    datoer.Add(Math.Round(dato, 1).ToString(CultureInfo.InvariantCulture));
+            }
+            ViewBag.Goals = sums.Select(x => x.Goals).ToList();
+            ViewBag.Names = sums.Select(x => x.Name).ToList();
+            ViewBag.Caps = sums.Select(x => x.Caps).ToList();
+            ViewBag.DateOfBirthAverage = datoer;
+            return View("TopTeams");
         }
 
         public JsonResult GetPlayerList()
         {
             var playerNames = db.Players.Select(x => x.Name).ToList();
             return Json(playerNames);
+        }
+
+        public JsonResult GetPlayerListWithLabels()
+        {
+            var players = db.Players.Select(x => new {label = x.Name, id = x.Id}).ToList();
+            return Json(players);
         }
 
         public ActionResult Show(string name)
@@ -149,6 +173,12 @@ namespace EuroApi.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+
+        public ActionResult Team(int id)
+        {
+            var teamName = _teamRepository.Find(id).Name;
+            return View(db.Players.Where(x => x.NationalTeam == teamName).ToList());
         }
     }
 }
