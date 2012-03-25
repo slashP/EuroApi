@@ -18,7 +18,7 @@ namespace EuroApi
         public static void RegisterRoutes(RouteCollection routes)
         {
             //Database.SetInitializer(new DontDropDbJustCreateTablesIfModelChanged<EuroApiContext>());
-            //Database.SetInitializer(new DropCreateDatabaseAlways<EuroApiContext>());
+            Database.SetInitializer(new DropCreateDatabaseAlways<EuroApiContext>());
 
             //var db = new EuroApiContext();
             //db.Database.ExecuteSqlCommand("DELETE FROM dbo.KnockoutMatchResultBets where id >= {0}", 0);

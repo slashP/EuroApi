@@ -36,3 +36,4 @@ C:\Users\perkrihe\Documents\Visual Studio 2010\Projects\EuroApi\EuroApi\obj\Debu
 C:\Users\perkrihe\Documents\Visual Studio 2010\Projects\EuroApi\EuroApi\obj\Debug\EuroApi.pdb
 C:\Users\perkrihe\Documents\Visual Studio 2010\Projects\EuroApi\EuroApi\bin\Devtalk.EF.CodeFirst.dll
 C:\Users\perkrihe\Documents\Visual Studio 2010\Projects\EuroApi\EuroApi\bin\WebActivator.dll
+C:\Users\perkrihe\Documents\Visual Studio 2010\Projects\EuroApi\EuroApi\bin\OmidID.Web.Security.EFMembershipProvider.dll
