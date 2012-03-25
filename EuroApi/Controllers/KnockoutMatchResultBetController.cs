@@ -14,6 +14,8 @@ namespace EuroApi.Controllers
         private readonly IRepository<KnockoutMatchResultBet> _repository = new KnockoutMatchResultBetRepository();
         private readonly IRepository<Team> _teamRepository = new TeamRepository();
         private readonly IRepository<KnockoutMatch> _knockoutMatchRepository = new KnockoutMatchRepository();
+        private readonly IRepository<MatchResultBet> _matchResultBetRepository = new MatchResultBetRepository();
+
 
         public JsonResult SetBet(int? matchId, int? homeGoals, int? awayGoals, int? homeTeamId, int? awayTeamId)
         {
@@ -43,40 +45,45 @@ namespace EuroApi.Controllers
                 userBet.AwayTeamId = (int) awayTeamId;
                 _repository.Save();
             }
-            if(match.Type == KnockoutMatch.QUARTERFINAL)
-            {
-                var userBets =
-                _repository.Query(x => x.KnockoutMatch.Type == KnockoutMatch.QUARTERFINAL && x.User == User.Identity.Name).
-                    ToList();
-                if (userBets.Count >= 4)
-                {
-                    var semiFinals = GetSemiFinalsFromBets().ToList();
-                    if (userBets.Any(x => x.KnockoutMatch.Winner() == null))
-                        return Json("");
-                    var html = semiFinals.Select(x => RenderPartialViewToString("_UserBetKnockoutMatch", x));
-                    return Json(html);
-                }
-            }
-            else if(match.Type == KnockoutMatch.SEMIFINAL)
-            {
-                var userBets =
-                _repository.Query(x => x.KnockoutMatch.Type == KnockoutMatch.SEMIFINAL && x.User == User.Identity.Name).
-                    ToList();
-                if (userBets.Count >= 2)
-                {
-                    var final = GetFinalFromBets();
-                    if (userBets.Any(x => x.KnockoutMatch.Winner() == null))
-                        return Json("");
-                    var html = new List<string>{RenderPartialViewToString("_UserBetKnockoutMatch", final)};
-                    return Json(html);
-                }
-            }
-            else if(match.Type == KnockoutMatch.FINAL)
-            {
-                var final = GetFinalFromBets();
-                var html = new List<string> { RenderPartialViewToString("_UserBetKnockoutMatch", final) };
-                return Json(html);
-            }
+            //switch (match.Type)
+            //{
+            //    case KnockoutMatch.QUARTERFINAL:
+            //        {
+            //            var userBets =
+            //                _repository.Query(x => x.KnockoutMatch.Type == KnockoutMatch.QUARTERFINAL && x.User == User.Identity.Name).
+            //                    ToList();
+            //            if (userBets.Count >= 4)
+            //            {
+            //                var semiFinals = GetSemiFinalsFromBets().ToList();
+            //                if (userBets.Any(x => x.KnockoutMatch.Winner() == null))
+            //                    return Json("");
+            //                var html = semiFinals.Select(x => RenderPartialViewToString("_UserBetKnockoutMatch", x));
+            //                return Json(html);
+            //            }
+            //        }
+            //        break;
+            //    case KnockoutMatch.SEMIFINAL:
+            //        {
+            //            var userBets =
+            //                _repository.Query(x => x.KnockoutMatch.Type == KnockoutMatch.SEMIFINAL && x.User == User.Identity.Name).
+            //                    ToList();
+            //            if (userBets.Count >= 2)
+            //            {
+            //                var final = GetFinalFromBets();
+            //                if (userBets.Any(x => x.KnockoutMatch.Winner() == null))
+            //                    return Json("");
+            //                var html = new List<string>{RenderPartialViewToString("_UserBetKnockoutMatch", final)};
+            //                return Json(html);
+            //            }
+            //        }
+            //        break;
+            //    case KnockoutMatch.FINAL:
+            //        {
+            //            var final = GetFinalFromBets();
+            //            var html = new List<string> { RenderPartialViewToString("_UserBetKnockoutMatch", final) };
+            //            return Json(html);
+            //        }
+            //}
             
             return Json("");
         }
@@ -118,15 +125,16 @@ namespace EuroApi.Controllers
             var userBets =
                 _repository.Query(x => x.KnockoutMatch.Type == KnockoutMatch.QUARTERFINAL && x.User == User.Identity.Name).
                     ToList();
-            if (userBets.Count >= 4)
+            var groupBets = _matchResultBetRepository.Query(x => x.User == User.Identity.Name);
+            if (userBets.Count >= 4 && groupBets.Count() >= 24)
             {
                 var semiFinals = GetSemiFinalsFromBets().ToList();
                 if (userBets.Any(x => x.KnockoutMatch.Winner() == null))
-                    return Json("");
+                    return Json("Some results are draw in quarter finals.");
                 var html = semiFinals.Select(x => RenderPartialViewToString("_UserBetKnockoutMatch", x));
                 return Json(html);
             }
-            return Json("");
+            return Json("Set bets in groups and quarter finals before semi finals.");
         }
 
         public JsonResult Final()
@@ -134,17 +142,16 @@ namespace EuroApi.Controllers
             var userBets =
                 _repository.Query(x => x.KnockoutMatch.Type == KnockoutMatch.SEMIFINAL && x.User == User.Identity.Name).
                     ToList();
+            var groupBets = _matchResultBetRepository.Query(x => x.User == User.Identity.Name);
             var final = GetFinalFromBets();
-            if (userBets.Count >= 2)
+            if (userBets.Count >= 2 && groupBets.Count() >= 24)
             {
                 if (userBets.Any(x => x.KnockoutMatch.Winner() == null))
-                    return Json("");
+                    return Json("Some results are draw in semi finals.");
                 var html = new List<string> { RenderPartialViewToString("_UserBetKnockoutMatch", final) };
                 return Json(html);
             }
-            return Json("");
+            return Json("Set bets in groups, quarter finals and semi finals before final.");
         }
-
-
     }
 }

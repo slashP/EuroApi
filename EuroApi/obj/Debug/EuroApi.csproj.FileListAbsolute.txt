@@ -34,3 +34,5 @@ C:\Users\perkrihe\Documents\Visual Studio 2010\Projects\EuroApi\EuroApi\bin\Syst
 C:\Users\perkrihe\Documents\Visual Studio 2010\Projects\EuroApi\EuroApi\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\perkrihe\Documents\Visual Studio 2010\Projects\EuroApi\EuroApi\obj\Debug\EuroApi.dll
 C:\Users\perkrihe\Documents\Visual Studio 2010\Projects\EuroApi\EuroApi\obj\Debug\EuroApi.pdb
+C:\Users\perkrihe\Documents\Visual Studio 2010\Projects\EuroApi\EuroApi\bin\Devtalk.EF.CodeFirst.dll
+C:\Users\perkrihe\Documents\Visual Studio 2010\Projects\EuroApi\EuroApi\bin\WebActivator.dll
