@@ -17,7 +17,7 @@ namespace EuroApi
 
         public static void RegisterRoutes(RouteCollection routes)
         {
-            Database.SetInitializer(new DontDropDbJustCreateTablesIfModelChanged<EuroApiContext>());
+            //Database.SetInitializer(new DontDropDbJustCreateTablesIfModelChanged<EuroApiContext>());
             //Database.SetInitializer(new DropCreateDatabaseAlways<EuroApiContext>());
 
             //var db = new EuroApiContext();
