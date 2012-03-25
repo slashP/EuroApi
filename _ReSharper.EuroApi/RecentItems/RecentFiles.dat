@@ -1,6 +1,5 @@
 ﻿<RecentFiles>
   <RecentFiles>
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:Player/f:Team.cshtml" caret="0" fromTop="0" />
     <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Controllers/f:PlayerBetController.cs" caret="0" fromTop="0" />
     <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Controllers/f:PlayerBetTypeController.cs" caret="0" fromTop="0" />
     <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:PlayerBetType/f:Index.cshtml" caret="0" fromTop="0" />
@@ -29,7 +28,8 @@
     <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:Shared/f:_UserBetMatch.cshtml" caret="0" fromTop="0" />
     <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:Shared/f:_GroupBet.cshtml" caret="0" fromTop="0" />
     <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:Shared/f:_UserBetKnockoutMatch.cshtml" caret="0" fromTop="0" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/f:Web.config" caret="2249" fromTop="18" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Controllers/f:KnockoutMatchResultBetController.cs" caret="0" fromTop="0" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/f:Web.config" caret="2229" fromTop="17" />
   </RecentFiles>
   <RecentEdits>
     <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Views/d:Shared/f:_PlayerListBet.cshtml" caret="1598" fromTop="13" />
@@ -39,10 +39,10 @@
     <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Controllers/f:PlayerController.cs" caret="962" fromTop="12" />
     <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Controllers/f:KnockoutMatchResultBetController.cs" caret="2432" fromTop="15" />
     <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Controllers/f:KnockoutMatchResultBetController.cs" caret="2432" fromTop="14" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/f:Web.config" caret="4769" fromTop="31" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/f:Web.config" caret="5163" fromTop="36" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/f:Web.config" caret="4404" fromTop="26" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/f:Web.config" caret="3065" fromTop="28" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/f:Web.config" caret="4776" fromTop="31" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/f:Web.config" caret="5170" fromTop="36" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/f:Web.config" caret="4411" fromTop="26" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/f:Web.config" caret="3072" fromTop="28" />
     <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Controllers/f:KnockoutMatchResultBetController.cs" caret="646" fromTop="16" />
     <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Controllers/f:KnockoutMatchResultBetController.cs" caret="7676" fromTop="23" />
     <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Controllers/f:KnockoutMatchResultBetController.cs" caret="7676" fromTop="32" />
@@ -54,13 +54,13 @@
     <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Controllers/f:KnockoutMatchResultBetController.cs" caret="2093" fromTop="0" />
     <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Controllers/f:KnockoutMatchResultBetController.cs" caret="4159" fromTop="31" />
     <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/d:Controllers/f:KnockoutMatchResultBetController.cs" caret="4898" fromTop="16" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/f:Web.config" caret="3713" fromTop="18" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/f:Web.config" caret="3720" fromTop="18" />
     <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/f:Web.config" caret="2156" fromTop="18" />
     <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/f:Web.config" caret="1809" fromTop="15" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/f:Web.config" caret="2486" fromTop="25" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/f:Web.config" caret="2493" fromTop="25" />
     <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/f:Global.asax.cs" caret="619" fromTop="4" />
     <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/f:Web.config" caret="1821" fromTop="15" />
-    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/f:Web.config" caret="2225" fromTop="16" />
     <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/f:Web.config" caret="847" fromTop="12" />
+    <File id="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6/f:Web.config" caret="2229" fromTop="17" />
   </RecentEdits>
 </RecentFiles>
