@@ -10,6 +10,7 @@ namespace EuroApi.Models
 
         public DbSet<KnockoutMatch> KnockoutMatches { get; set; }
 
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Match>()

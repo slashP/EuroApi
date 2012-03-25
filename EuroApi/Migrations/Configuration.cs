@@ -29,6 +29,13 @@ namespace EuroApi.Migrations
                 AddMatches(context);
                 AddPlayers(context);
                 AddPlayerBetTypes(context);
+                var installer = new OmidID.Web.Security.Installer
+                {
+                    MembershipProvider = System.Web.Security.Membership.Provider,
+                    RoleProvider = System.Web.Security.Roles.Provider
+                };
+                //Install database:
+                var installed = installer.CreateIfNotExist();
             }
             catch (DbEntityValidationException dbEx)
             {

@@ -19,7 +19,7 @@ namespace EuroApi
         {
             //Database.SetInitializer(new DontDropDbJustCreateTablesIfModelChanged<EuroApiContext>());
             //Database.SetInitializer(new DropCreateDatabaseAlways<EuroApiContext>());
-
+            //Database.SetInitializer<EuroApiContext>(null);
             //var db = new EuroApiContext();
             //db.Database.ExecuteSqlCommand("DELETE FROM dbo.KnockoutMatchResultBets where id >= {0}", 0);
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
