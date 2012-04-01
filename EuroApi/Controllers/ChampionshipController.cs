@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using EuroApi.Context;
 using EuroApi.Models;
 
 namespace EuroApi.Controllers
 {
     public class ChampionshipController : Controller
     {
-        private readonly EuroApiContext _db = new EuroApiContext();
+        private readonly FootyFeudContext _db = new FootyFeudContext();
 
         public ActionResult Index()
         {

@@ -2,13 +2,14 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using EuroApi.Context;
 using EuroApi.Models;
 
 namespace EuroApi.Controllers
 {
     public class MatchController : Controller
     {
-        private EuroApiContext db = new EuroApiContext();
+        private FootyFeudContext db = new FootyFeudContext();
 
         public ActionResult Index()
         {

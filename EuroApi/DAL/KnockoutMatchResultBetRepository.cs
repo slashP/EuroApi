@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
+using EuroApi.Context;
 using EuroApi.Models;
 
 namespace EuroApi.DAL
 {
     public class KnockoutMatchResultBetRepository : IRepository<KnockoutMatchResultBet>
     {
-        private readonly EuroApiContext _db = new EuroApiContext();
+        private readonly FootyFeudContext _db = new FootyFeudContext();
         public KnockoutMatchResultBet Find(int id)
         {
             return _db.KnockoutMatchResultBets.Find(id);

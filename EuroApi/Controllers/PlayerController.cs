@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using EuroApi.Context;
 using EuroApi.DAL;
 using EuroApi.Models;
 using EuroApi.Util;
@@ -15,7 +16,7 @@ namespace EuroApi.Controllers
     public class PlayerController : Controller
     {
         IRepository<Team> _teamRepository = new TeamRepository();
-        private EuroApiContext db = new EuroApiContext();
+        private FootyFeudContext db = new FootyFeudContext();
 
         //
         // GET: /Player/

@@ -1,4 +1,6 @@
-﻿namespace EuroApi.Models
+﻿using CodeFirstMembershipSharp;
+
+namespace EuroApi.Models
 {
     public class UserInLeague
     {

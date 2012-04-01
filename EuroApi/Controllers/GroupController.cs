@@ -1,13 +1,14 @@
 ﻿using System.Data;
 using System.Linq;
 using System.Web.Mvc;
+using EuroApi.Context;
 using EuroApi.Models;
 
 namespace EuroApi.Controllers
 {
     public class GroupController : Controller
     {
-        private EuroApiContext db = new EuroApiContext();
+        private FootyFeudContext db = new FootyFeudContext();
 
         public ActionResult Index()
         {

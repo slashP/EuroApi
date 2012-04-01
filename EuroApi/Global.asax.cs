@@ -31,14 +31,6 @@ namespace EuroApi
                 "{controller}/{action}/{id}", // URL with parameters
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
             );
-
-            var installer = new OmidID.Web.Security.Installer
-                                {
-                                    MembershipProvider = System.Web.Security.Membership.Provider,
-                                    RoleProvider = System.Web.Security.Roles.Provider
-                                };
-            //Install database:
-            var installed = installer.CreateIfNotExist();
         }
 
         protected void Application_Start()

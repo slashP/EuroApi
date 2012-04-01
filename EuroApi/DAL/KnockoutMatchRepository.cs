@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
+using EuroApi.Context;
 using EuroApi.Models;
 
 namespace EuroApi.DAL
 {
     public class KnockoutMatchRepository : IRepository<KnockoutMatch>
     {
-        private EuroApiContext _db = new EuroApiContext();
+        private FootyFeudContext _db = new FootyFeudContext();
 
         public KnockoutMatch Find(int id)
         {

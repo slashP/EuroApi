@@ -1,5 +1,6 @@
 using System.Data.Entity.Validation;
 using System.Diagnostics;
+using EuroApi.Context;
 using EuroApi.Models;
 
 namespace EuroApi.Migrations
@@ -8,14 +9,14 @@ namespace EuroApi.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<EuroApiContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<FootyFeudContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(EuroApiContext context)
+        protected override void Seed(FootyFeudContext context)
         {
             //  This method will be called after migrating to the latest version.
 
@@ -29,13 +30,7 @@ namespace EuroApi.Migrations
                 AddMatches(context);
                 AddPlayers(context);
                 AddPlayerBetTypes(context);
-                var installer = new OmidID.Web.Security.Installer
-                {
-                    MembershipProvider = System.Web.Security.Membership.Provider,
-                    RoleProvider = System.Web.Security.Roles.Provider
-                };
-                //Install database:
-                var installed = installer.CreateIfNotExist();
+                
             }
             catch (DbEntityValidationException dbEx)
             {
@@ -49,13 +44,13 @@ namespace EuroApi.Migrations
             }
         }
 
-        private void AddPlayerBetTypes(EuroApiContext context)
+        private void AddPlayerBetTypes(FootyFeudContext context)
         {
             context.PlayerBetTypes.AddOrUpdate(new PlayerBetType { Id = 1, ShortDescription = "Top scorer", LongDescription = "Select top scorer in tournament" });
             context.PlayerBetTypes.AddOrUpdate(new PlayerBetType { Id = 2, ShortDescription = "Most assists", LongDescription = "Select player with the most assists" });
         }
 
-        private void AddGroups(EuroApiContext context)
+        private void AddGroups(FootyFeudContext context)
         {
             //context.Groups.ToList().ForEach(g => context.Groups.Remove(g));
             //context.SaveChanges();
@@ -65,7 +60,7 @@ namespace EuroApi.Migrations
             context.Groups.AddOrUpdate(new Group { Id = 4, Name = "D" });
         }
 
-        private void AddTeams(EuroApiContext context)
+        private void AddTeams(FootyFeudContext context)
         {
             //context.Teams.ToList().ForEach(t => context.Teams.Remove(t));
             //context.SaveChanges();
@@ -87,7 +82,7 @@ namespace EuroApi.Migrations
             context.Teams.AddOrUpdate(new Team { Id = 16, GroupId = 4, Name = "Sweden" });
         }
 
-        private void AddMatches(EuroApiContext context)
+        private void AddMatches(FootyFeudContext context)
         {
             //context.Matches.ToList().ForEach(m => context.Matches.Remove(m));
             //context.SaveChanges();
@@ -126,7 +121,7 @@ namespace EuroApi.Migrations
             context.KnockoutMatches.AddOrUpdate(new KnockoutMatch { Type = 3, Id = 7, Date = DateTime.Parse("July 1, 2012 20:45"), HomeTeamId = 16, AwayTeamId = 15, Place = "Kiev" });
         }
 
-        private void AddPlayers(EuroApiContext context)
+        private void AddPlayers(FootyFeudContext context)
         {
             context.Players.ToList().ForEach(a => context.Players.Remove(a));
             context.Players.Add(new Player { Number = 1, Position = "GK", Name = "Maarten Stekelenburg", DateOfBirth = DateTime.Parse("September 22, 1982"), Caps = 45, Goals = 0, Team = "Roma", NationalTeam = "Netherlands" });
