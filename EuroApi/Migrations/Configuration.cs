@@ -411,6 +411,74 @@ namespace EuroApi.Migrations
             context.Players.Add(new Player { Number = 22, Position = "FW", Name = "Fabio Borini", DateOfBirth = DateTime.Parse("29 March 1991"), Caps = 1, Goals = 0, Team = "Roma", NationalTeam = "Italy" });
 
 
+            context.Players.Add(new Player { Number = 1, Position = "GK", Name = "Thomas Sørensen", DateOfBirth = DateTime.Parse("8 January 1979"), Caps = 100, Goals = 0, Team = "Stoke City", NationalTeam = "Denmark" });
+            context.Players.Add(new Player { Number = 16, Position = "GK", Name = "Stephan Andersen", DateOfBirth = DateTime.Parse("8 January 1979"), Caps = 8, Goals = 0, Team = "Evian", NationalTeam = "Denmark" });
+            context.Players.Add(new Player { Number = 3, Position = "DF", Name = "Simon Kjær", DateOfBirth = DateTime.Parse("8 January 1979"), Caps = 22, Goals = 0, Team = "Roma", NationalTeam = "Denmark" });
+            context.Players.Add(new Player { Number = 5, Position = "DF", Name = "Daniel Wass", DateOfBirth = DateTime.Parse("8 January 1979"), Caps = 4, Goals = 0, Team = "Evian", NationalTeam = "Denmark" });
+            context.Players.Add(new Player { Number = 6, Position = "DF", Name = "Lars Jacobsen", DateOfBirth = DateTime.Parse("8 January 1979"), Caps = 49, Goals = 1, Team = "København", NationalTeam = "Denmark" });
+            context.Players.Add(new Player { Number = 8, Position = "DF", Name = "Daniel Agger (c)", DateOfBirth = DateTime.Parse("8 January 1979"), Caps = 44, Goals = 5, Team = "Liverpool", NationalTeam = "Denmark" });
+            context.Players.Add(new Player { Number = 15, Position = "DF", Name = "Simon Poulsen", DateOfBirth = DateTime.Parse("8 January 1979"), Caps = 16, Goals = 0, Team = "AZ", NationalTeam = "Denmark" });
+            context.Players.Add(new Player { Number = 17, Position = "DF", Name = "Andreas Bjelland", DateOfBirth = DateTime.Parse("8 January 1979"), Caps = 5, Goals = 0, Team = "Nordsjælland", NationalTeam = "Denmark" });
+            context.Players.Add(new Player { Number = 2, Position = "MF", Name = "Christian Poulsen", DateOfBirth = DateTime.Parse("8 January 1979"), Caps = 90, Goals = 6, Team = "Evian", NationalTeam = "Denmark" });
+            context.Players.Add(new Player { Number = 4, Position = "MF", Name = "William Kvist", DateOfBirth = DateTime.Parse("8 January 1979"), Caps = 27, Goals = 0, Team = "VfB Stuttgart", NationalTeam = "Denmark" });
+            context.Players.Add(new Player { Number = 9, Position = "MF", Name = "Michael Silberbauer", DateOfBirth = DateTime.Parse("8 January 1979"), Caps = 24, Goals = 1, Team = "Young Boys", NationalTeam = "Denmark" });
+            context.Players.Add(new Player { Number = 10, Position = "MF", Name = "Lasse Schøne", DateOfBirth = DateTime.Parse("8 January 1979"), Caps = 9, Goals = 2, Team = "NEC", NationalTeam = "Denmark" });
+            context.Players.Add(new Player { Number = 14, Position = "MF", Name = "Jakob Poulsen", DateOfBirth = DateTime.Parse("8 January 1979"), Caps = 20, Goals = 1, Team = "Midtjylland", NationalTeam = "Denmark" });
+            context.Players.Add(new Player { Number = 21, Position = "MF", Name = "Christian Eriksen", DateOfBirth = DateTime.Parse("8 January 1979"), Caps = 21, Goals = 2, Team = "Ajax", NationalTeam = "Denmark" });
+            context.Players.Add(new Player { Number = 23, Position = "MF", Name = "Niki Zimling", DateOfBirth = DateTime.Parse("8 January 1979"), Caps = 9, Goals = 0, Team = "Club Brugge", NationalTeam = "Denmark" });
+            context.Players.Add(new Player { Number = 7, Position = "FW", Name = "Nicklas Bendtner", DateOfBirth = DateTime.Parse("8 January 1979"), Caps = 46, Goals = 17, Team = "Sunderland", NationalTeam = "Denmark" });
+            context.Players.Add(new Player { Number = 11, Position = "FW", Name = "Tobias Mikkelsen", DateOfBirth = DateTime.Parse("8 January 1979"), Caps = 2, Goals = 0, Team = "Nordsjælland", NationalTeam = "Denmark" });
+            context.Players.Add(new Player { Number = 12, Position = "FW", Name = "Mads Junker", DateOfBirth = DateTime.Parse("8 January 1979"), Caps = 7, Goals = 1, Team = "Roda", NationalTeam = "Denmark" });
+            context.Players.Add(new Player { Number = 19, Position = "FW", Name = "Dennis Rommedahl", DateOfBirth = DateTime.Parse("8 January 1979"), Caps = 114, Goals = 21, Team = "Brøndby", NationalTeam = "Denmark" });
+
+
+            context.Players.Add(new Player { Number = 1, Position = "GK", Name = "Stipe Pletikosa", DateOfBirth = DateTime.Parse("8 January 1979"), Team = "Rostov", Caps = 90, Goals = 0, NationalTeam = "Croatia" });
+            context.Players.Add(new Player { Number = 23, Position = "GK", Name = "Danijel Subašic", DateOfBirth = DateTime.Parse("27 October 1984"), Team = "Monaco", Caps = 3, Goals = 0, NationalTeam = "Croatia" });
+            context.Players.Add(new Player { Number = 12, Position = "GK", Name = "Ivan Kelava", DateOfBirth = DateTime.Parse("20 February 1988"), Team = "Dinamo Zagreb", Caps = 0, Goals = 0, NationalTeam = "Croatia" });
+            context.Players.Add(new Player { Number = 3, Position = "GK", Name = "Josip Šimunic", DateOfBirth = DateTime.Parse("18 February 1978"), Team = "Dinamo Zagreb", Caps = 93, Goals = 3, NationalTeam = "Croatia" });
+            context.Players.Add(new Player { Number = 5, Position = "GK", Name = "Vedran Corluka", DateOfBirth = DateTime.Parse("5 February 1986"), Team = "Bayer Leverkusen", Caps = 53, Goals = 2, NationalTeam = "Croatia" });
+            context.Players.Add(new Player { Number = 6, Position = "GK", Name = "Danijel Pranjic", DateOfBirth = DateTime.Parse("2 December 1981"), Team = "Bayern Munich", Caps = 42, Goals = 0, NationalTeam = "Croatia" });
+            context.Players.Add(new Player { Number = 13, Position = "GK", Name = "Gordon Schildenfeld", DateOfBirth = DateTime.Parse("18 March 1985"), Team = "Eintracht Frankfurt", Caps = 10, Goals = 0, NationalTeam = "Croatia" });
+            context.Players.Add(new Player { Number = 15, Position = "GK", Name = "Domagoj Vida", DateOfBirth = DateTime.Parse("29 April 1989"), Team = "Dinamo Zagreb", Caps = 8, Goals = 0, NationalTeam = "Croatia" });
+            context.Players.Add(new Player { Number = 21, Position = "GK", Name = "Šime Vrsaljko", DateOfBirth = DateTime.Parse("10 January 1992"), Team = "Dinamo Zagreb", Caps = 3, Goals = 0, NationalTeam = "Croatia" });
+            context.Players.Add(new Player { Number = 11, Position = "GK", Name = "Darijo Srna (captain)", DateOfBirth = DateTime.Parse("1 May 1982"), Team = "Shakhtar Donetsk", Caps = 90, Goals = 19, NationalTeam = "Croatia" });
+            context.Players.Add(new Player { Number = 19, Position = "GK", Name = "Niko Kranjcar", DateOfBirth = DateTime.Parse("13 August 1984"), Team = "Tottenham Hotspur", Caps = 69, Goals = 15, NationalTeam = "Croatia" });
+            context.Players.Add(new Player { Number = 10, Position = "GK", Name = "Luka Modric", DateOfBirth = DateTime.Parse("9 September 1985"), Team = "Tottenham Hotspur", Caps = 54, Goals = 8, NationalTeam = "Croatia" });
+            context.Players.Add(new Player { Number = 7, Position = "GK", Name = "Ivan Rakitic", DateOfBirth = DateTime.Parse("10 March 1988"), Team = "Sevilla", Caps = 39, Goals = 8, NationalTeam = "Croatia" });
+            context.Players.Add(new Player { Number = 8, Position = "GK", Name = "Ognjen Vukojevic", DateOfBirth = DateTime.Parse("20 December 1983"), Team = "Dynamo Kyiv", Caps = 37, Goals = 3, NationalTeam = "Croatia" });
+            context.Players.Add(new Player { Number = 16, Position = "GK", Name = "Tomislav Dujmovic", DateOfBirth = DateTime.Parse("26 February 1981"), Team = "Zaragoza", Caps = 16, Goals = 0, NationalTeam = "Croatia" });
+            context.Players.Add(new Player { Number = 44, Position = "GK", Name = "Ivan Perišic", DateOfBirth = DateTime.Parse("2 February 1989"), Team = "Borussia Dortmund", Caps = 8, Goals = 0, NationalTeam = "Croatia" });
+            context.Players.Add(new Player { Number = 18, Position = "GK", Name = "Ivica Olic", DateOfBirth = DateTime.Parse("14 September 1979"), Team = "Bayern Munich", Caps = 77, Goals = 15, NationalTeam = "Croatia" });
+            context.Players.Add(new Player { Number = 22, Position = "GK", Name = "Eduardo", DateOfBirth = DateTime.Parse("25 February 1983"), Team = "Shakhtar Donetsk", Caps = 45, Goals = 22, NationalTeam = "Croatia" });
+            context.Players.Add(new Player { Number = 17, Position = "GK", Name = "Mario Mandžukic", DateOfBirth = DateTime.Parse("21 May 1986"), Team = "VfL Wolfsburg", Caps = 27, Goals = 5, NationalTeam = "Croatia" });
+            context.Players.Add(new Player { Number = 9, Position = "GK", Name = "Nikica Jelavic", DateOfBirth = DateTime.Parse("27 August 1985"), Team = "Everton", Caps = 18, Goals = 2, NationalTeam = "Croatia" });
+
+
+context.Players.Add(new Player { Number = 1, Position = "GK", Name = "Shay Given", DateOfBirth = DateTime.Parse("20 April 1976"), Caps = 121, Goals = 0, Team = "Aston Villa", NationalTeam = "Ireland" });
+context.Players.Add(new Player { Number = 16, Position = "GK", Name = "David Forde", DateOfBirth = DateTime.Parse("20 December 1979"), Caps = 2, Goals = 0, Team = "Millwall", NationalTeam = "Ireland" });
+context.Players.Add(new Player { Number = 23, Position = "GK", Name = "Stephen Henderson", DateOfBirth = DateTime.Parse("2 May 1988"), Caps = 0, Goals = 0, Team = "West Ham", NationalTeam = "Ireland" });
+context.Players.Add(new Player { Number = 4, Position = "DF", Name = "John O'Shea", DateOfBirth = DateTime.Parse("30 April 1981"), Caps = 75, Goals = 1, Team = "Sunderland", NationalTeam = "Ireland" });
+context.Players.Add(new Player { Number = 19, Position = "DF", Name = "Shane Duffy", DateOfBirth = DateTime.Parse("1 January 1992"), Caps = 0, Goals = 0, Team = "Everton", NationalTeam = "Ireland" });
+context.Players.Add(new Player { Number = 2, Position = "DF", Name = "Sean St Ledger", DateOfBirth = DateTime.Parse("28 December 1984"), Caps = 25, Goals = 2, Team = "Leicester City", NationalTeam = "Ireland" });
+context.Players.Add(new Player { Number = 5, Position = "DF", Name = "Darren O'Dea", DateOfBirth = DateTime.Parse("4 February 1987"), Caps = 13, Goals = 0, Team = "Leeds United", NationalTeam = "Ireland" });
+context.Players.Add(new Player { Number = 3, Position = "DF", Name = "Stephen Ward", DateOfBirth = DateTime.Parse("20 August 1985"), Caps = 10, Goals = 2, Team = "Wolverhampton Wanderers", NationalTeam = "Ireland" });
+context.Players.Add(new Player { Number = 13, Position = "DF", Name = "Kevin Foley", DateOfBirth = DateTime.Parse("1 November 1984"), Caps = 8, Goals = 0, Team = "Wolverhampton Wanderers", NationalTeam = "Ireland" });
+context.Players.Add(new Player { Number = 11, Position = "MF", Name = "Damien Duff", DateOfBirth = DateTime.Parse("2 March 1979"), Caps = 95, Goals = 8, Team = "Fulham", NationalTeam = "Ireland" });
+context.Players.Add(new Player { Number = 7, Position = "MF", Name = "Aiden McGeady", DateOfBirth = DateTime.Parse("4 April 1986"), Caps = 47, Goals = 2, Team = "Spartak Moscow", NationalTeam = "Ireland" });
+context.Players.Add(new Player { Number = 15, Position = "MF", Name = "Stephen Hunt", DateOfBirth = DateTime.Parse("1 August 1981"), Caps = 38, Goals = 1, Team = "Wolverhampton Wanderers", NationalTeam = "Ireland" });
+context.Players.Add(new Player { Number = 6, Position = "MF", Name = "Glenn Whelan", DateOfBirth = DateTime.Parse("13 January 1984"), Caps = 37, Goals = 2, Team = "Stoke City", NationalTeam = "Ireland" });
+context.Players.Add(new Player { Number = 8, Position = "MF", Name = "Keith Andrews", DateOfBirth = DateTime.Parse("13 September 1980"), Caps = 27, Goals = 3, Team = "West Bromwich Albion", NationalTeam = "Ireland" });
+context.Players.Add(new Player { Number = 18, Position = "MF", Name = "Paul Green", DateOfBirth = DateTime.Parse("10 April 1983"), Caps = 10, Goals = 1, Team = "Derby County", NationalTeam = "Ireland" });
+context.Players.Add(new Player { Number = 24, Position = "MF", Name = "Keith Fahey", DateOfBirth = DateTime.Parse("15 January 1983"), Caps = 15, Goals = 3, Team = "Birmingham City", NationalTeam = "Ireland" });
+context.Players.Add(new Player { Number = 12, Position = "MF", Name = "Séamus Coleman", DateOfBirth = DateTime.Parse("11 October 1988"), Caps = 4, Goals = 0, Team = "Everton", NationalTeam = "Ireland" });
+context.Players.Add(new Player { Number = 14, Position = "MF", Name = "James McCarthy", DateOfBirth = DateTime.Parse("12 November 1990"), Caps = 3, Goals = 0, Team = "Wigan Athletic", NationalTeam = "Ireland" });
+context.Players.Add(new Player { Number = 22, Position = "MF", Name = "James McClean", DateOfBirth = DateTime.Parse("22 April 1989"), Caps = 1, Goals = 0, Team = "Sunderland", NationalTeam = "Ireland" });
+context.Players.Add(new Player { Number = 10, Position = "FW", Name = "Robbie Keane (C)", DateOfBirth = DateTime.Parse("8 July 1980"), Caps = 115, Goals = 53, Team = "Los Angeles Galaxy", NationalTeam = "Ireland" });
+context.Players.Add(new Player { Number = 17, Position = "FW", Name = "Kevin Doyle", DateOfBirth = DateTime.Parse("18 September 1983"), Caps = 46, Goals = 10, Team = "Wolverhampton Wanderers", NationalTeam = "Ireland" });
+context.Players.Add(new Player { Number = 9, Position = "FW", Name = "Shane Long", DateOfBirth = DateTime.Parse("22 January 1987"), Caps = 24, Goals = 6, Team = "West Bromwich Albion", NationalTeam = "Ireland" });
+context.Players.Add(new Player { Number = 20, Position = "FW", Name = "Simon Cox", DateOfBirth = DateTime.Parse("28 April 1987"), Caps = 11, Goals = 3, Team = "West Bromwich Albion", NationalTeam = "Ireland" });
+
+
         }
     }
 }
