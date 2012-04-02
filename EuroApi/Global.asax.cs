@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Configuration;
+using System.Data.Entity;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -39,6 +40,15 @@ namespace EuroApi
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+            var conf = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("~");
+            var connstring = conf.ConnectionStrings.ConnectionStrings["FootyFeudContext"].ConnectionString;
+            if (!connstring.Contains("MultipleActiveResultSets=True;"))
+            {
+                connstring += "MultipleActiveResultSets=True;";
+            }
+
+            conf.ConnectionStrings.ConnectionStrings["FootyFeudContext"].ConnectionString = connstring;
+            conf.Save();
         }
     }
 }
