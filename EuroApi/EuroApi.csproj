@@ -243,10 +243,13 @@
     <Content Include="Content\flags\spain-flag.gif" />
     <Content Include="Content\flags\sweden-flag.gif" />
     <Content Include="Content\flags\ukraine-flag.gif" />
+    <Content Include="Content\images\euro-2012-mascots.jpg" />
+    <Content Include="Content\images\euro2012w.jpg" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
     <Content Include="Content\images\glyphicons_198_ok.png" />
     <Content Include="Content\images\glyphicons_199_ban.png" />
+    <Content Include="Content\images\niLYkeG.jpg" />
     <Content Include="Content\themes\base\images\rounded.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -507,6 +510,9 @@
     <Content Include="Membership.config">
       <SubType>Designer</SubType>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Match.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

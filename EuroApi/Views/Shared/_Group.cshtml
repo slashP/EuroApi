@@ -1,5 +1,5 @@
 ﻿@using EuroApi.Models
-@model List<Team>
+@model IEnumerable<Team>
 @{
     var firstTeam = Model.FirstOrDefault() ?? new Team{Group = new Group{Name = ""}};
     var groupName = firstTeam.Group.Name;
@@ -7,7 +7,7 @@
 <div class="groupTable groupTable@(groupName)">
     <table>
         <tr>
-            <th style="width: 30px;"></th>
+            <th style="width: 30px;">@groupName</th>
             <th style="width: 70px;">Team</th>
             <th>#</th>
             <th>+</th>

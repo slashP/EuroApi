@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Web.Security;
 using EuroApi.Context;
@@ -10,19 +7,12 @@ namespace CodeFirstMembershipSharp
 {
     public class CodeFirstMembershipProvider : MembershipProvider
     {
-
         #region Properties
 
         public override string ApplicationName
         {
-            get
-            {
-                return this.GetType().Assembly.GetName().Name.ToString();
-            }
-            set
-            {
-                this.ApplicationName = this.GetType().Assembly.GetName().Name.ToString();
-            }
+            get { return GetType().Assembly.GetName().Name; }
+            set { ApplicationName = GetType().Assembly.GetName().Name; }
         }
 
         public override int MaxInvalidPasswordAttempts
@@ -64,7 +54,9 @@ namespace CodeFirstMembershipSharp
 
         #region Functions
 
-        public override MembershipUser CreateUser(string username, string password, string email, string passwordQuestion, string passwordAnswer, bool isApproved, object providerUserKey, out MembershipCreateStatus status)
+        public override MembershipUser CreateUser(string username, string password, string email,
+                                                  string passwordQuestion, string passwordAnswer, bool isApproved,
+                                                  object providerUserKey, out MembershipCreateStatus status)
         {
             if (string.IsNullOrEmpty(username))
             {
@@ -76,54 +68,46 @@ namespace CodeFirstMembershipSharp
                 status = MembershipCreateStatus.InvalidPassword;
                 return null;
             }
-            if (string.IsNullOrEmpty(email))
-            {
-                status = MembershipCreateStatus.InvalidEmail;
-                return null;
-            }
 
-            string HashedPassword = Crypto.HashPassword(password);
-            if (HashedPassword.Length > 128)
+            string hashedPassword = Crypto.HashPassword(password);
+            if (hashedPassword.Length > 128)
             {
                 status = MembershipCreateStatus.InvalidPassword;
                 return null;
             }
 
-            using (FootyFeudContext Context = new FootyFeudContext())
+            using (var context = new FootyFeudContext())
             {
-                if (Context.Users.Where(Usr => Usr.Username == username).Any())
+                if (context.Users.Any(usr => usr.Username == username))
                 {
                     status = MembershipCreateStatus.DuplicateUserName;
                     return null;
                 }
 
-                if (Context.Users.Where(Usr => Usr.Email == email).Any())
-                {
-                    status = MembershipCreateStatus.DuplicateEmail;
-                    return null;
-                }
+                var newUser = new User
+                                  {
+                                      UserId = Guid.NewGuid(),
+                                      Username = username,
+                                      Password = hashedPassword,
+                                      IsApproved = isApproved,
+                                      Email = "bogus@asdf.com",
+                                      CreateDate = DateTime.UtcNow,
+                                      LastPasswordChangedDate = DateTime.UtcNow,
+                                      PasswordFailuresSinceLastSuccess = 0,
+                                      LastLoginDate = DateTime.UtcNow,
+                                      LastActivityDate = DateTime.UtcNow,
+                                      LastLockoutDate = DateTime.UtcNow,
+                                      IsLockedOut = false,
+                                      LastPasswordFailureDate = DateTime.UtcNow
+                                  };
 
-                User NewUser = new User
-                {
-                    UserId = Guid.NewGuid(),
-                    Username = username,
-                    Password = HashedPassword,
-                    IsApproved = isApproved,
-                    Email = email,
-                    CreateDate = DateTime.UtcNow,
-                    LastPasswordChangedDate = DateTime.UtcNow,
-                    PasswordFailuresSinceLastSuccess = 0,
-                    LastLoginDate = DateTime.UtcNow,
-                    LastActivityDate = DateTime.UtcNow,
-                    LastLockoutDate = DateTime.UtcNow,
-                    IsLockedOut = false,
-                    LastPasswordFailureDate = DateTime.UtcNow
-                };
-
-                Context.Users.Add(NewUser);
-                Context.SaveChanges();
+                context.Users.Add(newUser);
+                context.SaveChanges();
                 status = MembershipCreateStatus.Success;
-                return new MembershipUser(Membership.Provider.Name, NewUser.Username, NewUser.UserId, NewUser.Email, null, null, NewUser.IsApproved, NewUser.IsLockedOut, NewUser.CreateDate.Value, NewUser.LastLoginDate.Value, NewUser.LastActivityDate.Value, NewUser.LastPasswordChangedDate.Value, NewUser.LastLockoutDate.Value);
+                return new MembershipUser(Membership.Provider.Name, newUser.Username, newUser.UserId, newUser.Email,
+                                          null, null, newUser.IsApproved, newUser.IsLockedOut, newUser.CreateDate.Value,
+                                          newUser.LastLoginDate.Value, newUser.LastActivityDate.Value,
+                                          newUser.LastPasswordChangedDate.Value, newUser.LastLockoutDate.Value);
             }
         }
 
@@ -137,7 +121,7 @@ namespace CodeFirstMembershipSharp
             {
                 return false;
             }
-            using (FootyFeudContext Context = new FootyFeudContext())
+            using (var Context = new FootyFeudContext())
             {
                 User User = null;
                 User = Context.Users.FirstOrDefault(Usr => Usr.Username == username);
@@ -154,7 +138,8 @@ namespace CodeFirstMembershipSharp
                     return false;
                 }
                 String HashedPassword = User.Password;
-                Boolean VerificationSucceeded = (HashedPassword != null && Crypto.VerifyHashedPassword(HashedPassword, password));
+                Boolean VerificationSucceeded = (HashedPassword != null &&
+                                                 Crypto.VerifyHashedPassword(HashedPassword, password));
                 if (VerificationSucceeded)
                 {
                     User.PasswordFailuresSinceLastSuccess = 0;
@@ -194,7 +179,7 @@ namespace CodeFirstMembershipSharp
             {
                 return null;
             }
-            using (FootyFeudContext Context = new FootyFeudContext())
+            using (var Context = new FootyFeudContext())
             {
                 User User = null;
                 User = Context.Users.FirstOrDefault(Usr => Usr.Username == username);
@@ -205,7 +190,10 @@ namespace CodeFirstMembershipSharp
                         User.LastActivityDate = DateTime.UtcNow;
                         Context.SaveChanges();
                     }
-                    return new MembershipUser(Membership.Provider.Name, User.Username, User.UserId, User.Email, null, null, User.IsApproved, User.IsLockedOut, User.CreateDate.Value, User.LastLoginDate.Value, User.LastActivityDate.Value, User.LastPasswordChangedDate.Value, User.LastLockoutDate.Value);
+                    return new MembershipUser(Membership.Provider.Name, User.Username, User.UserId, User.Email, null,
+                                              null, User.IsApproved, User.IsLockedOut, User.CreateDate.Value,
+                                              User.LastLoginDate.Value, User.LastActivityDate.Value,
+                                              User.LastPasswordChangedDate.Value, User.LastLockoutDate.Value);
                 }
                 else
                 {
@@ -216,13 +204,15 @@ namespace CodeFirstMembershipSharp
 
         public override MembershipUser GetUser(object providerUserKey, bool userIsOnline)
         {
-            if (providerUserKey is Guid) { }
+            if (providerUserKey is Guid)
+            {
+            }
             else
             {
                 return null;
             }
 
-            using (FootyFeudContext Context = new FootyFeudContext())
+            using (var Context = new FootyFeudContext())
             {
                 User User = null;
                 User = Context.Users.Find(providerUserKey);
@@ -233,7 +223,10 @@ namespace CodeFirstMembershipSharp
                         User.LastActivityDate = DateTime.UtcNow;
                         Context.SaveChanges();
                     }
-                    return new MembershipUser(Membership.Provider.Name, User.Username, User.UserId, User.Email, null, null, User.IsApproved, User.IsLockedOut, User.CreateDate.Value, User.LastLoginDate.Value, User.LastActivityDate.Value, User.LastPasswordChangedDate.Value, User.LastLockoutDate.Value);
+                    return new MembershipUser(Membership.Provider.Name, User.Username, User.UserId, User.Email, null,
+                                              null, User.IsApproved, User.IsLockedOut, User.CreateDate.Value,
+                                              User.LastLoginDate.Value, User.LastActivityDate.Value,
+                                              User.LastPasswordChangedDate.Value, User.LastLockoutDate.Value);
                 }
                 else
                 {
@@ -256,7 +249,7 @@ namespace CodeFirstMembershipSharp
             {
                 return false;
             }
-            using (FootyFeudContext Context = new FootyFeudContext())
+            using (var Context = new FootyFeudContext())
             {
                 User User = null;
                 User = Context.Users.FirstOrDefault(Usr => Usr.Username == username);
@@ -265,7 +258,8 @@ namespace CodeFirstMembershipSharp
                     return false;
                 }
                 String HashedPassword = User.Password;
-                Boolean VerificationSucceeded = (HashedPassword != null && Crypto.VerifyHashedPassword(HashedPassword, oldPassword));
+                Boolean VerificationSucceeded = (HashedPassword != null &&
+                                                 Crypto.VerifyHashedPassword(HashedPassword, oldPassword));
                 if (VerificationSucceeded)
                 {
                     User.PasswordFailuresSinceLastSuccess = 0;
@@ -301,7 +295,7 @@ namespace CodeFirstMembershipSharp
 
         public override bool UnlockUser(string userName)
         {
-            using (FootyFeudContext Context = new FootyFeudContext())
+            using (var Context = new FootyFeudContext())
             {
                 User User = null;
                 User = Context.Users.FirstOrDefault(Usr => Usr.Username == userName);
@@ -321,8 +315,9 @@ namespace CodeFirstMembershipSharp
 
         public override int GetNumberOfUsersOnline()
         {
-            DateTime DateActive = DateTime.UtcNow.Subtract(TimeSpan.FromMinutes(Convert.ToDouble(Membership.UserIsOnlineTimeWindow)));
-            using (FootyFeudContext Context = new FootyFeudContext())
+            DateTime DateActive =
+                DateTime.UtcNow.Subtract(TimeSpan.FromMinutes(Convert.ToDouble(Membership.UserIsOnlineTimeWindow)));
+            using (var Context = new FootyFeudContext())
             {
                 return Context.Users.Where(Usr => Usr.LastActivityDate > DateActive).Count();
             }
@@ -334,7 +329,7 @@ namespace CodeFirstMembershipSharp
             {
                 return false;
             }
-            using (FootyFeudContext Context = new FootyFeudContext())
+            using (var Context = new FootyFeudContext())
             {
                 User User = null;
                 User = Context.Users.FirstOrDefault(Usr => Usr.Username == username);
@@ -353,7 +348,7 @@ namespace CodeFirstMembershipSharp
 
         public override string GetUserNameByEmail(string email)
         {
-            using (FootyFeudContext Context = new FootyFeudContext())
+            using (var Context = new FootyFeudContext())
             {
                 User User = null;
                 User = Context.Users.FirstOrDefault(Usr => Usr.Email == email);
@@ -368,31 +363,48 @@ namespace CodeFirstMembershipSharp
             }
         }
 
-        public override MembershipUserCollection FindUsersByEmail(string emailToMatch, int pageIndex, int pageSize, out int totalRecords)
+        public override MembershipUserCollection FindUsersByEmail(string emailToMatch, int pageIndex, int pageSize,
+                                                                  out int totalRecords)
         {
-            MembershipUserCollection MembershipUsers = new MembershipUserCollection();
-            using (FootyFeudContext Context = new FootyFeudContext())
+            var MembershipUsers = new MembershipUserCollection();
+            using (var Context = new FootyFeudContext())
             {
                 totalRecords = Context.Users.Where(Usr => Usr.Email == emailToMatch).Count();
-                IQueryable<User> Users = Context.Users.Where(Usr => Usr.Email == emailToMatch).OrderBy(Usrn => Usrn.Username).Skip(pageIndex * pageSize).Take(pageSize);
+                IQueryable<User> Users =
+                    Context.Users.Where(Usr => Usr.Email == emailToMatch).OrderBy(Usrn => Usrn.Username).Skip(pageIndex*
+                                                                                                              pageSize).
+                        Take(pageSize);
                 foreach (User user in Users)
                 {
-                    MembershipUsers.Add(new MembershipUser(Membership.Provider.Name, user.Username, user.UserId, user.Email, null, null, user.IsApproved, user.IsLockedOut, user.CreateDate.Value, user.LastLoginDate.Value, user.LastActivityDate.Value, user.LastPasswordChangedDate.Value, user.LastLockoutDate.Value));
+                    MembershipUsers.Add(new MembershipUser(Membership.Provider.Name, user.Username, user.UserId,
+                                                           user.Email, null, null, user.IsApproved, user.IsLockedOut,
+                                                           user.CreateDate.Value, user.LastLoginDate.Value,
+                                                           user.LastActivityDate.Value,
+                                                           user.LastPasswordChangedDate.Value,
+                                                           user.LastLockoutDate.Value));
                 }
             }
             return MembershipUsers;
         }
 
-        public override MembershipUserCollection FindUsersByName(string usernameToMatch, int pageIndex, int pageSize, out int totalRecords)
+        public override MembershipUserCollection FindUsersByName(string usernameToMatch, int pageIndex, int pageSize,
+                                                                 out int totalRecords)
         {
-            MembershipUserCollection MembershipUsers = new MembershipUserCollection();
-            using (FootyFeudContext Context = new FootyFeudContext())
+            var MembershipUsers = new MembershipUserCollection();
+            using (var Context = new FootyFeudContext())
             {
                 totalRecords = Context.Users.Where(Usr => Usr.Username == usernameToMatch).Count();
-                IQueryable<User> Users = Context.Users.Where(Usr => Usr.Username == usernameToMatch).OrderBy(Usrn => Usrn.Username).Skip(pageIndex * pageSize).Take(pageSize);
+                IQueryable<User> Users =
+                    Context.Users.Where(Usr => Usr.Username == usernameToMatch).OrderBy(Usrn => Usrn.Username).Skip(
+                        pageIndex*pageSize).Take(pageSize);
                 foreach (User user in Users)
                 {
-                    MembershipUsers.Add(new MembershipUser(Membership.Provider.Name, user.Username, user.UserId, user.Email, null, null, user.IsApproved, user.IsLockedOut, user.CreateDate.Value, user.LastLoginDate.Value, user.LastActivityDate.Value, user.LastPasswordChangedDate.Value, user.LastLockoutDate.Value));
+                    MembershipUsers.Add(new MembershipUser(Membership.Provider.Name, user.Username, user.UserId,
+                                                           user.Email, null, null, user.IsApproved, user.IsLockedOut,
+                                                           user.CreateDate.Value, user.LastLoginDate.Value,
+                                                           user.LastActivityDate.Value,
+                                                           user.LastPasswordChangedDate.Value,
+                                                           user.LastLockoutDate.Value));
                 }
             }
             return MembershipUsers;
@@ -400,14 +412,20 @@ namespace CodeFirstMembershipSharp
 
         public override MembershipUserCollection GetAllUsers(int pageIndex, int pageSize, out int totalRecords)
         {
-            MembershipUserCollection MembershipUsers = new MembershipUserCollection();
-            using (FootyFeudContext Context = new FootyFeudContext())
+            var MembershipUsers = new MembershipUserCollection();
+            using (var Context = new FootyFeudContext())
             {
                 totalRecords = Context.Users.Count();
-                IQueryable<User> Users = Context.Users.OrderBy(Usrn => Usrn.Username).Skip(pageIndex * pageSize).Take(pageSize);
+                IQueryable<User> Users =
+                    Context.Users.OrderBy(Usrn => Usrn.Username).Skip(pageIndex*pageSize).Take(pageSize);
                 foreach (User user in Users)
                 {
-                    MembershipUsers.Add(new MembershipUser(Membership.Provider.Name, user.Username, user.UserId, user.Email, null, null, user.IsApproved, user.IsLockedOut, user.CreateDate.Value, user.LastLoginDate.Value, user.LastActivityDate.Value, user.LastPasswordChangedDate.Value, user.LastLockoutDate.Value));
+                    MembershipUsers.Add(new MembershipUser(Membership.Provider.Name, user.Username, user.UserId,
+                                                           user.Email, null, null, user.IsApproved, user.IsLockedOut,
+                                                           user.CreateDate.Value, user.LastLoginDate.Value,
+                                                           user.LastActivityDate.Value,
+                                                           user.LastPasswordChangedDate.Value,
+                                                           user.LastLockoutDate.Value));
                 }
             }
             return MembershipUsers;
@@ -422,19 +440,11 @@ namespace CodeFirstMembershipSharp
         {
             get { return false; }
         }
-        public override string GetPassword(string username, string answer)
-        {
-            throw new NotSupportedException("Consider using methods from WebSecurity module.");
-        }
 
         //CodeFirstMembershipProvider does not support password reset scenarios.
         public override bool EnablePasswordReset
         {
             get { return false; }
-        }
-        public override string ResetPassword(string username, string answer)
-        {
-            throw new NotSupportedException("Consider using methods from WebSecurity module.");
         }
 
         //CodeFirstMembershipProvider does not support question and answer scenarios.
@@ -442,7 +452,19 @@ namespace CodeFirstMembershipSharp
         {
             get { return false; }
         }
-        public override bool ChangePasswordQuestionAndAnswer(string username, string password, string newPasswordQuestion, string newPasswordAnswer)
+
+        public override string GetPassword(string username, string answer)
+        {
+            throw new NotSupportedException("Consider using methods from WebSecurity module.");
+        }
+
+        public override string ResetPassword(string username, string answer)
+        {
+            throw new NotSupportedException("Consider using methods from WebSecurity module.");
+        }
+
+        public override bool ChangePasswordQuestionAndAnswer(string username, string password,
+                                                             string newPasswordQuestion, string newPasswordAnswer)
         {
             throw new NotSupportedException("Consider using methods from WebSecurity module.");
         }

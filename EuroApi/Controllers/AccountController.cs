@@ -108,7 +108,7 @@ namespace EuroApi.Controllers
             {
                 // Attempt to register the user
                 MembershipCreateStatus createStatus;
-                _membershipProvider.CreateUser(model.UserName, model.Password, model.Email, null, null, true, null, out createStatus);
+                _membershipProvider.CreateUser(model.UserName, model.Password, null, null, null, true, null, out createStatus);
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
@@ -136,7 +136,7 @@ namespace EuroApi.Controllers
             {
                 // Attempt to register the user
                 MembershipCreateStatus createStatus;
-                _membershipProvider.CreateUser(model.UserName, model.Password, model.Email, null, null, true, null, out createStatus);
+                _membershipProvider.CreateUser(model.UserName, model.Password, null, null, null, true, null, out createStatus);
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {

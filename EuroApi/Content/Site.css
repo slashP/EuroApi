@@ -21,6 +21,11 @@ a:active, a:hover {
     text-decoration: underline;
 }
 
+.marginauto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 
 
 
@@ -234,9 +239,12 @@ hgroup.title h2 {
 
 /* features */
 section.feature {
-    width: 300px;
+    width: 250px;
     float: left;
+    margin-left: auto;
+    margin-right: auto;
     padding: 10px;
+    text-align: center;
 }
 
 /* ordered list */
