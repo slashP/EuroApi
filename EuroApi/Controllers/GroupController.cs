@@ -6,6 +6,7 @@ using EuroApi.Models;
 
 namespace EuroApi.Controllers
 {
+    [Authorize(Users = "perkrihe, slashP")]
     public class GroupController : Controller
     {
         private FootyFeudContext db = new FootyFeudContext();

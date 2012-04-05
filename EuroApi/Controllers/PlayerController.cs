@@ -95,7 +95,7 @@ namespace EuroApi.Controllers
 
         //
         // GET: /Player/Create
-
+        [Authorize(Users = "perkrihe, slashP")]
         public ActionResult Create()
         {
             return View();
@@ -105,6 +105,7 @@ namespace EuroApi.Controllers
         // POST: /Player/Create
 
         [HttpPost]
+        [Authorize(Users = "perkrihe, slashP")]
         public ActionResult Create(Player player)
         {
             if (ModelState.IsValid)
@@ -119,7 +120,7 @@ namespace EuroApi.Controllers
 
         //
         // GET: /Player/Edit/5
-
+        [Authorize(Users = "perkrihe, slashP")]
         public ActionResult Edit(int id = 0)
         {
             Player player = db.Players.Find(id);
@@ -134,6 +135,7 @@ namespace EuroApi.Controllers
         // POST: /Player/Edit/5
 
         [HttpPost]
+        [Authorize(Users = "perkrihe, slashP")]
         public ActionResult Edit(Player player)
         {
             if (ModelState.IsValid)
@@ -148,6 +150,7 @@ namespace EuroApi.Controllers
         //
         // GET: /Player/Delete/5
 
+        [Authorize(Users = "perkrihe, slashP")]
         public ActionResult Delete(int id = 0)
         {
             Player player = db.Players.Find(id);
@@ -162,6 +165,7 @@ namespace EuroApi.Controllers
         // POST: /Player/Delete/5
 
         [HttpPost, ActionName("Delete")]
+        [Authorize(Users = "perkrihe, slashP")]
         public ActionResult DeleteConfirmed(int id)
         {
             Player player = db.Players.Find(id);

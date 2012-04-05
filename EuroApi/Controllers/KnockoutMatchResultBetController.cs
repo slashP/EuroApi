@@ -45,46 +45,6 @@ namespace EuroApi.Controllers
                 userBet.AwayTeamId = (int) awayTeamId;
                 _repository.Save();
             }
-            //switch (match.Type)
-            //{
-            //    case KnockoutMatch.QUARTERFINAL:
-            //        {
-            //            var userBets =
-            //                _repository.Query(x => x.KnockoutMatch.Type == KnockoutMatch.QUARTERFINAL && x.User == User.Identity.Name).
-            //                    ToList();
-            //            if (userBets.Count >= 4)
-            //            {
-            //                var semiFinals = GetSemiFinalsFromBets().ToList();
-            //                if (userBets.Any(x => x.KnockoutMatch.Winner() == null))
-            //                    return Json("");
-            //                var html = semiFinals.Select(x => RenderPartialViewToString("_UserBetKnockoutMatch", x));
-            //                return Json(html);
-            //            }
-            //        }
-            //        break;
-            //    case KnockoutMatch.SEMIFINAL:
-            //        {
-            //            var userBets =
-            //                _repository.Query(x => x.KnockoutMatch.Type == KnockoutMatch.SEMIFINAL && x.User == User.Identity.Name).
-            //                    ToList();
-            //            if (userBets.Count >= 2)
-            //            {
-            //                var final = GetFinalFromBets();
-            //                if (userBets.Any(x => x.KnockoutMatch.Winner() == null))
-            //                    return Json("");
-            //                var html = new List<string>{RenderPartialViewToString("_UserBetKnockoutMatch", final)};
-            //                return Json(html);
-            //            }
-            //        }
-            //        break;
-            //    case KnockoutMatch.FINAL:
-            //        {
-            //            var final = GetFinalFromBets();
-            //            var html = new List<string> { RenderPartialViewToString("_UserBetKnockoutMatch", final) };
-            //            return Json(html);
-            //        }
-            //}
-            
             return Json("");
         }
 

@@ -42,11 +42,8 @@ namespace EuroApi
             RegisterRoutes(RouteTable.Routes);
             var conf = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("~");
             var connstring = conf.ConnectionStrings.ConnectionStrings["FootyFeudContext"].ConnectionString;
-            if (!connstring.Contains("MultipleActiveResultSets=True;"))
-            {
-                connstring += "MultipleActiveResultSets=True;";
-            }
-
+            if (connstring.Contains("MultipleActiveResultSets=True;")) return;
+            connstring += "MultipleActiveResultSets=True;";
             conf.ConnectionStrings.ConnectionStrings["FootyFeudContext"].ConnectionString = connstring;
             conf.Save();
         }

@@ -15,26 +15,13 @@ namespace EuroApi.Controllers
         {
             var matches = _matchRepository.GetAll().OrderBy(x => x.Date).Take(6).ToList();
             var teamsByGroup = new List<IEnumerable<Team>>();
+            
             foreach (var groupId in _teamRepository.GetAll().Select(x => x.Group.Name).Distinct())
             {
                 teamsByGroup.Add(_teamRepository.Query(x => x.Group.Name == groupId).ToList());
             }
             ViewBag.Groups = teamsByGroup;
             return View(matches);
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your quintessential app description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your quintessential contact page.";
-
-            return View();
         }
     }
 }

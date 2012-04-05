@@ -89,10 +89,13 @@ namespace EuroApi.Models
                 return final;
             SetupKnockoutBets(ref resultBets, KnockoutMatch.SEMIFINAL);
             var semiFinalBets = resultBets.Where(x => x.KnockoutMatch.Type == KnockoutMatch.SEMIFINAL).ToList();
-            final.HomeTeam = semiFinalBets[0].KnockoutMatch.Winner();
-            final.HomeTeamId = final.HomeTeam.Id;
-            final.AwayTeam = semiFinalBets[1].KnockoutMatch.Winner();
-            final.AwayTeamId = final.AwayTeam.Id;
+            if(semiFinalBets.Any())
+            {
+                final.HomeTeam = semiFinalBets[0].KnockoutMatch.Winner();
+                final.HomeTeamId = final.HomeTeam.Id;
+                final.AwayTeam = semiFinalBets[1].KnockoutMatch.Winner();
+                final.AwayTeamId = final.AwayTeam.Id;    
+            }
             return final;
         }
     }
