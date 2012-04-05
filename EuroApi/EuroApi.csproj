@@ -227,7 +227,6 @@
     <Content Include="Content\flags\czech-flag.gif" />
     <Content Include="Content\flags\denmark-flag.gif" />
     <Content Include="Content\flags\england-flag.gif" />
-    <Content Include="Content\flags\england-flag.jpg" />
     <Content Include="Content\flags\france-flag.gif" />
     <Content Include="Content\flags\germany-flag.gif" />
     <Content Include="Content\flags\greece-flag.gif" />
