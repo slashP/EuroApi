@@ -2,16 +2,16 @@
 @model Match
 @{
     var userBets = (List<MatchResultBet>)ViewBag.UsersResultBets;
-    var userBetHomeResult = 0;
-    var userBetAwayResult = 0;
+    var userBetHomeResult = string.Empty;
+    var userBetAwayResult = string.Empty;
     var untouched = "";
     if (userBets != null)
     {
         var userBet = userBets.Where(x => x.MatchId == Model.Id).ToList();
         if (userBet.Any())
         {
-            userBetHomeResult = userBet.Select(x => x.HomeTeamGoals).FirstOrDefault();
-            userBetAwayResult = userBet.Select(x => x.AwayTeamGoals).FirstOrDefault();
+            userBetHomeResult = userBet.Select(x => x.HomeTeamGoals).FirstOrDefault().ToString();
+            userBetAwayResult = userBet.Select(x => x.AwayTeamGoals).FirstOrDefault().ToString();
             untouched = "glyphicons_198_ok.png";            
         }
     }
@@ -26,6 +26,7 @@
     </div>
 </div>
 <div class="teamsInMatch">
+    
     <input class="resultBet homeTeam @untouched" type="tel" group="@group" matchId="@Model.Id" value="@userBetHomeResult"/>
     <input class="resultBet awayTeam @untouched" type="tel" group="@group" matchId="@Model.Id" value="@userBetAwayResult" />
     <div class="resultSaved"><img src="/Content/images/@(untouched)" style="height: 15px;" alt=""/></div>

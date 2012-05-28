@@ -170,8 +170,10 @@
     <Compile Include="App_Start\DontDropDbJustCreateTablesIfModelChangedStart.cs" />
     <Compile Include="Context\FootyFeudContext.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GjestebokController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KommentarController.cs" />
     <Compile Include="Controllers\MatchController.cs" />
     <Compile Include="Controllers\MatchResultBetController.cs" />
     <Compile Include="Controllers\KnockoutMatchResultBetController.cs" />
@@ -191,6 +193,7 @@
     <Compile Include="DTO\DtoMatch.cs" />
     <Compile Include="DTO\DtoMatchResultBet.cs" />
     <Compile Include="DTO\DtoTeam.cs" />
+    <Compile Include="Entities\BettingResult.cs" />
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Global.asax.cs">
@@ -202,6 +205,8 @@
     <Compile Include="Membership\WebSecurity.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\GuestbookEntry.cs" />
     <Compile Include="Models\KnockoutMatch.cs" />
     <Compile Include="Models\KnockoutMatchResultBet.cs" />
     <Compile Include="Models\KnockoutPhase.cs" />
@@ -465,6 +470,18 @@
   <ItemGroup>
     <Content Include="Views\Shared\_Match.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\MatchResultBet\Results.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Gjestebok\Create.cshtml" />
+    <Content Include="Views\Gjestebok\Delete.cshtml" />
+    <Content Include="Views\Gjestebok\Details.cshtml" />
+    <Content Include="Views\Gjestebok\Edit.cshtml" />
+    <Content Include="Views\Gjestebok\Index.cshtml" />
+    <Content Include="Views\Gjestebok\Kommenter.cshtml" />
+    <Content Include="Views\Kommentar\Create.cshtml" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -482,7 +499,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>60188</DevelopmentServerPort>
+          <DevelopmentServerPort>17814</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

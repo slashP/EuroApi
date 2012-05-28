@@ -22,6 +22,8 @@ namespace EuroApi.Controllers
             if (matchId == null || homeGoals == null || awayGoals == null || homeTeamId == null || awayTeamId == null)
                 return null;
             var match = _knockoutMatchRepository.Find((int)matchId);
+            var europeanTime = DateTime.UtcNow.AddHours(2);
+            if (match == null || match.Date < europeanTime) return null;
             var userBet = _repository.Query(x => x.User == User.Identity.Name && x.KnockoutMatchId == matchId && x.KnockoutMatch.Type == match.Type).FirstOrDefault();
             if (userBet == null)
             {

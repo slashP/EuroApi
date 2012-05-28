@@ -1,0 +1,52 @@
+﻿@using EuroApi.Models
+@model IEnumerable<EuroApi.Models.Comment>
+
+@{
+    ViewBag.Title = "Kommenter";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@{
+    Guestbook innlegg = ViewBag.Melding;
+    var komm = new Comment();
+}
+
+<div class="innlegg">
+        <h4>@innlegg.Name</h4>
+        <p>@innlegg.Message</p>
+    </div>
+    <hr width="55%" style="margin-right: 210px;" />
+
+
+   <div id="nyttinnlegg">
+   @using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+        <div class="editor-label">
+            @Html.Label("Kommentar")
+        </div>
+       <div class="editor-multiline-field">
+            <textarea name="innlegg" id="kommentartext"></textarea>
+        </div>
+
+        <p>
+            <input type="submit" value="Kommenter" />
+        </p>
+   }
+    </div>
+    <h3 style="margin-left: 147px;">Kommentarer</h3>
+    @foreach (var item in Model)
+    {
+    <div class="innlegg">
+        <h4>@item.Name</h4>
+        <p>@item.Kommentar</p>
+    </div>
+    <hr width="55%" style="margin-right: 210px;" />
+    }
+
+    
+<div>
+    @Html.ActionLink("Tilbake til gjestseboken", "Index")
+</div>
+

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using EuroApi.Entities;
 
 namespace CodeFirstMembershipSharp
 {
@@ -40,5 +41,12 @@ namespace CodeFirstMembershipSharp
         public virtual DateTime? PasswordVerificationTokenExpirationDate { get; set; }
 
         public virtual ICollection<Role> Roles { get; set; }
+
+        [NotMapped] 
+        public virtual int CorrectOutcomes { get; set; }
+        [NotMapped]
+        public virtual int CorrectResults { get; set; }
+        [NotMapped]
+        public virtual int Points { get { return 2*CorrectOutcomes + 3*CorrectResults; } }
     }
 }

@@ -58,7 +58,7 @@ namespace EuroApi.Controllers
                 return HttpNotFound();
             }
             ViewBag.HomeTeamId = new SelectList(db.Teams, "Id", "Name", match.HomeTeamId);
-            ViewBag.GuestTeamId = new SelectList(db.Teams, "Id", "Name", match.AwayTeamId);
+            ViewBag.AwayTeamId = new SelectList(db.Teams, "Id", "Name", match.AwayTeamId);
             return View(match);
         }
 

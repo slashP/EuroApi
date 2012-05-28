@@ -95,11 +95,10 @@ h5, h6 {
 ----------------------------------------------------------*/
 .content-wrapper {
     margin: 0 auto;
-    width: 940px;
+    width: 960px;
 }
 
 #body {
-    
     clear: both;
     padding-bottom: 35px;
     margin-left: 20px;

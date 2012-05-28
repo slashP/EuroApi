@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using EuroApi.DAL;
@@ -13,7 +14,8 @@ namespace EuroApi.Controllers
 
         public ActionResult Index()
         {
-            var matches = _matchRepository.GetAll().OrderBy(x => x.Date).Take(6).ToList();
+            var europeanTime = DateTime.UtcNow.AddHours(2);
+            var matches = _matchRepository.Query(x => x.Date > europeanTime).OrderBy(x => x.Date).Take(6).ToList();
             var teamsByGroup = new List<IEnumerable<Team>>();
             
             foreach (var groupId in _teamRepository.GetAll().Select(x => x.Group.Name).Distinct())

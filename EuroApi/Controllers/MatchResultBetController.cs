@@ -1,9 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web.Mvc;
+using CodeFirstMembershipSharp;
+using EuroApi.Context;
 using EuroApi.DAL;
 using EuroApi.DTO;
+using EuroApi.Entities;
 using EuroApi.Models;
 
 namespace EuroApi.Controllers
@@ -16,6 +20,7 @@ namespace EuroApi.Controllers
         private readonly IRepository<Team> _teamRepository = new TeamRepository();
         private readonly IRepository<KnockoutMatchResultBet> _knockoutBetRepository = new KnockoutMatchResultBetRepository();
         private readonly IRepository<KnockoutMatch> _knockoutMatchRepository = new KnockoutMatchRepository();
+        private readonly FootyFeudContext _db = new FootyFeudContext();
 
 
         //
@@ -98,6 +103,9 @@ namespace EuroApi.Controllers
         {
             if (matchId == null || homeGoals == null || awayGoals == null)
                 return null;
+            var match = _matchRepository.Find((int)matchId);
+            var europeanTime = DateTime.UtcNow.AddHours(2);
+            if (match == null || match.Date < europeanTime) return null;
             var userBet = _repository.Query(x => x.User == User.Identity.Name && x.MatchId == matchId).FirstOrDefault();
             if(userBet == null)
             {
@@ -147,6 +155,25 @@ namespace EuroApi.Controllers
                 viewResult.View.Render(viewContext, sw);
                 return sw.GetStringBuilder().ToString();
             }
+        }
+
+        public ActionResult Results()
+        {
+            var users = _db.Users.ToList();
+            var europeanTime = DateTime.UtcNow.AddHours(2);
+            var matches = _matchRepository.Query(x => x.Date < europeanTime).ToList();
+            foreach (var user in users)
+            {
+                var usr = user;
+                var userBets = _repository.Query(x => x.User == usr.Username).ToList();
+                foreach (var userbet in matches.Select(match => userBets.FirstOrDefault(x => x.MatchId == match.Id)).Where(userbet => userbet != null))
+                {
+                    user.CorrectOutcomes += userbet.CorrectOutcome();
+                    user.CorrectResults += userbet.CorrectBet();
+                }
+            }
+            ViewBag.Matches = matches;
+            return View(users.OrderByDescending(x => x.Points));
         }
     }
 }
