@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace EuroApi.Models
 {
@@ -8,6 +9,8 @@ namespace EuroApi.Models
         public const int SEMIFINAL = 2;
         public const int FINAL = 3;
         public int Id { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy hh:mm}")]
         public DateTime Date { get; set; }
 
         public int Type { get; set; }

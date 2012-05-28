@@ -1,0 +1,67 @@
+﻿@model EuroApi.Models.KnockoutMatch
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>KnockoutMatch</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Date)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Date)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Type)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Type)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.HomeTeam.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HomeTeam.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AwayTeam.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AwayTeam.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.HomeTeamGoals)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HomeTeamGoals)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AwayTeamGoals)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AwayTeamGoals)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Place)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Place)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
