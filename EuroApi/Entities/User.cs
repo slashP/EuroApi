@@ -47,6 +47,6 @@ namespace CodeFirstMembershipSharp
         [NotMapped]
         public virtual int CorrectResults { get; set; }
         [NotMapped]
-        public virtual int Points { get { return 2*CorrectOutcomes + 3*CorrectResults; } }
+        public virtual int Points { get { return CorrectOutcomes + CorrectResults; } }
     }
 }

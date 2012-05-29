@@ -4,37 +4,7 @@
 @{
     ViewBag.Title = "Results";
 }
-<div class="row" style="font-weight: bold;">
-    <div class="span3">
-        User
-    </div>
-    <div class="span2">
-        Correct Outcomes
-    </div>
-    <div class="span2">
-        Correct Results
-    </div>
-    <div class="span2">
-        Points
-    </div>
-</div>
-@foreach(var user in Model)
-{
-    <div class="row">
-        <div class="span3">
-            @user.Username
-        </div>
-        <div class="span2">
-            @user.CorrectOutcomes
-        </div>
-        <div class="span2">
-            @user.CorrectResults
-        </div>
-        <div class="span2">
-            @user.Points
-        </div>
-    </div>
-}
+@Html.Partial("_Results", Model)
 <hr />
 <h3>Matches played</h3>
 @foreach(var match in (IEnumerable<Match>)ViewBag.Matches)
@@ -42,8 +12,8 @@
     <div class="row">
         <div class="span12">
             <img src="/Content/flags/@(match.HomeTeam.Name)-flag.gif" style='height: 14px;' alt='flag' />
-                @match.HomeTeam.Name - <img src="/Content/flags/@(match.AwayTeam.Name)-flag.gif" style='height: 14px;' alt='flag' />
-                @match.AwayTeam.Name @match.HomeTeamGoals - @match.AwayTeamGoals
+            @match.HomeTeam.Name - <img src="/Content/flags/@(match.AwayTeam.Name)-flag.gif" style='height: 14px;' alt='flag' />
+            @match.AwayTeam.Name @match.HomeTeamGoals - @match.AwayTeamGoals
         </div>
     </div>
 }
