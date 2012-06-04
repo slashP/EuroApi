@@ -62,6 +62,9 @@ namespace EuroApi.Context
 
         public DbSet<PlayerBetType> PlayerBetTypes { get; set; }
 
+        public DbSet<TeamBet> TeamBets { get; set; }
+        public DbSet<TeamBetType> TeamBetTypes { get; set; }
+
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Guestbook> Guestbooks { get; set; }
     }

@@ -9,7 +9,7 @@
     <div class="span6" style="text-align: center;">
         <ul class="nav nav-pills">
             <li class="active liGroups"><a href="#" onclick="getGroups();">Groups</a></li>
-            <li class="liMisc"><a href="#" onclick="getPlayerBets();">Misc.</a></li>
+            <li class="liMisc"><a href="#" onclick="getPlayerBets();">Tournament bets.</a></li>
         </ul>
     </div>
     <div class="span3">&nbsp;</div>
@@ -17,6 +17,10 @@
 
 <div class="row">
     <div class="bettingArea"></div>
+</div>
+
+<div class="row">
+    <div class="teamBetArea"></div>
 </div>
 <script>
     $(document).ready(function () {
@@ -76,6 +80,7 @@
             url: "/MatchResultBet/GetGroups",
             success: function (results) {
                 $(".bettingArea").html('');
+                $(".teamBetArea").html('');                
                 $(".bettingArea").html('<h2>Groups</h2>');
                 $(".bettingArea").append(results);
             }
@@ -196,6 +201,17 @@
                 $(".bettingArea").hide();
                 $(".bettingArea").append(results);
                 $(".bettingArea").slideDown('fast', function () {});
+            }
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: "/TeamBet/TeamBets",
+            success: function (results) {
+                $(".teamBetArea").html('');
+                $(".teamBetArea").hide();
+                $(".teamBetArea").append(results);
+                $(".teamBetArea").slideDown('fast', function () { });
             }
         });
     }

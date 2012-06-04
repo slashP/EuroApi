@@ -2,29 +2,30 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using EuroApi.Context;
-using EuroApi.DAL;
 using EuroApi.Models;
 
 namespace EuroApi.Controllers
 {
     [Authorize]
-    public class PlayerBetController : Controller
+    public class TeamBetController : Controller
     {
+        //
+        // GET: /TeamBet/
+
         private readonly FootyFeudContext _db = new FootyFeudContext();
 
-        public JsonResult PlayerBets()
+        public JsonResult TeamBets()
         {
-            var types = _db.PlayerBetTypes.ToList();
-            var players = _db.Players.ToList();
-            var bets = _db.PlayerBets.Where(x => x.User == User.Identity.Name).ToList();
-            var html = RenderPartialViewToString("_PlayerListBet", players, types, bets);
+            var types = _db.TeamBetTypes.ToList();
+            var players = _db.Teams.ToList();
+            var bets = _db.TeamBets.Where(x => x.User == User.Identity.Name).ToList();
+            var html = RenderPartialViewToString("_TeamListBet", players, types, bets);
             return Json(html);
         }
 
-        public JsonResult SetBet(int playerId, int type)
+        public JsonResult SetBet(int teamId, int type)
         {
             var europeanTime = DateTime.UtcNow.AddHours(2);
             var match = _db.Matches.FirstOrDefault(x => x.Date > europeanTime);
@@ -34,29 +35,34 @@ namespace EuroApi.Controllers
                 if (europeanTime > date) return null;
             }
             var user = User.Identity.Name;
-            var bet = _db.PlayerBets.FirstOrDefault(x => x.User == user && x.PlayerBetTypeId == type);
-            
-            if(bet != null)
+            var bet = _db.TeamBets.FirstOrDefault(x => x.User == user && x.TeamBetTypeId == type);
+            if (bet != null)
             {
-                bet.PlayerId = playerId;
+                bet.TeamId = teamId;
                 _db.SaveChanges();
             }
             else
             {
-                var newBet = new PlayerBet
-                                 {
-                                     PlayerBetTypeId = type,
-                                     User = user,
-                                     PlayerId = playerId
-                                 };
-                _db.PlayerBets.Add(newBet);
+                var newBet = new TeamBet
+                {
+                    TeamBetTypeId = type,
+                    User = user,
+                    TeamId = teamId
+                };
+                _db.TeamBets.Add(newBet);
                 _db.SaveChanges();
             }
-            var player = _db.Players.Find(playerId);
-            return Json(player == null ? "" : player.Name);
+            var team = _db.Teams.Find(teamId);
+            return Json(team == null ? "" : team.Name);
         }
 
-        protected string RenderPartialViewToString(string viewName, object model, List<PlayerBetType> types, List<PlayerBet> bets)
+        public JsonResult TeamList()
+        {
+            var teams = _db.Teams.Select(x => new { label = x.Name, id = x.Id }).ToList();
+            return Json(teams);
+        }
+
+        protected string RenderPartialViewToString(string viewName, object model, List<TeamBetType> types, List<TeamBet> bets)
         {
             if (string.IsNullOrEmpty(viewName))
                 viewName = ControllerContext.RouteData.GetRequiredString("action");
@@ -73,5 +79,6 @@ namespace EuroApi.Controllers
                 return sw.GetStringBuilder().ToString();
             }
         }
+
     }
 }
