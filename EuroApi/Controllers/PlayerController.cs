@@ -62,13 +62,13 @@ namespace EuroApi.Controllers
 
         public JsonResult GetPlayerList()
         {
-            var playerNames = db.Players.Select(x => x.Name).ToList();
+            var playerNames = db.Players.OrderBy(x => x.NationalTeam).Select(x => x.Name).ToList();
             return Json(playerNames);
         }
 
         public JsonResult GetPlayerListWithLabels()
         {
-            var players = db.Players.Select(x => new {label = x.Name, id = x.Id}).ToList();
+            var players = db.Players.OrderBy(x => x.NationalTeam).Select(x => new { label = x.Name, id = x.Id }).ToList();
             return Json(players);
         }
 

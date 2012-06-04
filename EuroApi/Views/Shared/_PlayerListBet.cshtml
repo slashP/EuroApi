@@ -75,7 +75,6 @@
                     $("#selectedBetPlayer").html('You selected: ' + value + "<br/>");
                 } else {
                     var type = $(this).attr("typeId");
-                    console.log(type);
                     setPlayerBet(data.item.id, type);
                 }
             }
@@ -94,6 +93,7 @@
             data: { playerId: id, type: type },
             type: "POST",
             success: function (results) {
+                console.log(id);
                 $(".playerSelect" + type).val(id);
             }
         });

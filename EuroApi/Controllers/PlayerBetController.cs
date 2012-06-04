@@ -18,7 +18,7 @@ namespace EuroApi.Controllers
         public JsonResult PlayerBets()
         {
             var types = _db.PlayerBetTypes.ToList();
-            var players = _db.Players.ToList();
+            var players = _db.Players.OrderBy(x => x.NationalTeam).ToList();
             var bets = _db.PlayerBets.Where(x => x.User == User.Identity.Name).ToList();
             var html = RenderPartialViewToString("_PlayerListBet", players, types, bets);
             return Json(html);
