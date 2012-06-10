@@ -18,7 +18,7 @@ namespace EuroApi.Controllers
                 return;
             }
             var user = _db.Users.FirstOrDefault(x => x.Username == User.Identity.Name);
-            var guestbookCount = _db.Guestbooks.Count();
+            var guestbookCount = _db.Guestbooks.Count() + _db.Comments.Count();
             if (user != null) ViewBag.GuestbookCountNotRead = guestbookCount - (user.GuestbookCount ?? 0);
             base.OnActionExecuting(filterContext);
         }

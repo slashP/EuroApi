@@ -16,12 +16,18 @@ namespace EuroApi.Controllers
 
         public ViewResult Index()
         {
+            if (!SetGuestbookCount()) return null;
+            return View(_db.Guestbooks.ToList().OrderByDescending(i => i.Id).Take(50));
+        }
+
+        private bool SetGuestbookCount()
+        {
             var user = _db.Users.FirstOrDefault(x => x.Username == User.Identity.Name);
-            if (user == null) return null;
-            user.GuestbookCount = _db.Guestbooks.Count();
+            if (user == null) return false;
+            user.GuestbookCount = _db.Guestbooks.Count() + _db.Comments.Count();
             _db.SaveChanges();
             ViewBag.GuestbookCountNotRead = 0;
-            return View(_db.Guestbooks.ToList().OrderByDescending(i => i.Id).Take(50));
+            return true;
         }
 
         public ActionResult Create()
@@ -69,6 +75,7 @@ namespace EuroApi.Controllers
                 var k = new Comment(){GuestbookId = id, Kommentar = innlegg, Name = User.Identity.Name};
                 _db.Comments.Add(k);
                 _db.SaveChanges();
+                SetGuestbookCount();
                 return RedirectToAction("Kommenter");
             }
 
