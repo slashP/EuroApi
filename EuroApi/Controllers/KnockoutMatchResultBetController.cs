@@ -9,7 +9,7 @@ using EuroApi.Models;
 
 namespace EuroApi.Controllers
 {
-    public class KnockoutMatchResultBetController : Controller
+    public class KnockoutMatchResultBetController : BaseController
     {
         private readonly IRepository<KnockoutMatchResultBet> _repository = new KnockoutMatchResultBetRepository();
         private readonly IRepository<Team> _teamRepository = new TeamRepository();

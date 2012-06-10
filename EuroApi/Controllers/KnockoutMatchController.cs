@@ -10,7 +10,7 @@ using EuroApi.Context;
 
 namespace EuroApi.Controllers
 {
-    public class KnockoutMatchController : Controller
+    public class KnockoutMatchController : BaseController
     {
         private readonly FootyFeudContext _db = new FootyFeudContext();
 

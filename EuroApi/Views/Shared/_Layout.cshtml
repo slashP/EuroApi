@@ -37,7 +37,13 @@
                                 <li>@Html.ActionLink("Players", "Index", "Player")</li>
                                 <li>@Html.ActionLink("Stats", "TopTeams", "Player")</li>
                                 <li>@Html.ActionLink("Results", "Results", "MatchResultBet")</li>
-                                <li>@Html.ActionLink("Gjestebok", "Index", "Gjestebok")</li>
+                                <li>
+                                    @{
+                                        int count = ViewBag.GuestbookCountNotRead ?? 0;
+                                        string countString = count > 0 ? "(" + count + ")" : string.Empty;
+                                        var linkText = "Gjestebok " + countString;
+                                    }
+                                    @Html.ActionLink(linkText, "Index", "Gjestebok")</li>
                                 <li>@Html.Partial("_LogOnPartial")</li>
                             </ul>
                         </div><!--/.nav-collapse -->  

@@ -7,7 +7,7 @@ using EuroApi.Models;
 namespace EuroApi.Controllers
 { 
     [Authorize]
-    public class GjestebokController : Controller
+    public class GjestebokController : BaseController
     {
         private readonly FootyFeudContext _db = new FootyFeudContext();
 
@@ -16,6 +16,11 @@ namespace EuroApi.Controllers
 
         public ViewResult Index()
         {
+            var user = _db.Users.FirstOrDefault(x => x.Username == User.Identity.Name);
+            if (user == null) return null;
+            user.GuestbookCount = _db.Guestbooks.Count();
+            _db.SaveChanges();
+            ViewBag.GuestbookCountNotRead = 0;
             return View(_db.Guestbooks.ToList().OrderByDescending(i => i.Id).Take(50));
         }
 

@@ -9,7 +9,7 @@ using EuroApi.Models;
 
 namespace EuroApi.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly IRepository<Match> _matchRepository = new MatchRepository();
         private readonly IRepository<Team> _teamRepository = new TeamRepository();

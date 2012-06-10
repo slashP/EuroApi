@@ -9,7 +9,7 @@ using EuroApi.Models;
 namespace EuroApi.Controllers
 {
     [Authorize]
-    public class TeamBetController : Controller
+    public class TeamBetController : BaseController
     {
         //
         // GET: /TeamBet/

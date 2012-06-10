@@ -3,7 +3,7 @@
 namespace EuroApi.Controllers
 {
     [Authorize]
-    public class KommentarController : Controller
+    public class KommentarController : BaseController
     {
         public ActionResult Create()
         {

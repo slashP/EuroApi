@@ -11,7 +11,7 @@ using EuroApi.Models;
 namespace EuroApi.Controllers
 {
     [Authorize]
-    public class PlayerBetController : Controller
+    public class PlayerBetController : BaseController
     {
         private readonly FootyFeudContext _db = new FootyFeudContext();
 

@@ -13,7 +13,7 @@ using EuroApi.Models;
 namespace EuroApi.Controllers
 {
     [Authorize]
-    public class MatchResultBetController : Controller
+    public class MatchResultBetController : BaseController
     {
         private readonly IRepository<MatchResultBet> _repository = new MatchResultBetRepository();
         private readonly IRepository<Match> _matchRepository = new MatchRepository();

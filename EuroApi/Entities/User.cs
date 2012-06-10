@@ -42,6 +42,8 @@ namespace CodeFirstMembershipSharp
 
         public virtual ICollection<Role> Roles { get; set; }
 
+        public virtual int? GuestbookCount { get; set; }
+
         [NotMapped] 
         public virtual int CorrectOutcomes { get; set; }
         [NotMapped]

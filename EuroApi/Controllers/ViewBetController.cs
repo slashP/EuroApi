@@ -8,9 +8,9 @@ using EuroApi.Models;
 
 namespace EuroApi.Controllers
 {
-    public class ViewBetController : Controller
+    public class ViewBetController : BaseController
     {
-        private FootyFeudContext _db = new FootyFeudContext();
+        private readonly FootyFeudContext _db = new FootyFeudContext();
 
         public ActionResult Username(string username)
         {

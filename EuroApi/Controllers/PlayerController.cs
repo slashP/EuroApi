@@ -13,7 +13,7 @@ using EuroApi.Util;
 
 namespace EuroApi.Controllers
 {
-    public class PlayerController : Controller
+    public class PlayerController : BaseController
     {
         IRepository<Team> _teamRepository = new TeamRepository();
         private FootyFeudContext db = new FootyFeudContext();
