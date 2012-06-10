@@ -16,7 +16,7 @@ namespace EuroApi.Controllers
             var user = _db.Users.FirstOrDefault(x => x.Username == username);
             if (user == null) return null;
             var europeanTime = DateTime.UtcNow.AddHours(2);
-            var bets = _db.MatchResultBets.Where(x => x.User == user.Username && x.Match.Date < europeanTime).ToList();
+            var bets = _db.MatchResultBets.Where(x => x.User == user.Username && x.Match.Date < europeanTime).OrderBy(x => x.Match.Date).ToList();
             return View(bets);
         }
 
