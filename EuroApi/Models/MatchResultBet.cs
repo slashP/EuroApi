@@ -36,5 +36,10 @@ namespace EuroApi.Models
         {
             return IsCorrectBet() ? 1 : 0;
         }
+
+        public int Points()
+        {
+            return 2*CorrectOutcome() + CorrectBet();
+        }
     }
 }
