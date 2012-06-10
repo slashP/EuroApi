@@ -24,11 +24,13 @@
 
     @foreach (var bet in Model)
     {
-        <div class="row">
-            <div class="span2"><img src="/Content/flags/@(bet.Match.HomeTeam.Name)-flag.gif" style='height: 14px;' alt='flag' />
+        <div class="row" style="margin-top: 4px;">
+            <div class="span2">
+                <img src="/Content/flags/@(bet.Match.HomeTeam.Name)-flag.gif" style='height: 14px;' alt='flag' />
                 @bet.Match.HomeTeam.Name
             </div>
-            <div class="span2"><img src="/Content/flags/@(bet.Match.AwayTeam.Name)-flag.gif" style='height: 14px;' alt='flag' />                 
+            <div class="span2">
+                <img src="/Content/flags/@(bet.Match.AwayTeam.Name)-flag.gif" style='height: 14px;' alt='flag' />                 
                 @bet.Match.AwayTeam.Name
             </div>
             <div class="span2">
