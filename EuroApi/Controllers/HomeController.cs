@@ -22,13 +22,15 @@ namespace EuroApi.Controllers
             var playedMatches = _matchRepository.Query(x => x.HomeTeamGoals != null && x.AwayTeamGoals != null).OrderByDescending(x => x.Date).Take(4).ToList();
             playedMatches.Reverse();
             ViewBag.PlayedMatches = playedMatches;
-            var teamsByGroup = new List<IEnumerable<Team>>();
+            var teamsByGroup = new List<List<Team>>();
             
             foreach (var groupId in _teamRepository.GetAll().Select(x => x.Group.Name).Distinct())
             {
                 teamsByGroup.Add(_teamRepository.Query(x => x.Group.Name == groupId).ToList());
             }
-            ViewBag.Groups = teamsByGroup;
+            var orderedTeams = new List<IEnumerable<Team>>();
+            teamsByGroup.ForEach(t => orderedTeams.Add(Standing.SortTeams(t)));
+            ViewBag.Groups = orderedTeams;
             ViewBag.Users = GetUserResultList();
             return View(matches);
         }

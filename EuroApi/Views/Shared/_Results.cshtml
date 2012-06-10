@@ -23,7 +23,7 @@
     {
         <div class="row">
             <div class="span3">
-                @user.Username
+                @Html.ActionLink(@user.Username, "Username", "ViewBet", new {username = @user.Username}, null)
             </div>
             <div class="span2">
                 @user.CorrectOutcomes

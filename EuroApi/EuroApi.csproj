@@ -183,6 +183,7 @@
     <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Controllers\TeamBetController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
+    <Compile Include="Controllers\ViewBetController.cs" />
     <Compile Include="DAL\KnockoutMatchRepository.cs" />
     <Compile Include="DAL\IRepository.cs" />
     <Compile Include="DAL\KnockoutMatchResultBetRepository.cs" />
@@ -512,6 +513,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_TeamListBet.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ViewBet\Username.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
