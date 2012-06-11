@@ -8,17 +8,7 @@
 }
 @if (match != null)
 {
-    <div class="row well">
-        <div class="span2">
-            <img src="/Content/flags/@(match.HomeTeam.Name)-flag.gif" style='height: 14px;' alt='flag' />
-            @match.HomeTeam.Name
-        </div>
-        <div class="span2">
-            <img src="/Content/flags/@(match.AwayTeam.Name)-flag.gif" style='height: 14px;' alt='flag' />                 
-            @match.AwayTeam.Name
-        </div>
-
-    </div>
+    @Html.Partial("_MatchHeading", match)
 
     <div class="row well">
         <div class="row" style="font-weight: bold;">

@@ -32,6 +32,16 @@ namespace EuroApi.Controllers
             teamsByGroup.ForEach(t => orderedTeams.Add(Standing.SortTeams(t)));
             ViewBag.Groups = orderedTeams;
             ViewBag.Users = GetUserResultList();
+            var currentMatch = _db.Matches.OrderByDescending(x => x.Date).FirstOrDefault(x => x.Date < europeanTime);
+            if (currentMatch != null)
+            {
+                var endTime = currentMatch.Date.AddHours(2);
+                if(endTime > europeanTime)
+                {
+                    var currentMatchBets = _db.MatchResultBets.Where(x => x.MatchId == currentMatch.Id).ToList();
+                    ViewBag.CurrentMatchBets = currentMatchBets;
+                }
+            }
             return View(matches);
         }
 
