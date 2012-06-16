@@ -35,11 +35,25 @@ namespace EuroApi.Controllers
             var currentMatch = _db.Matches.OrderByDescending(x => x.Date).FirstOrDefault(x => x.Date < europeanTime);
             if (currentMatch != null)
             {
+                var todayDate = currentMatch.Date;
+                var allCurrent = new List<Match>();
+                foreach (var match in _db.Matches)
+                {
+                    if(match.Date == todayDate)
+                    {
+                        allCurrent.Add(match);
+                    }
+                }
                 var endTime = currentMatch.Date.AddHours(2);
                 if(endTime > europeanTime)
                 {
+                    var matchBets = new List<List<MatchResultBet>>();
+                    foreach (var match in allCurrent)
+                    {
+                        matchBets.Add(_db.MatchResultBets.Where(x => x.MatchId == match.Id).ToList());
+                    }
                     var currentMatchBets = _db.MatchResultBets.Where(x => x.MatchId == currentMatch.Id).ToList();
-                    ViewBag.CurrentMatchBets = currentMatchBets;
+                    ViewBag.CurrentMatchBets = matchBets;
                 }
             }
             return View(matches);

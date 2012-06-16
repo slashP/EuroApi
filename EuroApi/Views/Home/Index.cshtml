@@ -21,6 +21,7 @@
     </div>
 }
 
+@Html.Partial("_Chat")
 
 @{
     var matchesPlayed = (List<Match>)ViewBag.PlayedMatches;
@@ -68,35 +69,42 @@
 </div>
 
 @{
-    var currentMatchBets = ViewBag.CurrentMatchBets == null ? null : (List<MatchResultBet>) ViewBag.CurrentMatchBets;    
+    var currentMatchBetList = ViewBag.CurrentMatchBets == null ? null : (List<List<MatchResultBet>>) ViewBag.CurrentMatchBets;    
 }
-@if(currentMatchBets != null && currentMatchBets.Any())
+@if(currentMatchBetList != null && currentMatchBetList.Any())
 {
-    <div style="" class="well">
-        <h3>Current match</h3>
-        <br />
+    foreach (var currentMatchBets in currentMatchBetList)
+    {
+        if (!currentMatchBets.Any())
+        {
+            continue;
+        }
+        <div style="" class="well">
+            <h3>Current match</h3>
+            <br />
             @Html.Partial("_MatchHeading", currentMatchBets.First().Match)
 
-        <div class="row" style="font-weight: bold;">
-            <div class="span2">
-                User
+            <div class="row" style="font-weight: bold;">
+                <div class="span2">
+                    User
+                </div>
+                <div class="span2">
+                    Bet
+                </div>
             </div>
-            <div class="span2">
-                Bet
-            </div>
+            @foreach (var currentMatchBet in currentMatchBets)
+            {
+                <div class="row" style="margin-top: 4px;">
+                    <div class="span2">
+                        @currentMatchBet.User
+                    </div>
+                    <div class="span2">
+                        @currentMatchBet.HomeTeamGoals - @currentMatchBet.AwayTeamGoals
+                    </div>
+                </div>
+            }
         </div>
-        @foreach (var currentMatchBet in currentMatchBets)
-        {
-            <div class="row" style="margin-top: 4px;">
-                <div class="span2">
-                    @currentMatchBet.User
-                </div>
-                <div class="span2">
-                    @currentMatchBet.HomeTeamGoals - @currentMatchBet.AwayTeamGoals
-                </div>
-            </div>
-        }
-    </div>
+    }
 } 
 
 

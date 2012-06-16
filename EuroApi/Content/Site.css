@@ -591,3 +591,15 @@ table th {
     background-color: #ccc;
     padding-bottom: 10px;
 }
+
+#disMess {
+    margin-bottom: 20px;   
+}
+
+.chatMessage {
+    width: 400px;
+    margin-left: 16px;
+    background-color: #eee;
+    margin: 2px;
+    padding: 2px;
+}

@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using CodeFirstMembershipSharp;
+using EuroApi.Entities;
 using EuroApi.Models;
 using User = CodeFirstMembershipSharp.User;
 
@@ -67,5 +68,7 @@ namespace EuroApi.Context
 
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Guestbook> Guestbooks { get; set; }
+
+        public DbSet<LiveTalk> LiveTalks { get; set; }
     }
 }
