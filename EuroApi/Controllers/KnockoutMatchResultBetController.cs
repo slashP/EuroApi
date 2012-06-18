@@ -73,7 +73,7 @@ namespace EuroApi.Controllers
                 userBet.AwayTeamId = (int) awayTeamId;
                 _repository.Save();
             }
-            return Json("");
+            return Json("Ok");
         }
 
         private IEnumerable<KnockoutMatch> GetSemiFinalsFromBets()
