@@ -23,6 +23,13 @@ namespace EuroApi.Controllers
         private readonly FootyFeudContext _db = new FootyFeudContext();
 
 
+        public ActionResult Quarter()
+        {
+            var quarters = _db.KnockoutMatches.Where(x => x.Type == 1).ToList();
+            ViewBag.UsersResultBetsKnockout = _db.KnockoutMatchResultBets.Where(x => x.User == User.Identity.Name && x.KnockoutMatch.Type == 1).ToList();
+            return View(quarters);
+        }
+
         //
         // GET: /MatchResultBet/
 

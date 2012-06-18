@@ -1,0 +1,47 @@
+﻿@using EuroApi.Models
+@model List<MatchResultBet>
+
+@{
+    ViewBag.Title = "Match";
+    var m = Model.FirstOrDefault();
+    var match = m != null ? m.Match : null;
+}
+@if (match != null)
+{
+    @Html.Partial("_MatchHeading", match)
+
+    <div class="row well">
+        <div class="row" style="font-weight: bold;">
+            <div class="span2">
+                User
+            </div>
+            <div class="span2">
+                Bet
+            </div>
+            <div class="span2">
+                Actual Result
+            </div>
+            <div class="span2">
+                Points
+            </div>
+        </div>
+
+        @foreach (var bet in Model)
+        {
+            <div class="row" style="margin-top: 4px;">
+                <div class="span2">
+                    @bet.User
+                </div>
+                <div class="span2">
+                    @bet.HomeTeamGoals - @bet.AwayTeamGoals
+                </div>
+                <div class="span2">
+                    @bet.Match.HomeTeamGoals - @bet.Match.AwayTeamGoals
+                </div>
+                <div class="span2">
+                    @(bet.Points())
+                </div>
+            </div>
+        }
+    </div>
+}

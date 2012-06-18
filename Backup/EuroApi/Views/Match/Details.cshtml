@@ -1,0 +1,50 @@
+﻿@model EuroApi.Models.Match
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Match</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.HomeTeam.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HomeTeam.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AwayTeam.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AwayTeam.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Date)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Date)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.HomeTeamGoals)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HomeTeamGoals)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AwayTeamGoals)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AwayTeamGoals)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

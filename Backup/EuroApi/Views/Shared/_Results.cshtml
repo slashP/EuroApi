@@ -1,0 +1,39 @@
+﻿@model IOrderedEnumerable<CodeFirstMembershipSharp.User>
+
+<div class="page-header span12" style="">
+    <h2>Table</h2>
+</div>
+
+<div class="row well">
+    <div class="row" style="font-weight: bold;">
+        <div class="span3">
+            User
+        </div>
+        <div class="span2">
+            Correct Outcomes
+        </div>
+        <div class="span2">
+            Correct Results
+        </div>
+        <div class="span2">
+            Points
+        </div>
+    </div>
+    @foreach(var user in Model)
+    {
+        <div class="row">
+            <div class="span3">
+                @Html.ActionLink(@user.Username, "Username", "ViewBet", new {username = @user.Username}, null)
+            </div>
+            <div class="span2">
+                @user.CorrectOutcomes
+            </div>
+            <div class="span2">
+                @user.CorrectResults
+            </div>
+            <div class="span2">
+                @user.Points
+            </div>
+        </div>
+    }
+</div>

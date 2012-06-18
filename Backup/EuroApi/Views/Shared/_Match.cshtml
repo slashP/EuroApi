@@ -1,0 +1,12 @@
+﻿@model EuroApi.Models.Match
+
+<div>
+    <div class="teamInMatch"><img src="/Content/flags/@(Model.HomeTeam.Name)-flag.gif" style='height: 14px;' alt='flag' />
+        @Model.HomeTeam.Name
+    </div>
+    <div class="teamInMatch"><img src="/Content/flags/@(Model.AwayTeam.Name)-flag.gif" style='height: 14px;' alt='flag' />
+        @Model.AwayTeam.Name
+    </div>
+</div>
+    
+<div>@Model.Date.ToString("dd.MM.yyyy HH:mm")</div>

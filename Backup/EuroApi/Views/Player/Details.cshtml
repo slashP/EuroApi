@@ -1,0 +1,67 @@
+﻿@model EuroApi.Models.Player
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Player</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Team)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Team)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DateOfBirth)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateOfBirth)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Position)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Position)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Number)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Number)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Caps)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Caps)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Goals)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Goals)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NationalTeam)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NationalTeam)
+    </div>
+</fieldset>

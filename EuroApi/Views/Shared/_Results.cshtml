@@ -10,13 +10,13 @@
             User
         </div>
         <div class="span2">
+            Points
+        </div>
+        <div class="span2">
             Correct Outcomes
         </div>
         <div class="span2">
             Correct Results
-        </div>
-        <div class="span2">
-            Points
         </div>
     </div>
     @foreach(var user in Model)
@@ -26,13 +26,13 @@
                 @Html.ActionLink(@user.Username, "Username", "ViewBet", new {username = @user.Username}, null)
             </div>
             <div class="span2">
+                @user.Points
+            </div>
+            <div class="span2">
                 @user.CorrectOutcomes
             </div>
             <div class="span2">
                 @user.CorrectResults
-            </div>
-            <div class="span2">
-                @user.Points
             </div>
         </div>
     }

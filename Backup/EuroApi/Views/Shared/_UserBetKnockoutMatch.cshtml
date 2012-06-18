@@ -1,0 +1,46 @@
+﻿@using EuroApi.Models
+@model KnockoutMatch
+
+@{
+    var userBets = (List<KnockoutMatchResultBet>)ViewBag.UsersResultBetsKnockout;
+    var userBetHomeResult = 0;
+    var userBetAwayResult = 0;
+    var untouched = "untoched";
+    var type = "";
+    if (Model.Type == KnockoutMatch.QUARTERFINAL)
+    {
+        type = "quarter";
+    } 
+    else if(Model.Type == KnockoutMatch.SEMIFINAL)
+    {
+        type = "semi";
+    }
+    else if (Model.Type == KnockoutMatch.FINAL)
+    {
+        type = "final";
+    }
+    if (userBets != null)
+    {
+        var userBet = userBets.Where(x => x.HomeTeamId == Model.HomeTeamId && x.AwayTeamId == Model.AwayTeamId).ToList();
+        if (userBet.Any())
+        {
+            userBetHomeResult = userBet.Select(x => x.HomeTeamGoals).FirstOrDefault();
+            userBetAwayResult = userBet.Select(x => x.AwayTeamGoals).FirstOrDefault();
+        }
+        untouched = "";
+    }
+}
+
+<div class="teamsInMatch">
+    <div class="teamInMatch"><img src="/Content/flags/@(Model.HomeTeam.Name)-flag.gif" style='height: 14px;' alt='flag' />
+        @Model.HomeTeam.Name
+    </div>
+    <div class="teamInMatch"><img src="/Content/flags/@(Model.AwayTeam.Name)-flag.gif" style='height: 14px;' alt='flag' />                 
+        @Model.AwayTeam.Name
+    </div>
+</div>
+<div class="teamsInMatch">
+    <input class="resultBetKnockout @type homeTeam @untouched" type="tel" homeTeamId="@Model.HomeTeam.Id" awayTeamId="@Model.AwayTeam.Id" matchId="@Model.Id" value="@userBetHomeResult"/>
+    <input class="resultBetKnockout @type awayTeam @untouched" type="tel" homeTeamId="@Model.HomeTeam.Id" awayTeamId="@Model.AwayTeam.Id" matchId="@Model.Id" value="@userBetAwayResult" />
+     <div class="resultSaved"><img class="resultSavedImage" alt=""/></div>
+</div>

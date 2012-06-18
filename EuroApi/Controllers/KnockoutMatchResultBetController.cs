@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using EuroApi.Context;
 using EuroApi.DAL;
 using EuroApi.Models;
 
@@ -15,6 +16,31 @@ namespace EuroApi.Controllers
         private readonly IRepository<Team> _teamRepository = new TeamRepository();
         private readonly IRepository<KnockoutMatch> _knockoutMatchRepository = new KnockoutMatchRepository();
         private readonly IRepository<MatchResultBet> _matchResultBetRepository = new MatchResultBetRepository();
+        private readonly FootyFeudContext _db = new FootyFeudContext();
+
+        public ActionResult Quarter()
+        {
+            var europeanTime = DateTime.UtcNow.AddHours(2);
+            var quarters = _db.KnockoutMatches.Where(x => x.Type == 1 && x.Date > europeanTime).ToList();
+            ViewBag.UsersResultBetsKnockout = _db.KnockoutMatchResultBets.Where(x => x.User == User.Identity.Name && x.KnockoutMatch.Type == 1).ToList();
+            return View(quarters);
+        }
+
+        public ActionResult Semi()
+        {
+            var europeanTime = DateTime.UtcNow.AddHours(2);
+            var quarters = _db.KnockoutMatches.Where(x => x.Type == 2 && x.Date > europeanTime).ToList();
+            ViewBag.UsersResultBetsKnockout = _db.KnockoutMatchResultBets.Where(x => x.User == User.Identity.Name && x.KnockoutMatch.Type == 2).ToList();
+            return View(quarters);
+        }
+
+        public ActionResult Final()
+        {
+            var europeanTime = DateTime.UtcNow.AddHours(2);
+            var quarters = _db.KnockoutMatches.Where(x => x.Type == 3 && x.Date > europeanTime).ToList();
+            ViewBag.UsersResultBetsKnockout = _db.KnockoutMatchResultBets.Where(x => x.User == User.Identity.Name && x.KnockoutMatch.Type == 3).ToList();
+            return View(quarters);
+        }
 
 
         public JsonResult SetBet(int? matchId, int? homeGoals, int? awayGoals, int? homeTeamId, int? awayTeamId)
@@ -97,23 +123,6 @@ namespace EuroApi.Controllers
                 return Json(html);
             }
             return Json("Set bets in groups and quarter finals before semi finals.");
-        }
-
-        public JsonResult Final()
-        {
-            var userBets =
-                _repository.Query(x => x.KnockoutMatch.Type == KnockoutMatch.SEMIFINAL && x.User == User.Identity.Name).
-                    ToList();
-            var groupBets = _matchResultBetRepository.Query(x => x.User == User.Identity.Name);
-            var final = GetFinalFromBets();
-            if (userBets.Count >= 2 && groupBets.Count() >= 24)
-            {
-                if (userBets.Any(x => x.KnockoutMatch.Winner() == null))
-                    return Json("Some results are draw in semi finals.");
-                var html = new List<string> { RenderPartialViewToString("_UserBetKnockoutMatch", final) };
-                return Json(html);
-            }
-            return Json("Set bets in groups, quarter finals and semi finals before final.");
         }
     }
 }

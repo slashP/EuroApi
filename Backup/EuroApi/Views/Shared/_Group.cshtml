@@ -1,0 +1,34 @@
+﻿@using EuroApi.Models
+@model IEnumerable<Team>
+@{
+    var firstTeam = Model.FirstOrDefault() ?? new Team{Group = new Group{Name = ""}};
+    var groupName = firstTeam.Group.Name;
+}
+<div class="groupTable groupTable@(groupName)">
+    <table>
+        <tr>
+            <th style="width: 30px;">@groupName</th>
+            <th style="width: 70px;">Team</th>
+            <th>#</th>
+            <th>+</th>
+            <th>-</th>
+            <th>+/-</th>
+            <th>P</th>
+        </tr>
+        
+        @foreach (var team in Model)
+        {
+            string teamName = team.Name.ToLower().Replace(" ", "");
+            string path = @"/Content/flags/" + teamName + "-flag.gif";
+            <tr>
+                <td><img src=@Url.Content(@path) style="height: 14px;" alt="flag" /></td>
+                <td>@team.Name</td>
+                <td>@team.PlayedMatches.Count</td>
+                <td>@team.GoalsScored</td>
+                <td>@team.GoalsConceded</td>
+                <td>@team.GoalDifference</td>
+                <td>@team.Points</td>
+            </tr>
+        }
+    </table>
+</div>

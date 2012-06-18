@@ -1,0 +1,19 @@
+﻿@using EuroApi.Models
+@model IOrderedEnumerable<CodeFirstMembershipSharp.User>
+
+@{
+    ViewBag.Title = "Results";
+}
+@Html.Partial("_Results", Model)
+<hr />
+<h3>Matches played</h3>
+@foreach(var match in (IEnumerable<Match>)ViewBag.Matches)
+{
+    <div class="row">
+        <div class="span12">
+            <img src="/Content/flags/@(match.HomeTeam.Name)-flag.gif" style='height: 14px;' alt='flag' />
+            @match.HomeTeam.Name - <img src="/Content/flags/@(match.AwayTeam.Name)-flag.gif" style='height: 14px;' alt='flag' />
+            @match.AwayTeam.Name @match.HomeTeamGoals - @match.AwayTeamGoals
+        </div>
+    </div>
+}

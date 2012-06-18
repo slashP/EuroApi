@@ -1,0 +1,5 @@
+﻿@model List<EuroApi.Models.Match>
+    @foreach(var match in Model)
+    {
+        @Html.Partial("_UserBetMatch", match)
+    }   

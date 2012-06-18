@@ -1,0 +1,27 @@
+﻿@model IEnumerable<EuroApi.Models.Match>
+
+@{
+    ViewBag.Title = "QuarterFinals";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="userBetMatches">
+    <div style="font-weight: bold; font-size: 1.5em; margin-bottom: 10px;">Quarterfinals</div>
+    @foreach(var match in Model)
+    {
+        
+        //var userBetHome = userBets.Where(x => x.MatchId == match.Id).Select(x => x.HomeTeamGoals).FirstOrDefault();
+        //var userBetAway = userBets.Where(x => x.MatchId == match.Id).Select(x => x.AwayTeamGoals).FirstOrDefault();
+        //var untouched = userBets.Any(x => x.MatchId == match.Id) ? "" : "untouched";
+        <div class="userBetMatch">
+            <div class="teamsInMatch">
+                <div><img src="/Content/flags/@(match.HomeTeam)-flag.gif" style='height: 14px;' alt='flag' />
+                    @match.HomeTeam</div>
+                <div><img src="/Content/flags/@(match.AwayTeam)-flag.gif" style='height: 14px;' alt='flag' />                 
+                    @match.AwayTeam</div>
+            </div>
+            <input class="resultBet homeTeam" type="tel" value="0"/>
+            <input class="resultBet awayTeam" type="tel" value="0" />
+        </div>
+    }
+</div>

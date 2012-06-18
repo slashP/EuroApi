@@ -1,0 +1,40 @@
+﻿@model List<EuroApi.Models.KnockoutMatch>
+
+@{
+    ViewBag.Title = "Semi finals";
+}
+
+<h2>Semi finals</h2>
+
+
+@foreach(var match in Model)
+{
+    @Html.Partial("_UserBetKnockoutMatch", match)
+}
+
+<script>
+    $(document).ready(function () {
+        $(".resultBetKnockout").live("change", function () {
+            var parentDiv = $(this).parent();
+            var homeGoals = parentDiv.find(".homeTeam").val();
+            var awayGoals = parentDiv.find(".awayTeam").val();
+            if ($(this).hasClass("semi")) {
+                setKnockoutBet("semiFinals", $(this).attr("matchId"), homeGoals, awayGoals, $(this).attr("homeTeamId"), $(this).attr("awayTeamId"));
+            }
+
+        });
+    });
+
+    var setKnockoutBet = function (type, matchId, homeGoals, awayGoals, homeTeamId, awayTeamId) {
+        $.ajax({
+            type: 'POST',
+            url: "/KnockoutMatchResultBet/SetBet",
+            data: { matchId: matchId, homeGoals: homeGoals, awayGoals: awayGoals, homeTeamId: homeTeamId, awayTeamId: awayTeamId },
+            success: function (results) {
+                if (results == "Ok") {
+                    $(".knockoutBet" + matchId).append('<div class="alert alert-success">Saved</div>');
+                }
+            }
+        });
+    };
+</script>

@@ -1,10 +1,11 @@
-﻿@using EuroApi.Models
+﻿@using System.Globalization
+@using EuroApi.Models
 @model KnockoutMatch
 
 @{
     var userBets = (List<KnockoutMatchResultBet>)ViewBag.UsersResultBetsKnockout;
-    var userBetHomeResult = 0;
-    var userBetAwayResult = 0;
+    var userBetHomeResult = "";
+    var userBetAwayResult = "";
     var untouched = "untoched";
     var type = "";
     if (Model.Type == KnockoutMatch.QUARTERFINAL)
@@ -21,11 +22,11 @@
     }
     if (userBets != null)
     {
-        var userBet = userBets.Where(x => x.HomeTeamId == Model.HomeTeamId && x.AwayTeamId == Model.AwayTeamId).ToList();
+        var userBet = userBets.Where(x => x.KnockoutMatchId == Model.Id).ToList();
         if (userBet.Any())
         {
-            userBetHomeResult = userBet.Select(x => x.HomeTeamGoals).FirstOrDefault();
-            userBetAwayResult = userBet.Select(x => x.AwayTeamGoals).FirstOrDefault();
+            userBetHomeResult = userBet.Select(x => x.HomeTeamGoals).FirstOrDefault().ToString(CultureInfo.InvariantCulture);
+            userBetAwayResult = userBet.Select(x => x.AwayTeamGoals).FirstOrDefault().ToString(CultureInfo.InvariantCulture);
         }
         untouched = "";
     }
@@ -39,8 +40,9 @@
         @Model.AwayTeam.Name
     </div>
 </div>
-<div class="teamsInMatch">
+<div class="teamsInMatch knockoutBet@(Model.Id)">
     <input class="resultBetKnockout @type homeTeam @untouched" type="tel" homeTeamId="@Model.HomeTeam.Id" awayTeamId="@Model.AwayTeam.Id" matchId="@Model.Id" value="@userBetHomeResult"/>
     <input class="resultBetKnockout @type awayTeam @untouched" type="tel" homeTeamId="@Model.HomeTeam.Id" awayTeamId="@Model.AwayTeam.Id" matchId="@Model.Id" value="@userBetAwayResult" />
-     <div class="resultSaved"><img class="resultSavedImage" alt=""/></div>
+    <div class="resultSaved"><img class="resultSavedImage" alt=""/></div>
 </div>
+

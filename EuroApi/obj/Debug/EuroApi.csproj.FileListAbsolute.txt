@@ -73,7 +73,6 @@ C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\System.Web.Razor.xml
 C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\System.Web.WebPages.xml
 C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\System.Web.WebPages.Deployment.xml
 C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\System.Web.WebPages.Razor.xml
-C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\obj\Debug\EuroApi.dll
 C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\obj\Debug\EuroApi.pdb
 C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\Newtonsoft.Json.dll
@@ -84,3 +83,4 @@ C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\Newtonsoft.Json.xml
 C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\SignalR.xml
 C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\SignalR.Hosting.AspNet.xml
 C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\SignalR.Hosting.Common.xml
+C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\obj\Debug\EuroApi.csprojResolveAssemblyReference.cache

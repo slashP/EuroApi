@@ -1,0 +1,69 @@
+﻿@model IEnumerable<EuroApi.Models.KnockoutMatch>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HomeTeam.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AwayTeam.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HomeTeamGoals)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AwayTeamGoals)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Place)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HomeTeam.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AwayTeam.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HomeTeamGoals)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AwayTeamGoals)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Place)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
