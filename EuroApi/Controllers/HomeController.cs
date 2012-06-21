@@ -36,8 +36,8 @@ namespace EuroApi.Controllers
             if (currentMatch != null)
             {
                 var todayDate = currentMatch.Date;
-                var allCurrent = new List<Match>();
-                foreach (var match in _db.Matches)
+                var allCurrent = new List<KnockoutMatch>();
+                foreach (var match in _db.KnockoutMatches)
                 {
                     if(match.Date == todayDate)
                     {
