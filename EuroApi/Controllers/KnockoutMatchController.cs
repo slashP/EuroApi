@@ -10,6 +10,7 @@ using EuroApi.Context;
 
 namespace EuroApi.Controllers
 {
+    [Authorize(Users = "slashP")]
     public class KnockoutMatchController : BaseController
     {
         private readonly FootyFeudContext _db = new FootyFeudContext();

@@ -24,5 +24,37 @@ namespace EuroApi.Models
             KnockoutMatch.HomeTeamGoals = HomeTeamGoals;
             KnockoutMatch.AwayTeamGoals = AwayTeamGoals;
         }
+
+        private bool IsCorrectBet()
+        {
+            return MatchIsPlayed() && KnockoutMatch.HomeTeamGoals == HomeTeamGoals && KnockoutMatch.AwayTeamGoals == AwayTeamGoals;
+        }
+
+        private bool IsCorrectOutcome()
+        {
+            return MatchIsPlayed() && ((HomeTeamGoals > AwayTeamGoals && KnockoutMatch.HomeTeamGoals > KnockoutMatch.AwayTeamGoals)
+                   || (HomeTeamGoals < AwayTeamGoals && KnockoutMatch.HomeTeamGoals < KnockoutMatch.AwayTeamGoals)
+                   || (HomeTeamGoals == AwayTeamGoals) && (KnockoutMatch.HomeTeamGoals == KnockoutMatch.AwayTeamGoals));
+        }
+
+        private bool MatchIsPlayed()
+        {
+            return KnockoutMatch.HomeTeamGoals != null && KnockoutMatch.AwayTeamGoals != null;
+        }
+
+        public int CorrectOutcome()
+        {
+            return IsCorrectOutcome() ? 1 : 0;
+        }
+
+        public int CorrectBet()
+        {
+            return IsCorrectBet() ? 1 : 0;
+        }
+
+        public int Points()
+        {
+            return 2 * CorrectOutcome() + CorrectBet();
+        }
     }
 }

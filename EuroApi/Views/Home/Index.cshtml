@@ -1,6 +1,6 @@
 ﻿@using CodeFirstMembershipSharp
 @using EuroApi.Models
-@model List<Match>
+@model List<KnockoutMatch>
 @{
     ViewBag.Title = "Home";
 }
@@ -26,7 +26,7 @@
 @Html.Partial("_Chat")
 
 @{
-    var matchesPlayed = (List<Match>)ViewBag.PlayedMatches;
+    var matchesPlayed = (List<KnockoutMatch>)ViewBag.PlayedMatches;
 }
 
 <div class="row">
@@ -71,7 +71,7 @@
 </div>
 
 @{
-    var currentMatchBetList = ViewBag.CurrentMatchBets == null ? null : (List<List<MatchResultBet>>) ViewBag.CurrentMatchBets;    
+    var currentMatchBetList = ViewBag.CurrentMatchBets == null ? null : (List<List<KnockoutMatchResultBet>>) ViewBag.CurrentMatchBets;    
 }
 @if(currentMatchBetList != null && currentMatchBetList.Any())
 {
@@ -84,7 +84,7 @@
         <div style="" class="well">
             <h3>Current match</h3>
             <br />
-            @Html.Partial("_MatchHeading", currentMatchBets.First().Match)
+            @Html.Partial("_MatchHeading", currentMatchBets.First().KnockoutMatch)
 
             <div class="row" style="font-weight: bold;">
                 <div class="span2">

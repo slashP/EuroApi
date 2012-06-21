@@ -18,8 +18,8 @@ namespace EuroApi.Controllers
         public ActionResult Index()
         {
             var europeanTime = DateTime.UtcNow.AddHours(2);
-            var matches = _matchRepository.Query(x => x.Date > europeanTime).OrderBy(x => x.Date).Take(4).ToList();
-            var playedMatches = _matchRepository.Query(x => x.HomeTeamGoals != null && x.AwayTeamGoals != null).OrderByDescending(x => x.Date).Take(4).ToList();
+            var matches = _db.KnockoutMatches.Where(x => x.Date > europeanTime).OrderBy(x => x.Date).Take(4).ToList();
+            var playedMatches = _db.KnockoutMatches.Where(x => x.HomeTeamGoals != null && x.AwayTeamGoals != null).OrderByDescending(x => x.Date).Take(4).ToList();
             playedMatches.Reverse();
             ViewBag.PlayedMatches = playedMatches;
             var teamsByGroup = new List<List<Team>>();
@@ -32,7 +32,7 @@ namespace EuroApi.Controllers
             teamsByGroup.ForEach(t => orderedTeams.Add(Standing.SortTeams(t)));
             ViewBag.Groups = orderedTeams;
             ViewBag.Users = GetUserResultList();
-            var currentMatch = _db.Matches.OrderByDescending(x => x.Date).FirstOrDefault(x => x.Date < europeanTime);
+            var currentMatch = _db.KnockoutMatches.OrderByDescending(x => x.Date).FirstOrDefault(x => x.Date < europeanTime);
             if (currentMatch != null)
             {
                 var todayDate = currentMatch.Date;
@@ -47,12 +47,11 @@ namespace EuroApi.Controllers
                 var endTime = currentMatch.Date.AddHours(2);
                 if(endTime > europeanTime)
                 {
-                    var matchBets = new List<List<MatchResultBet>>();
+                    var matchBets = new List<List<KnockoutMatchResultBet>>();
                     foreach (var match in allCurrent)
                     {
-                        matchBets.Add(_db.MatchResultBets.Where(x => x.MatchId == match.Id).ToList());
+                        matchBets.Add(_db.KnockoutMatchResultBets.Where(x => x.KnockoutMatchId == match.Id).ToList());
                     }
-                    var currentMatchBets = _db.MatchResultBets.Where(x => x.MatchId == currentMatch.Id).ToList();
                     ViewBag.CurrentMatchBets = matchBets;
                 }
             }
@@ -77,6 +76,12 @@ namespace EuroApi.Controllers
                 {
                     user.CorrectOutcomes += userbet.CorrectOutcome();
                     user.CorrectResults += userbet.CorrectBet();
+                }
+                var knockoutUserBets = _db.KnockoutMatchResultBets.Where(x => x.User == usr.Username).ToList();
+                foreach (var knockoutUserBet in knockoutUserBets)
+                {
+                    user.CorrectOutcomes += knockoutUserBet.CorrectOutcome();
+                    user.CorrectResults += knockoutUserBet.CorrectBet();
                 }
             }
             return users.OrderByDescending(x => x.Points);

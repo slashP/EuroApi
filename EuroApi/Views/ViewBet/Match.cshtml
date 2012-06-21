@@ -1,10 +1,10 @@
 ﻿@using EuroApi.Models
-@model List<MatchResultBet>
+@model List<KnockoutMatchResultBet>
 
 @{
     ViewBag.Title = "Match";
     var m = Model.FirstOrDefault();
-    var match = m != null ? m.Match : null;
+    var match = m != null ? m.KnockoutMatch : null;
 }
 @if (match != null)
 {
@@ -36,7 +36,7 @@
                     @bet.HomeTeamGoals - @bet.AwayTeamGoals
                 </div>
                 <div class="span2">
-                    @bet.Match.HomeTeamGoals - @bet.Match.AwayTeamGoals
+                    @bet.KnockoutMatch.HomeTeamGoals - @bet.KnockoutMatch.AwayTeamGoals
                 </div>
                 <div class="span2">
                     @(bet.Points())

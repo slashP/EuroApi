@@ -43,7 +43,11 @@ C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\Devtalk.EF.CodeFirst.dll
 C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\EntityFramework.dll
 C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\Microsoft.Web.Optimization.dll
+C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\Newtonsoft.Json.dll
 C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\OmidID.Web.Security.EFMembershipProvider.dll
+C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\SignalR.dll
+C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\SignalR.Hosting.AspNet.dll
+C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\SignalR.Hosting.Common.dll
 C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\System.Json.dll
 C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\System.Net.Http.dll
 C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\System.Net.Http.Formatting.dll
@@ -60,6 +64,10 @@ C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\System.Web.WebPages.dll
 C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\System.Web.WebPages.Razor.dll
 C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\WebActivator.dll
 C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\EntityFramework.xml
+C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\Newtonsoft.Json.xml
+C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\SignalR.xml
+C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\SignalR.Hosting.AspNet.xml
+C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\SignalR.Hosting.Common.xml
 C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\System.Json.xml
 C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\System.Net.Http.xml
 C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\System.Net.Http.Formatting.xml
@@ -75,12 +83,4 @@ C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\System.Web.WebPages.Deplo
 C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\System.Web.WebPages.Razor.xml
 C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\obj\Debug\EuroApi.dll
 C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\obj\Debug\EuroApi.pdb
-C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\Newtonsoft.Json.dll
-C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\SignalR.dll
-C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\SignalR.Hosting.AspNet.dll
-C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\SignalR.Hosting.Common.dll
-C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\Newtonsoft.Json.xml
-C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\SignalR.xml
-C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\SignalR.Hosting.AspNet.xml
-C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\bin\SignalR.Hosting.Common.xml
 C:\Users\perkrihe\Documents\GitHub\EuroApi\EuroApi\obj\Debug\EuroApi.csprojResolveAssemblyReference.cache

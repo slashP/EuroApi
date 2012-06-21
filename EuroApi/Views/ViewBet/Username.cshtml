@@ -1,4 +1,5 @@
-﻿@model List<EuroApi.Models.MatchResultBet>
+﻿@using EuroApi.Models
+@model List<EuroApi.Models.MatchResultBet>
 
 @{
     ViewBag.Title = "Bets";
@@ -38,6 +39,30 @@
             </div>
             <div class="span2">
                 @bet.Match.HomeTeamGoals - @bet.Match.AwayTeamGoals
+            </div>
+            <div class="span2">
+                @(bet.Points())
+            </div>
+        </div>
+
+    }
+    <hr />
+    @foreach (var bet in (List<KnockoutMatchResultBet>)ViewBag.KnockoutBets)
+    {
+        <div class="row" style="margin-top: 4px;">
+            <div class="span2">
+                <img src="/Content/flags/@(bet.KnockoutMatch.HomeTeam.Name)-flag.gif" style='height: 14px;' alt='flag' />
+                @bet.KnockoutMatch.HomeTeam.Name
+            </div>
+            <div class="span2">
+                <img src="/Content/flags/@(bet.KnockoutMatch.AwayTeam.Name)-flag.gif" style='height: 14px;' alt='flag' />                 
+                @bet.KnockoutMatch.AwayTeam.Name
+            </div>
+            <div class="span2">
+                @bet.HomeTeamGoals - @bet.AwayTeamGoals
+            </div>
+            <div class="span2">
+                @bet.KnockoutMatch.HomeTeamGoals - @bet.KnockoutMatch.AwayTeamGoals
             </div>
             <div class="span2">
                 @(bet.Points())
