@@ -6,6 +6,7 @@ using CodeFirstMembershipSharp;
 using EuroApi.Context;
 using EuroApi.DAL;
 using EuroApi.Models;
+using EuroApi.Util;
 
 namespace EuroApi.Controllers
 {
@@ -82,6 +83,18 @@ namespace EuroApi.Controllers
                 {
                     user.CorrectOutcomes += knockoutUserBet.CorrectOutcome();
                     user.CorrectResults += knockoutUserBet.CorrectBet();
+                }
+                user.TournamentBet = new TournamentBet { PlayerBets = new List<PlayerBet>(), TeamBets = new List<TeamBet>() };
+                var playerBets = _db.PlayerBets.Where(x => x.User == usr.Username).ToList().DistinctBy(x => x.PlayerId);
+
+                foreach (var playerBet in playerBets)
+                {
+                    user.TournamentBet.PlayerBets.Add(playerBet);
+                }
+                var teamBets = _db.TeamBets.Where(x => x.User == usr.Username).ToList().DistinctBy(x => x.TeamId);
+                foreach (var teamBet in teamBets)
+                {
+                    user.TournamentBet.TeamBets.Add(teamBet);
                 }
             }
             return users.OrderByDescending(x => x.Points);

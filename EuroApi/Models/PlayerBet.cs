@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace EuroApi.Models
 {
     public class PlayerBet

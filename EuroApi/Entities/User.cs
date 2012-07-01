@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using EuroApi.Entities;
+using EuroApi.Models;
 
 namespace CodeFirstMembershipSharp
 {
@@ -54,5 +55,7 @@ namespace CodeFirstMembershipSharp
         public int CorrectKnockoutResults { get; set; }
         [NotMapped]
         public virtual int Points { get { return 2*CorrectOutcomes + CorrectResults + 2*CorrectKnockoutOutcomes + CorrectKnockoutResults; } }
+        [NotMapped]
+        public TournamentBet TournamentBet { get; set; }
     }
 }

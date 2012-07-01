@@ -1,0 +1,50 @@
+﻿@model IOrderedEnumerable<CodeFirstMembershipSharp.User>
+
+<div class="page-header span12" style="">
+    <h2>Tournament Bets</h2>
+</div>
+
+<div class="row well">
+    <div class="row" style="font-weight: bold;">
+        <div class="span2">
+            User
+        </div>
+        <div class="span2">
+            Top Scorer
+        </div>
+        <div class="span2">
+            Most Assists
+        </div>
+        <div class="span2">
+            Winner
+        </div>
+        <div class="span2">
+            Most Goals
+        </div>
+        <div class="span2">
+            Red Cards
+        </div>
+    </div>
+    @foreach(var user in Model)
+    {
+        <div class="row">
+            <div class="span2">
+                @Html.ActionLink(@user.Username, "Username", "ViewBet", new {username = @user.Username}, null)
+            </div>
+            @foreach(var playerBet in user.TournamentBet.PlayerBets)
+            {
+                <div class="span2">
+                    @playerBet.Player.Name
+                </div>
+            }
+            @foreach(var teamBet in user.TournamentBet.TeamBets)
+            {
+                <div class="span2">
+                    @teamBet.Team.Name
+                </div>
+            }
+        </div>
+    }
+</div>
+
+

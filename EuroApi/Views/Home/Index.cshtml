@@ -21,7 +21,11 @@
     </div>
 }
 
+<<<<<<< HEAD
 <div style="font-size: large">@Html.ActionLink("Bet on semi finals", "Semi", "KnockoutMatchResultBet")</div>
+=======
+<div style="font-size: large">@Html.ActionLink("Bet on final", "Final", "KnockoutMatchResultBet")</div>
+>>>>>>> Tournament bets
 
 @Html.Partial("_Chat")
 
@@ -40,7 +44,7 @@
                 @Html.Partial("_Match", match)
             </div>
         }
-        @if(matchesPlayed.Any())
+        @if (matchesPlayed.Any())
         {
             <div class="page-header span6" style="">
                 <h2>Played matches</h2>
@@ -71,9 +75,9 @@
 </div>
 
 @{
-    var currentMatchBetList = ViewBag.CurrentMatchBets == null ? null : (List<List<KnockoutMatchResultBet>>) ViewBag.CurrentMatchBets;    
+    var currentMatchBetList = ViewBag.CurrentMatchBets == null ? null : (List<List<KnockoutMatchResultBet>>)ViewBag.CurrentMatchBets;    
 }
-@if(currentMatchBetList != null && currentMatchBetList.Any())
+@if (currentMatchBetList != null && currentMatchBetList.Any())
 {
     foreach (var currentMatchBets in currentMatchBetList)
     {
@@ -112,3 +116,4 @@
 
 
 @Html.Partial("_Results", (IOrderedEnumerable<User>)ViewBag.Users)
+@Html.Partial("_TournamentBets", (IOrderedEnumerable<User>)ViewBag.Users)

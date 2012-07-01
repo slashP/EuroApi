@@ -249,12 +249,14 @@
     <Compile Include="Models\Team.cs" />
     <Compile Include="Models\TeamBet.cs" />
     <Compile Include="Models\TeamBetType.cs" />
+    <Compile Include="Models\TournamentBet.cs" />
     <Compile Include="Models\UserBetStanding.cs" />
     <Compile Include="Models\UserInLeague.cs" />
     <Compile Include="Models\UserLeague.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\Expando.cs" />
     <Compile Include="Util\HtmlRenderer.cs" />
+    <Compile Include="Util\Linq.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -562,6 +564,9 @@
   <ItemGroup>
     <Content Include="Views\KnockoutMatchResultBet\Final.cshtml" />
     <Content Include="Views\KnockoutMatchResultBet\Semi.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_TournamentBets.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

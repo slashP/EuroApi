@@ -27,6 +27,7 @@ namespace EuroApi.Controllers
 
         public JsonResult SetBet(int teamId, int type)
         {
+            return null;
             var europeanTime = DateTime.UtcNow.AddHours(2);
             var match = _db.Matches.FirstOrDefault(x => x.Date > europeanTime);
             if (match != null)
