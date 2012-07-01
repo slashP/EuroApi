@@ -85,13 +85,13 @@ namespace EuroApi.Controllers
                     user.CorrectResults += knockoutUserBet.CorrectBet();
                 }
                 user.TournamentBet = new TournamentBet { PlayerBets = new List<PlayerBet>(), TeamBets = new List<TeamBet>() };
-                var playerBets = _db.PlayerBets.Where(x => x.User == usr.Username).ToList().DistinctBy(x => x.PlayerId);
+                var playerBets = _db.PlayerBets.Where(x => x.User == usr.Username).ToList().DistinctBy(x => x.PlayerBetTypeId);
 
                 foreach (var playerBet in playerBets)
                 {
                     user.TournamentBet.PlayerBets.Add(playerBet);
                 }
-                var teamBets = _db.TeamBets.Where(x => x.User == usr.Username).ToList().DistinctBy(x => x.TeamId);
+                var teamBets = _db.TeamBets.Where(x => x.User == usr.Username).ToList().DistinctBy(x => x.TeamBetTypeId);
                 foreach (var teamBet in teamBets)
                 {
                     user.TournamentBet.TeamBets.Add(teamBet);
