@@ -1,5 +1,3 @@
 <Modules>
   <Module PersistentId="CCE9FC4E-F763-4E1C-B9BE-B0125CD8A9A6" ModuleId="EuroApi" />
-  <Module PersistentId="0B511F50-D6F0-4173-9513-024374F4C31C" ModuleId="EuroApi.Test" />
-  <Module PersistentId="19F0E7F0-6119-4F45-B061-220247602E05" ModuleId="EuroApi.Tests" />
 </Modules>
